@@ -107,7 +107,6 @@ def GetHostKeys(host_id):
 def DeployKeys(keys, host_id):
     host = Host.objects.get(id=host_id)
 
-    #config_masterkey = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAoeyoGycGbrIIf2j1MiKedTij+sAez5OEq3urpoNpNEKcW/skpVTdAN2QCXeqqdhlp7a4QV5j8oLJqqKcHGa92gAFIu0TtLywa20gLFh00lA9ZRVjIhKpmdQkuU9dvdc7uQxMunVtrCQhJ54pJ7wF+ugGH5A/2EMUiYEYbk5u4jcW981+eYKTX51JFmfzPwQTgmQKFOC9Ba7wK0tDC9VPXHxuzEhDdk1a9MqlG2+PwY/06S89cjWHrKZB7UysmE+d5hXl18e8ugmuQvep6hPMFZ1vXZkaAqimsN9RYaPlDjBqoZUQnnBXzVT+epSczARhrALr/RpgK5tGRhPwnI4kjQ== km@pkm01.lan.hbd'
     config_masterkey = settings.KEYMASTER_PUBLIC_KEY
     #tmp_file = '/tmp/keymaster_key'
 
