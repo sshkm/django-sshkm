@@ -19,7 +19,8 @@ setup(
     description='A Django based ssh-key management tool.',
     long_description=README,
     url='https://github.com/sshkm/django-sshkm',
-    download_url='https://github.com/sshkm/django-sshkm/archive/' + version + '.zip',
+    #download_url='https://github.com/sshkm/django-sshkm/archive/' + version + '.zip',
+    download_url='https://github.com/sshkm/django-sshkm/archive/master.zip',
     author='Peter Loeffler',
     author_email='peter.loeffler@guruz.at',
     classifiers=[
