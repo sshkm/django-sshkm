@@ -1,0 +1,70 @@
+{% extends "keymaster/base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  title: 'Change Password',
+                  message: $('<form action={% url 'PasswordSave' %} method=post name=changePassword class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm></form>'),
+                  callback: function(result){
+                    if(result) {
+                      document.changePassword.submit();
+                    }
+                }
+                });
+"
+>Change Your Password</div>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  title: 'Create User',
+                  message: $('<form action={% url 'CreateUser' %} method=post name=createUser class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Username: <input class=form-control type=text name=username>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm>Admin: <input type=checkbox name=is_staff></form>'),
+                  callback: function(result){
+                    if(result) {
+                      document.createUser.submit();
+                    }
+                }
+                });
+"
+>Create User</div>
+
+
+{% if users %}
+<br><br>
+
+<form role="form" method="post" action="{% url 'DeleteUser' %}" name="deleteMultipleUsers">
+{% csrf_token %}
+    <div class="panel panel-default">
+        <table class="table">
+        <tr>
+            <th><input type="checkbox" class="checkAll"></th>
+            <th>Username</th>
+        </tr>
+    {% for user in users %}
+        <tr>
+            <td><input type="checkbox" name="id_multiple" id="{{ user.id }}" value="{{ user.id }}"></td>
+            <td>{{ user.username }}</td>
+        </tr>
+    {% endfor %}
+        </table>
+    </div>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  message: 'Are you shure you want to delete user(s) {{ users.name }}' + document.querySelectorAll('input[name=id_multiple]:checked'),
+                  callback: function(result){
+                    if(result) {
+                      document.deleteMultipleUsers.submit();
+                    }
+                }
+                });
+"
+>Delete</div>
+</form>
+
+{% endif %}
+
+{% endblock %}

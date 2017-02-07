@@ -1,0 +1,28 @@
+{% extends "keymaster/base.html" %}
+
+{% block title %}Create new SSH-Key{% endblock %}
+
+{% block content %}
+{% load bootstrap3 %}
+<form action="{% url 'KeySave' %}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_field keyform.name %}
+    {% bootstrap_field keyform.email %}
+    {% bootstrap_field keyform.member_of set_required=False %}
+    {% bootstrap_field keyform.firstname set_required=False %}
+    {% bootstrap_field keyform.lastname set_required=False %}
+    {% bootstrap_field keyform.description set_required=False %}
+    {% bootstrap_field keyform.keytype set_required=False %}
+    {% bootstrap_label "Public Key" label_for="id_publickey" %}
+    {% bootstrap_field keyform.publickey set_required=False show_label=False %}
+    {% if request.GET.id %}
+        <input type="hidden" name="id" value="{{ request.GET.id }}">
+    {% endif %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            Submit
+        </button>
+    {% endbuttons %}
+</form>
+
+{% endblock %}

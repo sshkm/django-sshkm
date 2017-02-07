@@ -1,0 +1,11 @@
+[
+{
+    "id": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "admin", 
+        "password": "pbkdf2_sha256$20000$zW4MOyWunGjy$DA/zyG9MCL8pavysNo3aCmHPeNaO7lbOIrr1G2EEGGE=",
+        "is_staff": 1
+    }
+}
+]
