@@ -43,6 +43,7 @@ setup(
         'celery>=4.0.0',
         'django-bootstrap3',
         'paramiko',
-#        'simplejson',
+        'simplejson',
+        'enum34',
     ],
 )
