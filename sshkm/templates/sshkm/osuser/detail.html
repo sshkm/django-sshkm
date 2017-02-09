@@ -1,0 +1,22 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}Create new Osuser{% endblock %}
+
+{% block content %}
+{% load bootstrap3 %}
+<form action="{% url 'OsuserSave' %}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_field osuserform.name %}
+    {% bootstrap_field osuserform.home set_required=False %}
+    {% bootstrap_field osuserform.description set_required=False %}
+    {% if request.GET.id %}
+        <input type="hidden" name="id" value="{{ request.GET.id }}">
+    {% endif %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            Submit
+        </button>
+    {% endbuttons %}
+</form>
+
+{% endblock %}

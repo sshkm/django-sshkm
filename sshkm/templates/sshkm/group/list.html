@@ -1,0 +1,61 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}Groups{% endblock %}
+
+{% block content %}
+
+
+<p>
+<h4><a href="{% url 'GroupDetail' %}">create a new group -></a></h4>
+</p>
+<br>
+{% if groups %}
+
+
+<form role="form" method="post" action="{% url 'GroupDelete' %}" name="deleteMultipleGroups">
+{% csrf_token %}
+    <div class="panel panel-default">
+        <table class="table">
+        <tr>
+            <th><input type="checkbox" class="checkAll"></th>
+            <th>Name</th>
+            <th>&nbsp;</th>
+        </tr>
+    {% for group in groups %}
+        <tr>
+            <td><input type="checkbox" name="id_multiple" id="{{ group.id }}" value="{{ group.id }}"></td>
+            <td><a href="{% url 'GroupDetail' %}?id={{ group.id }}">{{ group.name }}</a></td>
+            <td align="right">
+            <a href="#" onclick="
+                BootstrapDialog.confirm('Are you shure you want to delete the group {{ group.name }}',
+                  function(result){
+                    if(result) {
+                      window.location.href = '{% url 'GroupDelete' %}?id={{ group.id }}';
+                    }
+                });
+             "><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+    {% endfor %}
+        </table>
+    </div>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  message: 'Are you shure you want to delete groups(s) {{ groups.name }}' + document.querySelectorAll('input[name=id_multiple]:checked'),
+                  callback: function(result){
+                    if(result) {
+                      document.deleteMultipleGroups.submit();
+                    }
+                }
+                });
+"
+>Delete</div>
+</form>
+
+
+{% else %}
+    <p>No Groups are available.</p>
+{% endif %}
+
+{% endblock %}

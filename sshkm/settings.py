@@ -55,9 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 ##### CUSTOM
     'bootstrap3',
-    'menu',
-    'authentication',
-    'keymaster',
+    'sshkm',
 #####
 )
 
@@ -125,12 +123,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 ##### CUSTOM
-STATIC_URL = '/keymaster/static/'
+STATIC_URL = '/static/'
 #####
 
 
 ##### CUSTOM
-LOGIN_URL = '/authentication/login/'
+LOGIN_URL = '/login/'
 #####
 
 

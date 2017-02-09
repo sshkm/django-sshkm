@@ -1,0 +1,67 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}Keys{% endblock %}
+
+{% block content %}
+
+
+<p>
+<h4><a href="{% url 'KeyDetail' %}">create a new key -></a></h4>
+</p>
+<br>
+{% if keys %}
+
+
+<form role="form" method="post" action="{% url 'KeyDelete' %}" name="deleteMultipleKeys">
+{% csrf_token %}
+    <div class="panel panel-default">
+        <table class="table">
+        <tr>
+            <th><input type="checkbox" class="checkAll"></th>
+            <th>Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>&nbsp;</th>
+        </tr>
+    {% for key in keys %}
+        <tr>
+            <td><input type="checkbox" name="id_multiple" id="{{ key.id }}" value="{{ key.id }}"></td>
+            <td><a href="{% url 'KeyDetail' %}?id={{ key.id }}">{{ key.name }}</a></td>
+            <td><a href="{% url 'KeyDetail' %}?id={{ key.id }}">{{ key.firstname }}</a></td>
+            <td><a href="{% url 'KeyDetail' %}?id={{ key.id }}">{{ key.lastname }}</a></td>
+            <td><a href="{% url 'KeyDetail' %}?id={{ key.id }}">{{ key.email }}</a></td>
+            <td align="right">
+            <a href="#" onclick="
+                BootstrapDialog.confirm('Are you shure you want to delete key {{ key.name }}',
+                  function(result){
+                    if(result) {
+                      window.location.href = '{% url 'KeyDelete' %}?id={{ key.id }}';
+                    }
+                });
+             "><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+    {% endfor %}
+        </table>
+    </div>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  message: 'Are you shure you want to delete key(s) {{ key.name }}' + document.querySelectorAll('input[name=id_multiple]:checked'),
+                  callback: function(result){
+                    if(result) {
+                      document.deleteMultipleKeys.submit();
+                    }
+                }
+                });
+"
+>Delete</div>
+</form>
+
+
+{% else %}
+    <p>No Keys are available.</p>
+{% endif %}
+
+{% endblock %}

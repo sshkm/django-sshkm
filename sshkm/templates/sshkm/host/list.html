@@ -1,0 +1,87 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}Hosts{% endblock %}
+
+{% block content %}
+
+
+<p>
+<h4><a href="{% url 'HostDetail' %}">create a new host -></a></h4>
+</p>
+<br>
+{% if hostsstati %}
+
+<form role="form" method="post" action="{% url 'HostDelete' %}" name="MultipleHosts">
+{% csrf_token %}
+    <div class="panel panel-default">
+        <table class="table">
+        <tr>
+            <th><input type="checkbox" class="checkAll"></th>
+            <th>Name</th>
+            <th>Last Deploy Status</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+    {% for hoststatus in hostsstati %}
+        <tr>
+            <td><input type="checkbox" name="id_multiple" id="{{ hoststatus.id }}" value="{{ hoststatus.id }}"></td>
+            <td><a href="{% url 'HostDetail' %}?id={{ hoststatus.id }}">{{ hoststatus.name }}</a></td>
+            <td>{{ hoststatus.status }}</td>
+            <td align="right">
+            <a href="#" onclick="
+                BootstrapDialog.confirm('Are you shure you want to delete the host {{ hoststatus.name }}',
+                  function(result){
+                    if(result) {
+                      window.location.href = '{% url 'HostDelete' %}?id={{ hoststatus.id }}';
+                    }
+                });
+             "><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+            </td>
+            <td align="right">
+            <a href="#" onclick="
+                BootstrapDialog.confirm('Are you shure you want to deploy the host {{ hoststatus.name }}',
+                  function(result){
+                    if(result) {
+                      window.location.href = '{% url 'HostDeploy' %}?id={{ hoststatus.id }}';
+                    }
+                });
+             "><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+    {% endfor %}
+        </table>
+    </div>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  message: 'Are you shure you want to delete hosts(s) {{ hosts.name }}' + document.querySelectorAll('input[name=id_multiple]:checked'),
+                  callback: function(result){
+                    if(result) {
+                      document.MultipleHosts.submit();
+                    }
+                }
+                });
+"
+>Delete</div>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  message: 'Are you shure you want to deploy hosts(s) {{ hosts.name }}' + document.querySelectorAll('input[name=id_multiple]:checked'),
+                  callback: function(result){
+                    if(result) {
+                      document.MultipleHosts.action = '{% url 'HostDeploy' %}';
+                      document.MultipleHosts.submit();
+                    }
+                }
+                });
+"
+>Deploy</div>
+
+</form>
+
+
+{% else %}
+    <p>No Hosts are available.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}Osusers{% endblock %}
+
+{% block content %}
+
+
+<p>
+<h4><a href="{% url 'OsuserDetail' %}">create a new osuser -></a></h4>
+</p>
+<br>
+{% if osusers %}
+
+
+<form role="form" method="post" action="{% url 'OsuserDelete' %}" name="deleteMultipleOsusers">
+{% csrf_token %}
+    <div class="panel panel-default">
+        <table class="table">
+        <tr>
+            <th><input type="checkbox" class="checkAll"></th>
+            <th>Name</th>
+            <th>&nbsp;</th>
+        </tr>
+    {% for osuser in osusers %}
+        <tr>
+            <td><input type="checkbox" name="id_multiple" id="{{ osuser.id }}" value="{{ osuser.id }}"></td>
+            <td><a href="{% url 'OsuserDetail' %}?id={{ osuser.id }}">{{ osuser.name }}</a></td>
+            <td align="right">
+            <a href="#" onclick="
+                BootstrapDialog.confirm('Are you shure you want to delete the osuser {{ osuser.name }}',
+                  function(result){
+                    if(result) {
+                      window.location.href = '{% url 'OsuserDelete' %}?id={{ osuser.id }}';
+                    }
+                });
+             "><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+    {% endfor %}
+        </table>
+    </div>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  message: 'Are you shure you want to delete osusers(s) {{ osusers.name }}' + document.querySelectorAll('input[name=id_multiple]:checked'),
+                  callback: function(result){
+                    if(result) {
+                      document.deleteMultipleOsusers.submit();
+                    }
+                }
+                });
+"
+>Delete</div>
+</form>
+
+
+{% else %}
+    <p>No Osusers are available.</p>
+{% endif %}
+
+{% endblock %}
