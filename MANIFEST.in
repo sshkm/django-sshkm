@@ -1,0 +1,6 @@
+include LICENSE
+include README.rst
+recursive-include keymaster/static *
+recursive-include keymaster/templates *
+recursive-include keymaster/fixtures *
+recursive-include menu/fixtures *
