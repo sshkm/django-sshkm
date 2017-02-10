@@ -11,6 +11,7 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.auth.models import User
+from sshkm.models import Setting
 from sshkm.forms import UserForm
 
 
@@ -75,3 +76,13 @@ def DeleteUser(request):
 
     return HttpResponseRedirect(reverse('SettingsList'))
 
+@login_required
+def MasterKeyPublic(request):
+    #key = Setting.objects.get(name='MasterKeyPublic')
+    Setting(name='MasterKeyPublic', value=request.FILES['publickey']).save()
+    return HttpResponseRedirect(reverse('SettingsList'))
+
+@login_required
+def MasterKeyPrivate(request):
+    pass
+    return HttpResponseRedirect(reverse('SettingsList'))

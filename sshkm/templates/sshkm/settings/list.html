@@ -30,6 +30,34 @@ onclick="
                 });
 "
 >Create User</div>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  title: 'Upload Master SSH-public-key',
+                  message: $('<form action={% url 'MasterKeyPublic' %} method=post name=masterKeyPublic class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=publickey></form>'),
+                  callback: function(result){
+                    if(result) {
+                      document.masterKeyPublic.submit();
+                    }
+                }
+                });
+"
+>Upload Master SSH-public-key</div>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  title: 'Upload Master SSH-private-key',
+                  message: $('<form action={% url 'MasterKeyPrivate' %} method=post name=masterKeyPrivate class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=privatekey></form>'),
+                  callback: function(result){
+                    if(result) {
+                      document.masterKeyPrivate.submit();
+                    }
+                }
+                });
+"
+>Upload Master SSH-private-key</div>
+
+
 
 
 {% if users %}

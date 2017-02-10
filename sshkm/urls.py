@@ -57,6 +57,8 @@ urlpatterns = [
     url(r'^settings/passwordsave/$', views.PasswordSave, name='PasswordSave'),
     url(r'^settings/createuser/$', views.CreateUser, name='CreateUser'),
     url(r'^settings/deleteuser/$', views.DeleteUser, name='DeleteUser'),
+    url(r'^settings/masterkeypublic/$', views.MasterKeyPublic, name='MasterKeyPublic'),
+    url(r'^settings/masterkeyprivate/$', views.MasterKeyPrivate, name='MasterKeyPrivate'),
 
     url(r'^login/$', views.auth_login, name='login'),
     url(r'^logout/$', views.auth_logout, name='logout'),

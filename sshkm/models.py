@@ -11,11 +11,14 @@ class MenuItem(models.Model):
     staff_required = models.BooleanField(blank=True, default=False)
     menu = models.ForeignKey(Menu)
 
+class Setting(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    value = models.TextField(null=True, blank=True)
+
 class Group(models.Model):
     name = models.CharField(max_length=200, unique=True)
     description = models.CharField(max_length=500, null=True, blank=True)
     members = models.ManyToManyField('Key', through='KeyGroup', blank=True)
-    #members = models.ManyToManyField('Key')
 
 class Host(models.Model):
     name = models.CharField(max_length=200, unique=True)
@@ -42,11 +45,6 @@ class Key(models.Model):
     keytype = models.CharField(max_length=10, null=True, choices=KEYTYPE_CHOICES, default='RSA',)
     publickey = models.TextField(null=True, blank=True)
     member_of = models.ManyToManyField('Group', through='KeyGroup', blank=True)
-    #member_of = models.ManyToManyField('Group')
-#    def __str__(self):
-#        return self.name
-#    def __unicode__(self):
-#        return self.name
 
 class KeyGroup(models.Model):
     key = models.ForeignKey('Key', on_delete=models.CASCADE)
