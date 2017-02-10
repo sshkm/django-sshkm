@@ -2,17 +2,14 @@ from django.db import models
 
 class Menu(models.Model):
     name = models.CharField(max_length=100)
-    base_url = models.CharField(max_length=100, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
 
 class MenuItem(models.Model):
-    menu = models.ForeignKey(Menu)
+    name = models.CharField(max_length=100)
     order = models.IntegerField(default=500)
-    link_url = models.CharField(max_length=100)
-    title = models.CharField(max_length=100)
+    url = models.CharField(max_length=100)
     login_required = models.BooleanField(blank=True, default=False)
     staff_required = models.BooleanField(blank=True, default=False)
-    anonymous_only = models.BooleanField(blank=True, default=False)
+    menu = models.ForeignKey(Menu)
 
 class Group(models.Model):
     name = models.CharField(max_length=200, unique=True)

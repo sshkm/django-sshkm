@@ -43,12 +43,12 @@
           <a class="navbar-brand" href="/sshkm/index">SSHKM</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">{% load menubuilder %}{% menu left %}
-            {% for item in menuitems %}<li{% if item.current %} class='active'{% endif %}><a href="{{ item.url }}" title="{{ item.title|escape }}">{{ item.title }}</a></li>
+          <ul class="nav navbar-nav">{% load generatemenu %}{% menu left %}
+            {% for item in menuitems %}<li{% if item.current %} class='active'{% endif %}><a href="{{ item.url }}" title="{{ item.name|escape }}">{{ item.name }}</a></li>
             {% endfor %}
           </ul>
-          <ul class="nav navbar-nav navbar-right">{% load menubuilder %}{% menu right %}
-            {% for item in menuitems %}<li{% if item.current %} class='active'{% endif %}><a href="{{ item.url }}" title="{{ item.title|escape }}">{{ item.title }}</a></li>
+          <ul class="nav navbar-nav navbar-right">{% load generatemenu %}{% menu right %}
+            {% for item in menuitems %}<li{% if item.current %} class='active'{% endif %}><a href="{{ item.url }}" title="{{ item.name|escape }}">{{ item.name }}</a></li>
             {% endfor %}
           </ul>
         </div><!--/.nav-collapse -->
