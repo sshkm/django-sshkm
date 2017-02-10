@@ -14,13 +14,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 ##### CUSTOM
-#from ConfigParser import RawConfigParser
-#config = RawConfigParser()
-#config.read('/etc/sshkm.ini')
-#LOGIN_URL = config.get('global', 'LOGIN_URL')
-#####
-
-##### CUSTOM
 # messaging for bootstrap
 from django.contrib.messages import constants as messages
 
@@ -40,9 +33,6 @@ SECRET_KEY = '7bdm)t)-_)=t18z57u-jbfc3%e=p!go9*h_92l08=nvkf!=9nm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -92,17 +82,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sshkm.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
 
 
 # Internationalization
