@@ -47,6 +47,6 @@ setup(
         'enum34',
     ],
     data_files=[
-        ('/etc/sshkm', ['sshkm_test.conf']),
+        ('/etc/sshkm', ['sshkm.conf']),
     ]
 )
