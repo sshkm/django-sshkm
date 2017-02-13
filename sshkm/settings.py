@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 ##### CUSTOM
     'bootstrap3',
+    'menu',
     'sshkm',
 #####
 )
