@@ -40,6 +40,7 @@ setup(
         'setuptools',
         'django>=1.8',
         'django-auth-ldap',
+        'mysqlclient',
         'celery>=4.0.0',
         'django-bootstrap3',
         'paramiko',
