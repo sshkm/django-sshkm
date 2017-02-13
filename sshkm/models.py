@@ -1,16 +1,5 @@
 from django.db import models
 
-class Menu(models.Model):
-    name = models.CharField(max_length=100)
-
-class MenuItem(models.Model):
-    name = models.CharField(max_length=100)
-    order = models.IntegerField(default=500)
-    url = models.CharField(max_length=100)
-    login_required = models.BooleanField(blank=True, default=False)
-    staff_required = models.BooleanField(blank=True, default=False)
-    menu = models.ForeignKey(Menu)
-
 class Setting(models.Model):
     name = models.CharField(max_length=100, unique=True)
     value = models.TextField(null=True, blank=True)
