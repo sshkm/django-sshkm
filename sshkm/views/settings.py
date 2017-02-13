@@ -78,11 +78,30 @@ def DeleteUser(request):
 
 @login_required
 def MasterKeyPublic(request):
-    #key = Setting.objects.get(name='MasterKeyPublic')
-    Setting(name='MasterKeyPublic', value=request.FILES['publickey']).save()
+    try:
+        key = Setting.objects.get(name='MasterKeyPublic')
+        key.value = request.FILES['publickey'].read()
+        key.save()
+        messages.add_message(request, messages.SUCCESS, "Key uploaded.")
+    except ObjectDoesNotExist as e:
+        Setting(name='MasterKeyPublic', value=request.FILES['publickey'].read()).save()
+        messages.add_message(request, messages.SUCCESS, "Key uploaded.")
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, "Key could not be uploaded.")
+
     return HttpResponseRedirect(reverse('SettingsList'))
 
 @login_required
 def MasterKeyPrivate(request):
-    pass
+    try:
+        key = Setting.objects.get(name='MasterKeyPrivate')
+        key.value = request.FILES['privatekey'].read()
+        key.save()
+        messages.add_message(request, messages.SUCCESS, "Key uploaded.")
+    except ObjectDoesNotExist as e:
+        Setting(name='MasterKeyPrivate', value=request.FILES['privatekey'].read()).save()
+        messages.add_message(request, messages.SUCCESS, "Key uploaded.")
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, "Key could not be uploaded.")
+
     return HttpResponseRedirect(reverse('SettingsList'))

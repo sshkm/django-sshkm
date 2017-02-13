@@ -21,7 +21,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
-from sshkm.models import Group, Host, Osuser, Key, KeyGroup, Permission
+from sshkm.models import Group, Host, Osuser, Key, KeyGroup, Permission, Setting
 #from .forms import KeyForm, KeyModelForm
 from sshkm.forms import KeyForm
 
@@ -53,11 +53,16 @@ from sshkm.forms import KeyForm
 #    return redirect('/sshkm/host/list')
 
 def CopyKeyfile(host, keyfile, osuser, home):
+    try:
+        key = Setting.objects.get(name='MasterKeyPrivate')
+    except:
+        messages.add_message(request, messages.ERROR, "Failed to get private key. Maybe not uploaded in Settings?")
+
     # check python version make it compatible:
     if sys.version_info[0] < 3:
-        pkey = StringIO.StringIO(settings.KEYMASTER_PRIVATE_KEY)
+        pkey = StringIO.StringIO(key.value)
     else:
-        pkey = StringIO(settings.KEYMASTER_PRIVATE_KEY)
+        pkey = StringIO(key.value)
     private_key = paramiko.RSAKey.from_private_key(pkey)
     pkey.close()
 
@@ -105,9 +110,14 @@ def GetHostKeys(host_id):
     return keys
 
 def DeployKeys(keys, host_id):
+    try:
+        key = Setting.objects.get(name='MasterKeyPublic')
+    except:
+        messages.add_message(request, messages.ERROR, "Failed to get public key. Maybe not uploaded in Settings?")
+
     host = Host.objects.get(id=host_id)
 
-    config_masterkey = settings.KEYMASTER_PUBLIC_KEY
+    config_masterkey = key.value
     #tmp_file = '/tmp/sshkm_key'
 
     last_home = keys[0][0]
