@@ -41,6 +41,7 @@ setup(
         'django>=1.8',
         'django-auth-ldap',
         'mysqlclient',
+        'psycopg2',
         'celery>=4.0.0',
         'django-bootstrap3',
         'paramiko',
