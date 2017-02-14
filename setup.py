@@ -47,8 +47,8 @@ setup(
         'django-menu==0.1.10.1',
         'paramiko',
         'simplejson',
-        #'enum34',
-        'enum34;python_version<"3.4"',
+        'enum34',
+        #'enum34;python_version<"3.4"',
     ],
     dependency_links=[
         "http://github.com/sshkm/django-sshkm/tarball/master#egg=sshkm-0.1.10.1"
