@@ -46,7 +46,8 @@ setup(
         'django-bootstrap3',
         'paramiko',
         'simplejson',
-        'enum34;python_version<"3.4"',
+        'enum34',
+        #'enum34;python_version<"3.4"',
     ],
     data_files=[
         ('/etc/sshkm', ['sshkm.conf']),
