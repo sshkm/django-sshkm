@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<hr>
 <div class="btn btn-primary"
 onclick="
                 BootstrapDialog.confirm({
@@ -17,19 +18,8 @@ onclick="
                 });
 "
 >Change Your Password</div>
-<div class="btn btn-primary"
-onclick="
-                BootstrapDialog.confirm({
-                  title: 'Create User',
-                  message: $('<form action={% url 'CreateUser' %} method=post name=createUser class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Username: <input class=form-control type=text name=username>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm>Admin: <input type=checkbox name=is_staff></form>'),
-                  callback: function(result){
-                    if(result) {
-                      document.createUser.submit();
-                    }
-                }
-                });
-"
->Create User</div>
+
+<hr>
 <div class="btn btn-primary"
 onclick="
                 BootstrapDialog.confirm({
@@ -43,6 +33,13 @@ onclick="
                 });
 "
 >Upload Master SSH-public-key</div>
+<br>
+<br>
+<textarea rows="5" cols="50">
+{{ publickey }}
+</textarea>
+
+<hr>
 <div class="btn btn-primary"
 onclick="
                 BootstrapDialog.confirm({
@@ -56,13 +53,28 @@ onclick="
                 });
 "
 >Upload Master SSH-private-key</div>
+<br><br>
+<textarea rows="5" cols="50">
+{{ privatekey }}
+</textarea>
 
-
-
+<hr>
+<div class="btn btn-primary"
+onclick="
+                BootstrapDialog.confirm({
+                  title: 'Create User',
+                  message: $('<form action={% url 'CreateUser' %} method=post name=createUser class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Username: <input class=form-control type=text name=username>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm>Admin: <input type=checkbox name=is_staff></form>'),
+                  callback: function(result){
+                    if(result) {
+                      document.createUser.submit();
+                    }
+                }
+                });
+"
+>Create Local User</div>
 
 {% if users %}
 <br><br>
-
 <form role="form" method="post" action="{% url 'DeleteUser' %}" name="deleteMultipleUsers">
 {% csrf_token %}
     <div class="panel panel-default">
@@ -94,5 +106,6 @@ onclick="
 </form>
 
 {% endif %}
+<hr>
 
 {% endblock %}

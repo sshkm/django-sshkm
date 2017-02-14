@@ -18,20 +18,20 @@ from sshkm.forms import UserForm
 @login_required
 def SettingsList(request):
     users = User.objects.exclude(username='admin')
-    context = {'users': users}
-    return render(request, 'sshkm/settings/list.html', context)
+    try:
+        privatekey = Setting.objects.get(name='MasterKeyPrivate')
+        privatekey = privatekey.value[:50] + "\n...........\n" + privatekey.value[-50:]
+    except:
+        privatekey = ""
 
-#@login_required
-#def PasswordReset(request):
-#    if request.method == 'GET' and 'id' in request.GET:
-#        user = get_object_or_404(Host, pk=request.GET['id'])
-#        userform = UserForm(instance=host)
-#    else:
-#        userform = UserForm()
-#
-#    return render(request, 'sshkm/settings/passwordreset.html', {
-#        'userform': userform,
-#    })
+    try:
+        publickey = Setting.objects.get(name='MasterKeyPublic')
+        publickey = publickey.value
+    except:
+        publickey = ""
+
+    context = {'users': users, 'privatekey': privatekey, 'publickey': publickey}
+    return render(request, 'sshkm/settings/list.html', context)
 
 @login_required
 def PasswordSave(request):
