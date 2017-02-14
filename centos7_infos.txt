@@ -1,0 +1,11 @@
+yum install python34 python34-devel python34-pip mariadb-devel postgresql-devel gcc openldap-devel httpd httpd-devel
+
+pip3.4 install mod_wsgi
+mod_wsgi-express install-module
+
+systemctl enable httpd.service
+systemctl start httpd.service
+
+yum install mariadb-server
+systemctl enable mariadb.service
+systemctl start mariadb.service
