@@ -1,8 +1,8 @@
 import os
 from setuptools import find_packages, setup
 
-#with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
-#    README = readme.read()
+with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
+    README = readme.read()
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
@@ -17,7 +17,7 @@ setup(
     include_package_data=True,
     license='GNU General Public License v3 (GPLv3)',
     description='A Django based ssh-key management tool.',
-    #long_description=README,
+    long_description=README,
     url='https://github.com/sshkm/django-sshkm',
     #download_url='https://github.com/sshkm/django-sshkm/archive/' + version + '.zip',
     download_url='https://github.com/sshkm/django-sshkm/archive/master.zip',
@@ -47,8 +47,8 @@ setup(
         'django-menu',
         'paramiko',
         'simplejson',
-        'enum34',
-        #'enum34;python_version<"3.4"',
+        #'enum34',
+        'enum34;python_version<"3.4"',
     ],
     dependency_links=[
         "http://github.com/sshkm/django-sshkm/tarball/master#egg=sshkm-master"
