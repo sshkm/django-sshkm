@@ -44,7 +44,7 @@ setup(
         'psycopg2',
         'celery>=4.0.0',
         'django-bootstrap3',
-        'django-menu=0.1.10.1',
+        'django-menu==0.1.10.1',
         'paramiko',
         'simplejson',
         #'enum34',
