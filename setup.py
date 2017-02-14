@@ -44,14 +44,14 @@ setup(
         'psycopg2',
         'celery>=4.0.0',
         'django-bootstrap3',
-        'django-menu',
+        'django-menu=0.1.10.1',
         'paramiko',
         'simplejson',
         #'enum34',
         'enum34;python_version<"3.4"',
     ],
     dependency_links=[
-        "http://github.com/sshkm/django-sshkm/tarball/master#egg=sshkm-master"
+        "http://github.com/sshkm/django-sshkm/tarball/master#egg=sshkm-0.1.10.1"
     ],
     data_files=[
         ('/etc/sshkm', ['sshkm.conf']),
