@@ -1,26 +1,27 @@
-./configure --enable-shared --enable-loadable-sqlite-extensions --prefix=/usr/local LDFLAGS="-Wl,-rpath /usr/local/lib"
-make && make altinstall
+#./configure --enable-shared --enable-loadable-sqlite-extensions --prefix=/usr/local LDFLAGS="-Wl,-rpath /usr/local/lib"
+#make && make altinstall
 
-pip3.6 install mod_wsgi
+pip3.4 install mod_wsgi
 mod_wsgi-express install-module
 
-pip3.6 install https://github.com/sshkm/django-menu/archive/master.zip
-pip3.6 install https://github.com/sshkm/django-sshkm/archive/master.zip
-
-# /etc/httpd/conf.modules.d/10-wsgi.conf:
-# disable default module
+pip3.4 install https://github.com/sshkm/django-menu/archive/master.zip
+pip3.4 install https://github.com/sshkm/django-sshkm/archive/master.zip
 
 # /etc/httpd/conf/httpd.conf:
-LoadModule wsgi_module /etc/httpd/modules/mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so
-WSGIScriptAlias / /usr/local/lib/python3.6/site-packages/sshkm/wsgi.py
+LoadModule wsgi_module /usr/lib64/httpd/modules/mod_wsgi-py34.cpython-34m.so
+
+Alias /static/ /usr/lib/python3.4/site-packages/sshkm/static/
+
+<Directory /usr/lib/python3.4/site-packages/sshkm/static/>
+  Require all granted
+</Directory>
+
+WSGIScriptAlias / /usr/lib/python3.4/site-packages/sshkm/wsgi.py
 WSGIDaemonProcess sshkm user=apache group=apache
 WSGIProcessGroup sshkm
-<Directory /usr/local/lib/python3.6/site-packages>
+
+<Directory /usr/lib/python3.4/site-packages>
   <Files wsgi.py>
     Require all granted
   </Files>
-</Directory>
-Alias /static/ /usr/local/lib/python3.6/site-packages/sshkm/static/
-<Directory /usr/local/lib/python3.6/site-packages/sshkm/static/>
-  Require all granted
 </Directory>
