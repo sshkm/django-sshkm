@@ -1,3 +1,5 @@
+# if you use sqlite make shure that the user running celery has read and write permissions to the db-file
+
 yum install rabbitmq-server
 systemctl enable rabbitmq-server.service
 systemctl start rabbitmq-server.service
