@@ -32,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7bdm)t)-_)=t18z57u-jbfc3%e=p!go9*h_92l08=nvkf!=9nm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Application definition
 
@@ -74,9 +74,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-##### CUSTOM
-#                'django.core.context_processors.request',
-#####
             ],
         },
     },
@@ -129,7 +126,8 @@ BOOTSTRAP3 = {
 exec(compile(open('/etc/sshkm/sshkm.conf', "rb").read(), '/etc/sshkm/sshkm.conf', 'exec'))
 #####
 
-
+##### CUSTOM
 CELERY_BROKER_URL = 'amqp://'
 CELERY_RESULT_BACKEND = 'amqp'
+#####
 
