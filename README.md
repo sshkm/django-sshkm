@@ -11,5 +11,7 @@ It stores ssh-public-keys in a database and combine them in goups (Development, 
 
 ## Setup
 ```bash
+pip install https://github.com/sshkm/django-menu/archive/master.zip
 pip install https://github.com/sshkm/django-sshkm/archive/master.zip
 ```
+You can find a full example for a running version in the wiki.
