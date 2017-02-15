@@ -30,11 +30,7 @@ def CopyKeyfile(host, keyfile, osuser, home):
     except:
         messages.add_message(request, messages.ERROR, "Failed to get private key. Maybe not uploaded in Settings?")
 
-    # check python version make it compatible:
-    if sys.version_info[0] < 3:
-        pkey = StringIO.StringIO(key.value)
-    else:
-        pkey = StringIO(key.value)
+    pkey = StringIO(key.value)
     private_key = paramiko.RSAKey.from_private_key(pkey)
     pkey.close()
 

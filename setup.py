@@ -45,7 +45,7 @@ setup(
         'Topic :: Utilities',
     ],
     install_requires=[
-        'pathlib',
+        'pathlib2',
         'setuptools',
         'django>=1.8',
         'django-auth-ldap',
