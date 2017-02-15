@@ -55,18 +55,9 @@ def OsuserDelete(request):
 def OsuserSave(request):
     try:
         if request.POST.get('id') is not None:
-            #osuser = Osuser(
-            #    id=request.POST.get('id'),
-            #    name=request.POST.get('name'),
-            #    description=request.POST.get('description', ''),
-            #)
             osuserInstance = Osuser.objects.get(id=request.POST.get('id'))
             osuser = OsuserForm(request.POST, instance=osuserInstance)
         else:
-            #osuser = Osuser(
-            #    name=request.POST.get('name'),
-            #    description=request.POST.get('description'),
-            #)
             osuser = OsuserForm(request.POST)
         osuser.save()
         messages.add_message(request, messages.SUCCESS, "Osuser " + request.POST.get('name') + " sucessfully saved")

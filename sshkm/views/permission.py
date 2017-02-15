@@ -50,8 +50,6 @@ def PermissionDelete(request):
 @login_required
 def PermissionSave(request):
     try:
-        #permission = PermissionForm(request.POST)
-        #permission.save()
         for host_id in request.POST.getlist('host'):
             for group_id in request.POST.getlist('group'):
                 for osuser_id in request.POST.getlist('osuser'):

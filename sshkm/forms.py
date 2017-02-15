@@ -14,26 +14,10 @@ class KeyForm(forms.ModelForm):
     class Meta:
         model = Key
         fields = ('name', 'email', 'description', 'firstname', 'lastname', 'keytype', 'publickey', 'member_of',)
-        #fields = ('name', 'email', 'description', 'firstname', 'lastname', 'keytype', 'publickey',)
 
     def __init__(self, *args, **kwargs):
         super(KeyForm, self).__init__(*args, **kwargs)
         self.fields['member_of'] = ModelMultipleChoiceFieldNames(queryset=Group.objects.all(), required=False)
-
-    #def save(self, commit=True):
-
-    #    key = super(KeyForm, self).save() # Save the child so we have an ID for the m2m
-
-    #    name = self.cleaned_data.get('name')
-    #    email = self.cleaned_data.get('email')
-    #    description = self.cleaned_data.get('description')
-    #    firstname = self.cleaned_data.get('firstname')
-    #    lastname = self.cleaned_data.get('lastname')
-    #    keytype = self.cleaned_data.get('keytype')
-    #    publickey = self.cleaned_data.get('publickey')
-    #    KeyGroup.objects.create(group=member_of, key=id)
-
-#        return key
 
 class GroupForm(forms.ModelForm):
     class Meta:

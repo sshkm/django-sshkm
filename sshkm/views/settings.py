@@ -54,7 +54,6 @@ def CreateUser(request):
         if request.POST.get('is_staff'):
             user.is_staff = 1
         user.save()
-        #return render(request, 'sshkm/settings/list.html')
         return HttpResponseRedirect(reverse('SettingsList'))
 
 @login_required

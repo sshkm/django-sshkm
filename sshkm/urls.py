@@ -17,13 +17,9 @@ from django.conf.urls import include, url
 from . import views
 
 urlpatterns = [
-#    url(r'^', include('keymaster.urls')),
-#    url(r'^keymaster/', include('keymaster.urls')),
-#    url(r'^authentication/', include('authentication.urls')),
     url(r'^$', views.index, name='index'),
     url(r'^index/$', views.index, name='index'),
     url(r'^help/$', views.help, name='help'),
-    #url(r'^host/deploy/$', views.HostDeploy, name='HostDeploy'),
 
     url(r'^key/$', views.KeyList, name='KeyList'),
     url(r'^key/detail/$', views.KeyDetail, name='KeyDetail'),
@@ -53,7 +49,6 @@ urlpatterns = [
     url(r'^permission/save/$', views.PermissionSave, name='PermissionSave'),
 
     url(r'^settings/$', views.SettingsList, name='SettingsList'),
-    #url(r'^settings/passwordreset/$', views.PasswordReset, name='PasswordReset'),
     url(r'^settings/passwordsave/$', views.PasswordSave, name='PasswordSave'),
     url(r'^settings/createuser/$', views.CreateUser, name='CreateUser'),
     url(r'^settings/deleteuser/$', views.DeleteUser, name='DeleteUser'),
