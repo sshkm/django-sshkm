@@ -1,5 +1,6 @@
 import os
 from setuptools import find_packages, setup
+from pathlib import Path
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
@@ -7,7 +8,14 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
-version = '0.1'
+# check if sshkm.conf exists in /etc/sshkm directory and prevent from overwriting
+cfgfile = Path("/etc/sshkm/sshkm.conf")
+if cfgfile.is_file():
+    data_files = []
+else:
+    data_files = [('/etc/sshkm', ['sshkm.conf']),]
+
+version = 'master'
 
 setup(
     name='django-sshkm',
@@ -19,8 +27,8 @@ setup(
     description='A Django based ssh-key management tool.',
     long_description=README,
     url='https://github.com/sshkm/django-sshkm',
-    #download_url='https://github.com/sshkm/django-sshkm/archive/' + version + '.zip',
-    download_url='https://github.com/sshkm/django-sshkm/archive/master.zip',
+    download_url='https://github.com/sshkm/django-sshkm/archive/' + version + '.zip',
+    #download_url='https://github.com/sshkm/django-sshkm/archive/master.zip',
     author='Peter Loeffler',
     author_email='peter.loeffler@guruz.at',
     classifiers=[
@@ -53,7 +61,5 @@ setup(
     dependency_links=[
         "https://github.com/sshkm/django-menu/tarball/0.1.10.1#egg=django-menu-0.1.10.1"
     ],
-    data_files=[
-        ('/etc/sshkm', ['sshkm.conf']),
-    ]
+    data_files=data_files
 )
