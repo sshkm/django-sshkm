@@ -1,4 +1,4 @@
-# !!! still in initial development phase
+# !!! still under heavy construction
 
 # django-sshkm
 django-sshkm is a Django based ssh-key management tool.
