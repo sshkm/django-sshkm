@@ -1,5 +1,6 @@
 import os
 from setuptools import find_packages, setup
+# python 2 requires pathlib to be installed manually?:
 from pathlib import Path
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
@@ -45,7 +46,6 @@ setup(
         'Topic :: Utilities',
     ],
     install_requires=[
-        'pathlib2',
         'setuptools',
         'django>=1.8',
         'django-auth-ldap',
