@@ -10,5 +10,6 @@ It stores ssh-public-keys in a database and combine them in goups (Development, 
 - Django compatible database like (SQLite, MySQL/MariaDB, PostgreSQL, ...)
 
 # Setup
-::
-  pip install https://github.com/sshkm/django-sshkm/archive/master.zip
+```bash
+pip install https://github.com/sshkm/django-sshkm/archive/master.zip
+```
