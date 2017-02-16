@@ -12,12 +12,8 @@
     <title>{% block headtitle %}SSHKM{% endblock %}</title>
 
     {% load static %}
-    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
-
-    <!-- for popups -->
     <link href="{% static "bootstrap-dialog/bootstrap-dialog.min.css" %}" rel="stylesheet" type="text/css" />
-
     <link href="{% static "custom.css" %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -30,7 +26,6 @@
 
   <body>
 
-    <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -51,44 +46,29 @@
             {% for item in menuitems %}<li{% if item.current %} class='active'{% endif %}><a href="{{ item.url }}" title="{{ item.title|escape }}">{{ item.title }}</a></li>
             {% endfor %}
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </nav>
 
     <div class="container">
-    <div class="row col-10 col-sm-10 col-lg-10">
+      <div class="row col-10 col-sm-10 col-lg-10">
 
-    {% if messages %}
-            {% for message in messages %}
-                 <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
-            {% endfor %}
-    {% endif %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
 
-      <!-- Main component for a primary marketing message or call to action -->
-      <!-- <div class="jumbotron"> -->
         <h1>{% block title %}{% endblock %}</h1>
         {% block content %}{% endblock %}
-      <!-- </div> -->
 
+      </div>
     </div>
-    </div> <!-- /container -->
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="{% static "jquery/jquery.min.js" %}"></script>
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
-
-    <!-- for popups -->
     <script src="{% static "bootstrap-dialog/bootstrap-dialog.min.js" %}"></script>
-
-<script>
-// Listen for click on toggle checkbox
-// ToDo: static .js file
-$(".checkAll").click(function () {
-    $(this).closest('form').find(':checkbox').prop('checked', $(this).prop('checked'));
-});
-</script>
+    <script src="{% static "dialog.js" %}"></script>
 
   </body>
 </html>
