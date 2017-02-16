@@ -3,5 +3,6 @@ Header
 ======
 |pyversion|
 
-.. |pyversion| image:: https://github.com/sshkm/django-sshkm/img/pyversion.svg
+.. |pyversion| image:: https://img.shields.io/pypi/pyversions/celery.svg
     :alt: Supported Python versions.
+    :target: https://www.google.at
