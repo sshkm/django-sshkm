@@ -39,17 +39,36 @@
               </table>
             </div>
            <div class="btn btn-primary" onclick="
-             BootstrapDialog.confirm(
-               {
-                 title: 'please confirm',
-                 message: 'Are you shure you want to delete selected groups(s)',
-                 callback: function(result) {
-                   if(result) {
-                     document.deleteMultipleGroups.submit();
+             var checkboxs=document.getElementsByName('id_multiple');
+             var okay=false;
+
+             for(var i=0,l=checkboxs.length;i<l;i++) {
+               if(checkboxs[i].checked) {
+                 okay=true;
+                 break;
+               }
+             }
+
+             if(okay) {
+               BootstrapDialog.confirm(
+                 {
+                   title: 'please confirm',
+                   message: 'Are you shure you want to delete selected groups(s)',
+                   callback: function(result) {
+                     if(result) {
+                       document.deleteMultipleGroups.submit();
+                     }
                    }
                  }
-               }
-             );
+               );
+             } else {
+               BootstrapDialog.alert(
+                 {
+                   title: 'no group(s) selected',
+                   message: 'Please select at least one group'
+                 }
+               );
+             }
            ">Delete</div>
         </form>
 {% else %}
