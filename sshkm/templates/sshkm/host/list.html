@@ -35,7 +35,7 @@
                       window.location.href = '{% url 'HostDelete' %}?id={{ hoststatus.id }}';
                     }
                 });
-             "><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+             "><span class="glyphicon glyphicon-trash" aria-hidden="true" title="delete"></span></a>
             </td>
             <td align="right">
             <a href="#" onclick="
@@ -45,7 +45,7 @@
                       window.location.href = '{% url 'HostDeploy' %}?id={{ hoststatus.id }}';
                     }
                 });
-             "><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span></a>
+             "><span class="glyphicon glyphicon-floppy-save" aria-hidden="true" title="deploy"></span></a>
             </td>
         </tr>
     {% endfor %}
