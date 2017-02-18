@@ -15,4 +15,21 @@
           <button type="submit" class="btn btn-primary">Submit</button>
           {% endbuttons %}
         </form>
+{% if permissions %}
+       <h4>Permissions for this host</h4>
+       <div class="panel panel-default">
+         <table class="table">
+            <tr>
+              <th>Group</th>
+              <th>OS-User</th>
+            </tr>
+            {% for permission in permissions %}
+            <tr>
+              <td>{{ permission.group.name }}</td>
+              <td>{{ permission.osuser.name }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+{% endif %}
 {% endblock %}

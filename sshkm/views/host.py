@@ -48,12 +48,16 @@ def HostDetail(request):
     if request.method == 'GET' and 'id' in request.GET:
         host = get_object_or_404(Host, pk=request.GET['id'])
         hostform = HostForm(instance=host)
+        permissions = Permission.objects.filter(host_id=request.GET['id'])
+        return render(request, 'sshkm/host/detail.html', {
+            'hostform': hostform,
+            'permissions': permissions,
+        })
     else:
         hostform = HostForm()
-
-    return render(request, 'sshkm/host/detail.html', {
-        'hostform': hostform,
-    })
+        return render(request, 'sshkm/host/detail.html', {
+            'hostform': hostform,
+        })
 
 @login_required
 def HostDelete(request):

@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
-from sshkm.models import Osuser
+from sshkm.models import Osuser, Permission
 from sshkm.forms import OsuserForm
 
 
@@ -25,12 +25,16 @@ def OsuserDetail(request):
     if request.method == 'GET' and 'id' in request.GET:
         osuser = get_object_or_404(Osuser, pk=request.GET['id'])
         osuserform = OsuserForm(instance=osuser)
+        permissions = Permission.objects.filter(osuser_id=request.GET['id'])
+        return render(request, 'sshkm/osuser/detail.html', {
+            'osuserform': osuserform,
+            'permissions': permissions,
+        })
     else:
         osuserform = OsuserForm()
-
-    return render(request, 'sshkm/osuser/detail.html', {
-        'osuserform': osuserform,
-    })
+        return render(request, 'sshkm/osuser/detail.html', {
+            'osuserform': osuserform,
+        })
 
 @login_required
 def OsuserDelete(request):

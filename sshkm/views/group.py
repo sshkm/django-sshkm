@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
-from sshkm.models import Group, KeyGroup, Key
+from sshkm.models import Group, KeyGroup, Key, Permission
 from sshkm.forms import GroupForm
 
 
@@ -25,12 +25,16 @@ def GroupDetail(request):
     if request.method == 'GET' and 'id' in request.GET:
         group = get_object_or_404(Group, pk=request.GET['id'])
         groupform = GroupForm(instance=group)
+        permissions = Permission.objects.filter(group_id=request.GET['id'])
+        return render(request, 'sshkm/group/detail.html', {
+            'groupform': groupform,
+            'permissions': permissions,
+        })
     else:
         groupform = GroupForm()
-
-    return render(request, 'sshkm/group/detail.html', {
-        'groupform': groupform,
-    })
+        return render(request, 'sshkm/group/detail.html', {
+            'groupform': groupform,
+        })
 
 @login_required
 def GroupDelete(request):
