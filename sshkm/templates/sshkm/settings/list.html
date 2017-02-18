@@ -35,9 +35,12 @@ onclick="
 >Upload Master SSH-public-key</div>
 <br>
 <br>
-<textarea rows="5" cols="50">
+<div class="form-group">
+<label for="publickey">This is the public key you should copy to the authorized_keys file of the superuser (default: root):</label>
+<textarea class="form-control" id="publickey" rows="5" readonly>
 {{ publickey }}
 </textarea>
+<div>
 
 <hr>
 <div class="btn btn-primary"
@@ -54,9 +57,12 @@ onclick="
 "
 >Upload Master SSH-private-key</div>
 <br><br>
-<textarea rows="5" cols="50">
+<div class="form-group">
+<label for="privatekey">This are the first and last few characters of the private key:</label>
+<textarea class="form-control" id="privatekey" rows="5" readonly>
 {{ privatekey }}
 </textarea>
+</div>
 
 <hr>
 <div class="btn btn-primary"
