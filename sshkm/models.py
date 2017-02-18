@@ -20,18 +20,12 @@ class Osuser(models.Model):
     home = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=500, null=True, blank=True)
 
-KEYTYPE_CHOICES = (
-    ('ssh-rsa', 'ssh-rsa'),
-    ('ssh-dsa', 'ssh-dsa'),
-)
-
 class Key(models.Model):
     name = models.CharField(max_length=200, unique=True)
     description = models.CharField(max_length=500, null=True, blank=True)
     firstname = models.CharField(max_length=200, null=True, blank=True)
     lastname = models.CharField(max_length=200, null=True, blank=True)
     email = models.EmailField(max_length=200, null=True, blank=True)
-    keytype = models.CharField(max_length=10, null=True, choices=KEYTYPE_CHOICES, default='RSA',)
     publickey = models.TextField(null=True, blank=True)
     member_of = models.ManyToManyField('Group', through='KeyGroup', blank=True)
 

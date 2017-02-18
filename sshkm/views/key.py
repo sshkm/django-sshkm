@@ -80,7 +80,6 @@ def KeySave(request):
                 firstname=request.POST.get('firstname', False),
                 lastname=request.POST.get('lastname', False),
                 email=request.POST.get('email'),
-                keytype=request.POST.get('keytype', False),
                 publickey=request.POST.get('publickey', False),
             )
             KeyGroup.objects.filter(key_id=request.POST.get('id')).delete()
@@ -95,7 +94,6 @@ def KeySave(request):
                 firstname=request.POST.get('firstname', False),
                 lastname=request.POST.get('lastname', False),
                 email=request.POST.get('email'),
-                keytype=request.POST.get('keytype', False),
                 publickey=request.POST.get('publickey', False),
             )
             key.save()

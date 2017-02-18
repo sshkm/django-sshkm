@@ -1,6 +1,7 @@
 from django import forms
 from .models import Key, Group, Host, Osuser, KeyGroup, Permission
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 from django.forms import ModelMultipleChoiceField
 
@@ -13,11 +14,23 @@ class ModelMultipleChoiceFieldNames(ModelMultipleChoiceField):
 class KeyForm(forms.ModelForm):
     class Meta:
         model = Key
-        fields = ('name', 'email', 'description', 'firstname', 'lastname', 'keytype', 'publickey', 'member_of',)
+        fields = ('name', 'email', 'description', 'firstname', 'lastname', 'publickey', 'member_of',)
+        labels = {
+            'name': _('Name (unique)'),
+            'email': _('Email (optional)'),
+            'description': _('Description (optional)'),
+            'firstname': _('Firstname (optional)'),
+            'lastname': _('Lastname (optional)'),
+            'publickey': _('Public Key'),
+            'member_of': _('Member of Group(s)'),
+        }
 
     def __init__(self, *args, **kwargs):
         super(KeyForm, self).__init__(*args, **kwargs)
         self.fields['member_of'] = ModelMultipleChoiceFieldNames(queryset=Group.objects.all(), required=False)
+        self.fields['email'].widget.attrs['placeholder'] = ''
+        self.fields['description'].widget.attrs['placeholder'] = ''
+        self.fields['publickey'].widget.attrs['placeholder'] = 'ssh-rsa AAAAB3NzaC1yc......== user@example.com'
 
 class GroupForm(forms.ModelForm):
     class Meta:

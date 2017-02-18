@@ -12,9 +12,7 @@
           {% bootstrap_field keyform.firstname set_required=False %}
           {% bootstrap_field keyform.lastname set_required=False %}
           {% bootstrap_field keyform.description set_required=False %}
-          {% bootstrap_field keyform.keytype set_required=False %}
-          {% bootstrap_label "Public Key" label_for="id_publickey" %}
-          {% bootstrap_field keyform.publickey set_required=False show_label=False %}
+          {% bootstrap_field keyform.publickey set_required=False %}
           {% if request.GET.id %}
           <input type="hidden" name="id" value="{{ request.GET.id }}">
           {% endif %}

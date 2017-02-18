@@ -66,7 +66,7 @@ def GetHostKeys(host_id):
             osuser = Osuser.objects.get(id=permission.osuser_id)
 
             if key.publickey is not None and key.publickey != "":
-                keys.append((GetHome(osuser.id), key.name, key.keytype,  key.publickey, osuser.name))
+                keys.append((GetHome(osuser.id), key.publickey, osuser.name))
 
     keys = sorted(set(keys))
     return keys
@@ -82,17 +82,15 @@ def DeployKeys(keys, host_id):
     config_masterkey = key.value
 
     last_home = keys[0][0]
-    last_osuser = keys[0][4]
+    last_osuser = keys[0][2]
     masterkey = ''
     keyfile = ''
     counter = 0
 
     for key in keys:
         home = key[0]
-        name = key[1]
-        keytype = key[2]
-        publickey = key[3]
-        osuser = key[4]
+        publickey = key[1]
+        osuser = key[2]
 
         counter = counter + 1
 
@@ -103,9 +101,9 @@ def DeployKeys(keys, host_id):
             if osuser == 'root':
                 masterkey = config_masterkey + '\n'
             CopyKeyfile(host.name, keyfile, last_osuser, last_home)
-            keyfile = masterkey + keytype + ' ' + publickey + ' ' + name + '\n'
+            keyfile = masterkey + publickey + '\n'
         else:
-            keyfile += masterkey + keytype + ' ' + publickey + ' ' + name + '\n'
+            keyfile += masterkey + publickey + '\n'
         last_home = home
         last_osuser = osuser
         masterkey = ''
