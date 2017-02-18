@@ -3,115 +3,109 @@
 {% block title %}Settings{% endblock %}
 
 {% block content %}
-
-<hr>
-<div class="btn btn-primary"
-onclick="
-                BootstrapDialog.confirm({
-                  title: 'Change Password',
-                  message: $('<form action={% url 'PasswordSave' %} method=post name=changePassword class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm></form>'),
-                  callback: function(result){
-                    if(result) {
-                      document.changePassword.submit();
-                    }
+        <hr>
+        <div class="btn btn-primary" onclick="
+          BootstrapDialog.confirm(
+            {
+              title: 'Change Password',
+              message: $('<form action={% url 'PasswordSave' %} method=post name=changePassword class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm></form>'),
+              callback: function(result) {
+                if(result) {
+                  document.changePassword.submit();
                 }
-                });
-"
->Change Your Password</div>
+              }
+            }
+          );
+        ">Change Your Password</div>
 
-<hr>
-<div class="btn btn-primary"
-onclick="
-                BootstrapDialog.confirm({
-                  title: 'Upload Master SSH-public-key',
-                  message: $('<form action={% url 'MasterKeyPublic' %} method=post name=masterKeyPublic class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=publickey></form>'),
-                  callback: function(result){
-                    if(result) {
-                      document.masterKeyPublic.submit();
-                    }
+        <hr>
+
+        <div class="btn btn-primary" onclick="
+          BootstrapDialog.confirm(
+            {
+              title: 'Upload Master SSH-public-key',
+              message: $('<form action={% url 'MasterKeyPublic' %} method=post name=masterKeyPublic class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=publickey></form>'),
+              callback: function(result) {
+                if(result) {
+                  document.masterKeyPublic.submit();
                 }
-                });
-"
->Upload Master SSH-public-key</div>
-<br>
-<br>
-<div class="form-group">
-<label for="publickey">This is the public key you should copy to the authorized_keys file of the superuser (default: root):</label>
-<textarea class="form-control" id="publickey" rows="5" readonly>
-{{ publickey }}
-</textarea>
-<div>
+              }
+            }
+          );
+        ">Upload Master SSH-public-key</div>
+        <br>
+        <br>
+        <div class="form-group">
+          <label for="publickey">This is the public key you should copy to the authorized_keys file of the superuser (default: root) on your target hosts:</label>
+          <textarea class="form-control" id="publickey" rows="5" readonly>{{ publickey }}</textarea>
+        <div>
 
-<hr>
-<div class="btn btn-primary"
-onclick="
-                BootstrapDialog.confirm({
-                  title: 'Upload Master SSH-private-key',
-                  message: $('<form action={% url 'MasterKeyPrivate' %} method=post name=masterKeyPrivate class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=privatekey></form>'),
-                  callback: function(result){
-                    if(result) {
-                      document.masterKeyPrivate.submit();
-                    }
+        <hr>
+        <div class="btn btn-primary" onclick="
+          BootstrapDialog.confirm(
+            {
+              title: 'Upload Master SSH-private-key',
+              message: $('<form action={% url 'MasterKeyPrivate' %} method=post name=masterKeyPrivate class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=privatekey></form>'),
+              callback: function(result) {
+                if(result) {
+                  document.masterKeyPrivate.submit();
                 }
-                });
-"
->Upload Master SSH-private-key</div>
-<br><br>
-<div class="form-group">
-<label for="privatekey">This are the first and last few characters of the private key:</label>
-<textarea class="form-control" id="privatekey" rows="5" readonly>
-{{ privatekey }}
-</textarea>
-</div>
+              }
+            }
+          );
+        ">Upload Master SSH-private-key</div>
+        <br><br>
+        <div class="form-group">
+          <label for="privatekey">This are the first and last few characters of the private key:</label>
+          <textarea class="form-control" id="privatekey" rows="5" readonly>{{ privatekey }}</textarea>
+        </div>
 
-<hr>
-<div class="btn btn-primary"
-onclick="
-                BootstrapDialog.confirm({
-                  title: 'Create User',
-                  message: $('<form action={% url 'CreateUser' %} method=post name=createUser class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Username: <input class=form-control type=text name=username>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm>Admin: <input type=checkbox name=is_staff></form>'),
-                  callback: function(result){
-                    if(result) {
-                      document.createUser.submit();
-                    }
+        <hr>
+        <div class="btn btn-primary" onclick="
+          BootstrapDialog.confirm(
+            {
+              title: 'Create User',
+              message: $('<form action={% url 'CreateUser' %} method=post name=createUser class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Username: <input class=form-control type=text name=username>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm>Admin: <input type=checkbox name=is_staff></form>'),
+              callback: function(result) {
+                if(result) {
+                  document.createUser.submit();
                 }
-                });
-"
->Create Local User</div>
+              }
+            }
+          );
+        ">Create Local User</div>
 
-{% if users %}
-<br><br>
-<form role="form" method="post" action="{% url 'DeleteUser' %}" name="deleteMultipleUsers">
-{% csrf_token %}
-    <div class="panel panel-default">
-        <table class="table">
-        <tr>
-            <th><input type="checkbox" class="checkAll"></th>
-            <th>Username</th>
-        </tr>
-    {% for user in users %}
-        <tr>
-            <td><input type="checkbox" name="id_multiple" id="{{ user.id }}" value="{{ user.id }}"></td>
-            <td>{{ user.username }}</td>
-        </tr>
-    {% endfor %}
-        </table>
-    </div>
-<div class="btn btn-primary"
-onclick="
-                BootstrapDialog.confirm({
-                  message: 'Are you shure you want to delete user(s) {{ users.name }}' + document.querySelectorAll('input[name=id_multiple]:checked'),
-                  callback: function(result){
-                    if(result) {
-                      document.deleteMultipleUsers.submit();
-                    }
+        {% if users %}
+        <br><br>
+        <form role="form" method="post" action="{% url 'DeleteUser' %}" name="deleteMultipleUsers">
+          {% csrf_token %}
+          <div class="panel panel-default">
+            <table class="table">
+              <tr>
+                <th><input type="checkbox" class="checkAll"></th>
+                <th>Username</th>
+              </tr>
+              {% for user in users %}
+              <tr>
+                <td><input type="checkbox" name="id_multiple" id="{{ user.id }}" value="{{ user.id }}"></td>
+                <td>{{ user.username }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+          <div class="btn btn-primary" onclick="
+            BootstrapDialog.confirm(
+              {
+                message: 'Are you shure you want to delete user(s) {{ users.name }}' + document.querySelectorAll('input[name=id_multiple]:checked'),
+                callback: function(result) {
+                  if(result) {
+                    document.deleteMultipleUsers.submit();
+                  }
                 }
-                });
-"
->Delete</div>
-</form>
-
+              }
+            );
+          ">Delete</div>
+        </form>
 {% endif %}
-<hr>
-
+        <hr>
 {% endblock %}
