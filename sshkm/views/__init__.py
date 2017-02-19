@@ -1,24 +1,24 @@
-import paramiko, base64, os
+#import paramiko, base64, os
 
-from django.shortcuts import get_object_or_404, render
-from django.shortcuts import redirect
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
-from django.contrib import messages
+#from django.shortcuts import get_object_or_404, render
+from django.shortcuts import redirect, render
+#from django.http import HttpResponseRedirect, HttpResponse
+#from django.core.urlresolvers import reverse
+#from django.contrib import messages
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from django.db import IntegrityError
-from django.core.exceptions import ObjectDoesNotExist
+#from django.db import IntegrityError
+#from django.core.exceptions import ObjectDoesNotExist
 
-from sshkm.models import Group, Host, Osuser, Key, KeyGroup, Permission
+#from sshkm.models import Group, Host, Osuser, Key, KeyGroup, Permission
 #from .forms import KeyForm, KeyModelForm
-from sshkm.forms import KeyForm
+#from sshkm.forms import KeyForm
 
 
 
-from sshkm.views.help import help
+from sshkm.views.help import *
 from sshkm.views.key import *
 from sshkm.views.group import *
 from sshkm.views.host import *

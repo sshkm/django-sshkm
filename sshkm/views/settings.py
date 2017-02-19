@@ -5,7 +5,8 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
@@ -15,7 +16,7 @@ from sshkm.models import Setting
 from sshkm.forms import UserForm
 
 
-@login_required
+@staff_member_required(login_url=None)
 def SettingsList(request):
     users = User.objects.exclude(username='admin')
     try:
@@ -33,7 +34,7 @@ def SettingsList(request):
     context = {'users': users, 'privatekey': privatekey, 'publickey': publickey}
     return render(request, 'sshkm/settings/list.html', context)
 
-@login_required
+@staff_member_required(login_url=None)
 def PasswordSave(request):
     if request.POST.get('password') != request.POST.get('confirm'):
         messages.add_message(request, messages.ERROR, "Password and Password Confirm are not equal.")
@@ -44,7 +45,7 @@ def PasswordSave(request):
         u.save()
         return HttpResponseRedirect(reverse('logout'))
 
-@login_required
+@staff_member_required(login_url=None)
 def CreateUser(request):
     if request.POST.get('password') != request.POST.get('confirm'):
         messages.add_message(request, messages.ERROR, "Password and Password Confirm are not equal.")
@@ -56,7 +57,7 @@ def CreateUser(request):
         user.save()
         return HttpResponseRedirect(reverse('SettingsList'))
 
-@login_required
+@staff_member_required(login_url=None)
 def DeleteUser(request):
     try:
         if request.POST.get('id_multiple') is not None:
@@ -75,7 +76,7 @@ def DeleteUser(request):
 
     return HttpResponseRedirect(reverse('SettingsList'))
 
-@login_required
+@staff_member_required(login_url=None)
 def MasterKeyPublic(request):
     try:
         key = Setting.objects.get(name='MasterKeyPublic')
@@ -90,7 +91,7 @@ def MasterKeyPublic(request):
 
     return HttpResponseRedirect(reverse('SettingsList'))
 
-@login_required
+@staff_member_required(login_url=None)
 def MasterKeyPrivate(request):
     try:
         key = Setting.objects.get(name='MasterKeyPrivate')
