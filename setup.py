@@ -53,14 +53,10 @@ setup(
         'psycopg2',
         'celery>=4.0.0',
         'django-bootstrap3',
-        'django-menu',
         'paramiko',
         'simplejson',
         'enum34',
         #'enum34;python_version<"3.4"',
-    ],
-    dependency_links=[
-        "https://github.com/sshkm/django-menu/tarball/0.1.10.1#egg=django-menu-0.1.10.1"
     ],
     data_files=data_files
 )
