@@ -11,7 +11,6 @@ It stores ssh-public-keys in a database and combine them in goups (Development, 
 
 ## Setup
 ```bash
-pip install https://github.com/sshkm/django-menu/archive/master.zip
 pip install https://github.com/sshkm/django-sshkm/archive/master.zip
 ```
 If you use sqlite make shure that the user running celery has read and write permissions to the db-file.
