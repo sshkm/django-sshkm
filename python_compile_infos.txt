@@ -1,2 +1,0 @@
-./configure --enable-shared --enable-loadable-sqlite-extensions --prefix=/usr/local LDFLAGS="-Wl,-rpath /usr/local/lib"
-make && make altinstall

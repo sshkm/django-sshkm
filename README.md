@@ -15,4 +15,4 @@ pip install https://github.com/sshkm/django-sshkm/archive/master.zip
 ```
 If you use sqlite make shure that the user running celery has read and write permissions to the db-file.
 
-You can find a full example for a running version in the wiki: https://github.com/sshkm/django-sshkm/wiki/CentOS-7-example-setup-%28python-3.4-from-epel%29
+You can find a full example for a runnable version in the wiki: https://github.com/sshkm/django-sshkm/wiki/CentOS-7-example-setup-%28python-3.4-from-epel%29
