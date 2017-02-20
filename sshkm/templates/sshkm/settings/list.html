@@ -94,16 +94,16 @@
             </table>
           </div>
           <div class="btn btn-primary" onclick="
-            BootstrapDialog.confirm(
-              {
-                message: 'Are you shure you want to delete user(s) {{ users.name }}' + document.querySelectorAll('input[name=id_multiple]:checked'),
-                callback: function(result) {
-                  if(result) {
-                    document.deleteMultipleUsers.submit();
-                  }
-                }
-              }
-            );
+            checkboxCheck(
+              function(){
+                document.deleteMultipleUsers.submit();
+              },
+              'id_multiple',
+              'please confirm',
+              'Are you shure you want to delete selected user(s)',
+              'no user(s) selected',
+              'Please select at least one user'
+            )
           ">Delete</div>
         </form>
 {% endif %}

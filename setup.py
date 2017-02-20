@@ -1,7 +1,5 @@
 import os
 from setuptools import find_packages, setup
-# python 2 requires pathlib to be installed manually?:
-#from pathlib import Path
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
@@ -10,7 +8,6 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 # check if sshkm.conf exists in /etc/sshkm directory and prevent from overwriting
-#cfgfile = Path("/etc/sshkm/sshkm.conf")
 if os.path.isfile("/etc/sshkm/sshkm.conf"):
     data_files = []
 else:
@@ -29,7 +26,6 @@ setup(
     long_description=README,
     url='https://github.com/sshkm/django-sshkm',
     download_url='https://github.com/sshkm/django-sshkm/archive/' + version + '.zip',
-    #download_url='https://github.com/sshkm/django-sshkm/archive/master.zip',
     author='Peter Loeffler',
     author_email='peter.loeffler@guruz.at',
     classifiers=[

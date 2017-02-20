@@ -1,12 +1,8 @@
 from django.shortcuts import get_object_or_404, render
-from django.shortcuts import redirect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 

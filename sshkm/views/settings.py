@@ -1,17 +1,11 @@
-from django.shortcuts import get_object_or_404, render
-from django.shortcuts import redirect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-
-from django.contrib.auth import authenticate, login, logout
-#from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-
-from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
-
 from django.contrib.auth.models import User
+
 from sshkm.models import Setting
 from sshkm.forms import UserForm
 
@@ -62,7 +56,7 @@ def DeleteUser(request):
     try:
         if request.POST.get('id_multiple') is not None:
             User.objects.filter(id__in=request.POST.getlist('id_multiple')).delete()
-            messages.add_message(request, messages.SUCCESS, "Users deleted")
+            messages.add_message(request, messages.SUCCESS, "User(s) deleted")
         else:
             user = User.objects.get(id=request.GET['id'])
             delete = User(id=request.GET['id']).delete()
@@ -71,8 +65,6 @@ def DeleteUser(request):
         messages.add_message(request, messages.ERROR, "The user could not be deleted")
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The user could not be deleted")
-        print(type(e))
-        print(e)
 
     return HttpResponseRedirect(reverse('SettingsList'))
 

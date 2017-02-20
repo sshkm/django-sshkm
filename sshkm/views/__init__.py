@@ -1,32 +1,17 @@
-#import paramiko, base64, os
-
-#from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect, render
-#from django.http import HttpResponseRedirect, HttpResponse
-#from django.core.urlresolvers import reverse
-#from django.contrib import messages
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-#from django.db import IntegrityError
-#from django.core.exceptions import ObjectDoesNotExist
+from sshkm.models import Setting
 
-#from sshkm.models import Group, Host, Osuser, Key, KeyGroup, Permission
-#from .forms import KeyForm, KeyModelForm
-#from sshkm.forms import KeyForm
-
-
-
-from sshkm.views.docs import *
-from sshkm.views.key import *
-from sshkm.views.group import *
-from sshkm.views.host import *
-from sshkm.views.osuser import *
-from sshkm.views.permission import *
-from sshkm.views.deploy import *
-from sshkm.views.settings import *
-
+from sshkm.views.docs import docs
+from sshkm.views.key import KeyList, task_state, KeyDetail, KeyDelete, KeySave
+from sshkm.views.group import GroupList, GroupDetail, GroupDelete, GroupSave
+from sshkm.views.host import HostList, HostDetail, HostDelete, HostSave, HostDeploy
+from sshkm.views.osuser import OsuserList, OsuserDetail, OsuserDelete, OsuserSave
+from sshkm.views.permission import PermissionList, PermissionCreate, PermissionDelete, PermissionSave
+from sshkm.views.deploy import CopyKeyfile, GetHostKeys, DeployKeys, GetHome
+from sshkm.views.settings import SettingsList, PasswordSave, CreateUser, DeleteUser, MasterKeyPublic, MasterKeyPrivate
 
 
 @login_required

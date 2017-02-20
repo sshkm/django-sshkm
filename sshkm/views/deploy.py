@@ -1,34 +1,15 @@
-import sys
-import paramiko, base64, os
+import paramiko
 
 try:
     from StringIO import StringIO
 except ImportError:
     from io import StringIO
 
-from django.conf import settings
-
-from django.shortcuts import get_object_or_404, render
-from django.shortcuts import redirect
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
-from django.contrib import messages
-
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-
-from django.db import IntegrityError
-from django.core.exceptions import ObjectDoesNotExist
-
-from sshkm.models import Group, Host, Osuser, Key, KeyGroup, Permission, Setting
-from sshkm.forms import KeyForm
+from sshkm.models import Host, Osuser, Key, KeyGroup, Permission, Setting
 
 
 def CopyKeyfile(host, keyfile, osuser, home):
-    try:
-        key = Setting.objects.get(name='MasterKeyPrivate')
-    except:
-        messages.add_message(request, messages.ERROR, "Failed to get private key. Maybe not uploaded in Settings?")
+    key = Setting.objects.get(name='MasterKeyPrivate')
 
     try:
         passphrase = Setting.objects.get(name='MasterKeyPrivatePassphrase').value
@@ -80,10 +61,7 @@ def GetHostKeys(host_id):
     return keys
 
 def DeployKeys(keys, host_id):
-    try:
-        key = Setting.objects.get(name='MasterKeyPublic')
-    except:
-        messages.add_message(request, messages.ERROR, "Failed to get public key. Maybe not uploaded in Settings?")
+    key = Setting.objects.get(name='MasterKeyPublic')
 
     host = Host.objects.get(id=host_id)
 

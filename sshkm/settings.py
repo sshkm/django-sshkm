@@ -118,15 +118,14 @@ BOOTSTRAP3 = {
 }
 #####
 
+##### CUSTOM
+CELERY_BROKER_URL = 'amqp://'
+CELERY_RESULT_BACKEND = 'rpc'
+#####
 
 ##### CUSTOM
 # import config file from /etc
 #execfile('/etc/sshkm/sshkm.conf')
 exec(compile(open('/etc/sshkm/sshkm.conf', "rb").read(), '/etc/sshkm/sshkm.conf', 'exec'))
-#####
-
-##### CUSTOM
-CELERY_BROKER_URL = 'amqp://'
-CELERY_RESULT_BACKEND = 'amqp'
 #####
 

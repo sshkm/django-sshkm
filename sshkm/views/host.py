@@ -1,25 +1,18 @@
 from django.shortcuts import get_object_or_404, render
-from django.shortcuts import redirect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
+from celery import uuid
+
+from sshkm.tasks import ScheduleDeployKeys
+from sshkm.views.deploy import DeployKeys, GetHostKeys
+
 from sshkm.models import Host, Setting
 from sshkm.forms import HostForm
-
-from sshkm.views.deploy import *
-
-from sshkm.tasks import *
-from celery.task.control import inspect
-from celery.result import AsyncResult
-from celery import uuid
-import celery
 
 
 @login_required
