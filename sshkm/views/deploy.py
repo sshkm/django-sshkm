@@ -30,8 +30,16 @@ def CopyKeyfile(host, keyfile, osuser, home):
     except:
         messages.add_message(request, messages.ERROR, "Failed to get private key. Maybe not uploaded in Settings?")
 
+    try:
+        passphrase = Setting.objects.get(name='MasterKeyPrivatePassphrase').value
+    except:
+        passphrase = None
+
     pkey = StringIO(key.value)
-    private_key = paramiko.RSAKey.from_private_key(pkey)
+    if passphrase:
+        private_key = paramiko.RSAKey.from_private_key(pkey, password=passphrase)
+    else:
+        private_key = paramiko.RSAKey.from_private_key(pkey)
     pkey.close()
 
     client = paramiko.SSHClient()

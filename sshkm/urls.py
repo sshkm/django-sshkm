@@ -19,7 +19,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^index/$', views.index, name='index'),
-    url(r'^help/$', views.help, name='help'),
+    url(r'^docs/$', views.docs, name='docs'),
 
     url(r'^key/$', views.KeyList, name='KeyList'),
     url(r'^key/detail/$', views.KeyDetail, name='KeyDetail'),

@@ -1,0 +1,71 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}Documentation{% endblock %}
+
+{% block content %}
+        <h2>What is SSHKM...</h2>
+        <p>
+          With SSHKM you can manage your SSH-public-keys.<br>
+          You can store them centrally and <a href="{% url 'GroupList' %}">group</a> them together.<br>
+          Then you can deploy them to your <a href="{% url 'HostList' %}">Hosts</a> and have exactly the <a href="{% url 'KeyList' %}">Keys</a> in your authorized_keys files that you defined.<br>
+          Everytime you deploy them to a host keys which are not configured in SSHKM will be overwritten.<br>
+          So you can be shure that no one unwanted can connect to your hosts.<br>
+          (This only applies for operating system users you create in SSHKM which will be described later.)
+        </p>
+        <h2>... and how does it work</h2>
+        <p>
+          Your <a href="{% url 'GroupList' %}">Groups</a> can be departments, external companies, workgroups, groups of servers or what ever makes sense for you.<br>
+          <a href="{% url 'GroupList' %}">Groups</a> should help you in situations when one employee leaves the company and another takes his position for example.<br>
+          In such a case you only have to delete the key from the old employee and create one for the new. Now you add the new employee to the group(s) he applies.
+        </p>
+        <p>
+          When you have your <a href="{% url 'GroupList' %}">Groups</a> of <a href="{% url 'KeyList' %}">Keys</a> you can create your <a href="{% url 'HostList' %}">Hosts</a>. Typically this are your web-servers, database-server, application-servers ...<br>
+          Once you are finished with that you create the <a href="{% url 'OsuserList' %}">OS-Users</a> to wich you want to deploy your keys on your target hosts. At least root would make sense. But every user someone want to connect with hist ssh-key should be created here (john, oracle, webappuser, ...).<br>
+          Finally you want to put everthing together whith <a href="{% url 'PermissionList' %}">Permissions</a>. Here you define which <a href="{% url 'GroupList' %}">Group</a> (of <a href="{% url 'KeyList' %}">Keys</a>) should be able to connect to which <a href="{% url 'HostList' %}">Host</a> as which <a href="{% url 'OsuserList' %}">OS-User</a>.
+        </p>
+        <p>
+          The order in which you configure your Keys, Hosts, Groups, ... is not be fixed.
+        </p>
+        <h2>How to start</h2>
+        <h3>Upload your Master-Keys</h3>
+        <p>
+          To be able to deploy public keys to your environment SSHKM uses SSH-keys itself.<br>
+          First login to SSHKM as user with admin priviledges. The default user is admin with password admin (you can and should change this password in the <a href="{% url 'SettingsList' %}">settings page</a>).<br>
+          Navigate to the <a href="{% url 'SettingsList' %}">settings page</a>. This is the little gear-wheel icon in the top right corner.<br>
+          Here you can upload the public and private SSH-key wich SSHKM will use to deploy all your further configurations.
+        </p>
+        <h3>Create Hosts</h3>
+        <p>
+          Now you can create <a href="{% url 'HostList' %}">Hosts</a>.<br>
+          You can use hostnames or IPs.<br>
+          You only need to make shure that SSHKM resolve your Hosts and is able to connect to them. If there is a firewall between the SSHKM-server and your target host you have to be shure to make SSH connections possible.<br>
+        </p>
+        <h3>Create Groups</h3>
+        <p>
+          Create <a href="{% url 'GroupList' %}">Groups</a> to assign Keys later.<br>
+        </p>
+        <h3>Create Keys</h3>
+        <p>
+          <a href="{% url 'KeyList' %}">Keys</a> are what you finally want to deploy.<br>
+          This the public keys which should be able to connect to your target hosts.
+        </p>
+        <h3>Create OS-Users</h3>
+        <p>
+          <a href="{% url 'OsuserList' %}">OS-Users</a> are typically root, oracle, john, ...<br>
+          Be shure that at least the root user is created.
+        </p>
+        <h3>Create Permissions</h3>
+        <p>
+          <a href="{% url 'PermissionList' %}">Permissions</a> is where it all comes together.<br>
+          Here you define which group (of keys) should be able to connect to which Host as which OS-User.
+        </p>
+        <h3>Deploy your keys</h3>
+        <p>
+          Congratulations!<br>
+          Now you should be able to start your first deployment<br>
+          Navigate to <a href="{% url 'HostList' %}">Hosts</a> and either deploy one host by another or select multiple hosts and deploy them together.<br>
+          With a singe deployment you should see the result immediately.<br>
+          If you choose a multi-deployment it will start in the background. You will see the results as soon as the job for every host is finished. Refresh the page to get current results.
+        </p>
+{% endblock %}
+

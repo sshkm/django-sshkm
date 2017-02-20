@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
-from sshkm.models import Host
+from sshkm.models import Host, Setting
 from sshkm.forms import HostForm
 
 from sshkm.views.deploy import *
@@ -39,6 +39,11 @@ def HostList(request):
         except:
             status = host.status
         hostsstati.append(HostStatus(host.id, host.name, status))
+
+    # if hosts are created check if public/private keys are uploaded to make deployment possible
+    keys = Setting.objects.filter(name__in=['MasterKeyPrivate', 'MasterKeyPublic']).count()
+    if hosts and keys != 2:
+        messages.add_message(request, messages.WARNING, "To be able to deploy keys to your hosts please navigate to the settings page and upload your master private and public key (as user with Admin priviledges).")
 
     context = {'hosts': hosts, 'hostsstati': hostsstati}
     return render(request, 'sshkm/host/list.html', context)

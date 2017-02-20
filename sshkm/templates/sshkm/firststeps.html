@@ -1,0 +1,24 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}First Steps{% endblock %}
+
+{% block content %}
+
+<div class="row col-12 col-sm-12 col-lg-12">
+<p>
+You heaven't uploaded your master public and private key yet.<br>
+This is the key which should be in every authorized_keys file of your superusers (default: root) on all your hosts.<br>
+Login as user with Admin priviledges and navigate to the settings page (the little gear-wheel icon in the top right corner).<br>
+There you can upload the keys.
+</p>
+<p>
+Then you can create your hosts, keys, groups (of keys), OS-users.<br>
+If you finished that you define your permissions. This means which group (of keys) should be able to login to which OS-user on which host.<br>
+On the Hosts page you can deploy these permissions.
+</p>
+<p>
+For additional information go to <a href="{% url 'docs' %}">Docs</a> or visit the <a href="https://github.com/sshkm/django-sshkm/wiki" target="blank">wiki</a>
+</p>
+</div>
+
+{% endblock %}

@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
-from sshkm.views.help import *
+from sshkm.views.docs import *
 from sshkm.views.key import *
 from sshkm.views.group import *
 from sshkm.views.host import *
@@ -31,7 +31,12 @@ from sshkm.views.settings import *
 
 @login_required
 def index(request):
-    return render(request, 'sshkm/index.html')
+    # show first steps if public/private keys are not uploaded
+    keys = Setting.objects.filter(name__in=['MasterKeyPrivate', 'MasterKeyPublic']).count()
+    if keys != 2:
+        return render(request, 'sshkm/firststeps.html')
+    else:
+        return render(request, 'sshkm/docs.html')
 
 def auth_login(request):
     username = request.POST.get('username')

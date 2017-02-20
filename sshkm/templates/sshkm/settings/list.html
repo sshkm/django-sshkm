@@ -45,7 +45,7 @@
           BootstrapDialog.confirm(
             {
               title: 'Upload Master SSH-private-key',
-              message: $('<form action={% url 'MasterKeyPrivate' %} method=post name=masterKeyPrivate class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=privatekey></form>'),
+              message: $('<form action={% url 'MasterKeyPrivate' %} method=post name=masterKeyPrivate class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=privatekey><br><input type=password name=passphrase placeholder=\'Passphrase if it is set\' class=form-control></form>'),
               callback: function(result) {
                 if(result) {
                   document.masterKeyPrivate.submit();

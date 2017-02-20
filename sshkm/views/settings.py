@@ -104,4 +104,13 @@ def MasterKeyPrivate(request):
     except Exception as e:
         messages.add_message(request, messages.ERROR, "Key could not be uploaded.")
 
+    passphrase = request.POST.get('passphrase')
+    if passphrase:
+        try:
+            p = Setting.objects.get(name='MasterKeyPrivatePassphrase')
+            p.value = passphrase
+            p.save()
+        except:
+            Setting(name='MasterKeyPrivatePassphrase', value=passphrase).save()
+
     return HttpResponseRedirect(reverse('SettingsList'))

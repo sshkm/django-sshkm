@@ -48,7 +48,7 @@
             {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            {% url 'help' as current_url %}<li {% if current_url in request.path %} class="active"{% endif %}><a href="{{ current_url }}">Help</a></li>
+            {% url 'docs' as current_url %}<li {% if current_url in request.path %} class="active"{% endif %}><a href="{{ current_url }}">Docs</a></li>
             <li><a href="#top" title="Top">Top</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}" title="Logout">Logout</a></li>
