@@ -13,7 +13,7 @@ if os.path.isfile("/etc/sshkm/sshkm.conf"):
 else:
     data_files = [('/etc/sshkm', ['sshkm.conf']),]
 
-version = '0.1'
+version = '0.1.2'
 
 setup(
     name='django-sshkm',
