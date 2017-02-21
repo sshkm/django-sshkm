@@ -16,7 +16,7 @@ It stores ssh-public-keys in a database and combine them in goups (Development, 
 - Install SSHKM:  
   you will need some development tools and libraries: gcc python python-devel python-pip mariadb-devel postgresql-devel openldap-devel httpd-devel
 ```bash
-pip install https://github.com/sshkm/django-sshkm/archive/master.zip
+pip install django-sshkm
 ```
 - Configure /etc/sshkm/sshkm.conf  
   If you use sqlite make shure that the user running celery has read and write permissions to the db-file.
