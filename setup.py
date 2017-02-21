@@ -13,7 +13,7 @@ if os.path.isfile("/etc/sshkm/sshkm.conf"):
 else:
     data_files = [('/etc/sshkm', ['sshkm.conf']),]
 
-version = 'master'
+version = '0.1'
 
 setup(
     name='django-sshkm',
@@ -34,11 +34,10 @@ setup(
         'Framework :: Django :: 1.10',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Operating System :: POSIX :: Linux'
+        'Operating System :: POSIX :: Linux',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Topic :: Utilities',
     ],
     install_requires=[
