@@ -1,5 +1,6 @@
 include LICENSE
 include README.md
+include sshkm.conf
 recursive-include sshkm/templates *
 recursive-include sshkm/static *
 recursive-include sshkm/fixtures *
