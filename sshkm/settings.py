@@ -2,8 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-from django.utils.crypto import get_random_string
-SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
+SECRET_KEY = 'SECRET_KEY_PLACEHOLDER'
 
 DEBUG = True
 
@@ -73,4 +72,3 @@ CELERY_BROKER_URL = 'amqp://'
 CELERY_RESULT_BACKEND = 'rpc'
 
 exec(compile(open('/etc/sshkm/sshkm.conf', "rb").read(), '/etc/sshkm/sshkm.conf', 'exec'))
-
