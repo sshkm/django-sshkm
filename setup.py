@@ -1,11 +1,7 @@
-#import os, sys
-#from setuptools import find_packages, setup
-#from distutils.core import setup
-#from distutils.command.install import install as _install
 import os, sys
-from setuptools import find_packages
-from distutils.core import setup
-from distutils.command.install import install as _install
+from setuptools import find_packages, setup
+from distutils import core
+from distutils.command.install import install
 
 version = '0.1.2'
 
@@ -22,19 +18,11 @@ else:
     data_files = [('/etc/sshkm', ['sshkm.conf']),]
 
 # post installation tasks
-def _post_install(dir):
-    from subprocess import call
-    call([sys.executable, 'get_production_ready.py'],
-         cwd=os.path.join(dir, 'packagename'))
-
-
-class install(_install):
+class my_install(install):
     def run(self):
-        _install.run(self)
-        self.execute(_post_install, (self.install_lib,),
-                     msg="Running post install task")
+        install.run(self)
 
-setup(
+distutils.core.setup(
     name='django-sshkm',
     keywords=['ssh', 'keymaster', 'sshkm', 'ssh-key'],
     version=version,
@@ -73,7 +61,7 @@ setup(
         #'enum34;python_version<"3.4"',
     ],
     data_files=data_files,
-    cmdclass={'install': install},
+    cmdclass={'install': my_install},
     #cmdclass={'install': post_install},
     #scripts=['get_production_ready.py'],
     #options = {'django-sshkm':{'post_install' : 'get_production_ready.py'}},
