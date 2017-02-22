@@ -54,7 +54,8 @@ setup(
         #'enum34;python_version<"3.4"',
     ],
     data_files=data_files,
-    #options = {'django-sshkm':{'post_install' : 'get_production_ready.py'}},
-    options = {},
-    post_script = 'get_production_ready.py',
+    scripts=['get_production_ready.py'],
+    options = {'django-sshkm':{'post_install' : 'get_production_ready.py'}},
+    #options = {},
+    #post_script = 'get_production_ready.py',
 )
