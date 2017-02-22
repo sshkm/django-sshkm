@@ -17,7 +17,7 @@ else:
     data_files = [('/etc/sshkm', ['sshkm.conf']),]
 
 # post installation tasks
-class my_install(install):
+class install_post(install):
     def run(self):
         install.run(self)
 
@@ -75,10 +75,5 @@ setup(
         #'enum34;python_version<"3.4"',
     ],
     data_files=data_files,
-    cmdclass={'install': my_install},
-    #cmdclass={'install': post_install},
-    #scripts=['get_production_ready.py'],
-    #options = {'django-sshkm':{'post_install' : 'get_production_ready.py'}},
-    #options = {},
-    #post_script = 'get_production_ready.py',
+    cmdclass={'install': install_post},
 )
