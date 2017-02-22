@@ -1,5 +1,6 @@
 import os
 from setuptools import find_packages, setup
+from setuptools.command.install import install
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
@@ -14,24 +15,28 @@ else:
     data_files = [('/etc/sshkm', ['sshkm.conf']),]
 
 # post installation tasks
-class post_install():
-    def run(self):
-        from django.utils.crypto import get_random_string
+def _post_install():
+    print('POST INSTALL')
 
-        print('running get_production_ready...')
-
-        SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
-
-        f = open('sshkm/settings.py', 'r')
-        filedata = f.read()
-        f.close()
-
-        newdata = filedata.replace("'SECRET_KEY_PLACEHOLDER'", "'"+SECRET_KEY+"'")
-        newdata = newdata.replace("DEBUG = True", "DEBUG = False")
-
-        f = open('sshkm/settings.py', 'w')
-        f.write(newdata)
-        f.close()
+class post_install(install):
+    def __init__(self, *args, **kwargs):
+        super(post_install, self).__init__(*args, **kwargs)
+        atexit.register(_post_install)
+#    def run(self):
+#        from django.utils.crypto import get_random_string
+#
+#        SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
+#
+#        f = open('sshkm/settings.py', 'r')
+#        filedata = f.read()
+#        f.close()
+#
+#        newdata = filedata.replace("'SECRET_KEY_PLACEHOLDER'", "'"+SECRET_KEY+"'")
+#        newdata = newdata.replace("DEBUG = True", "DEBUG = False")
+#
+#        f = open('sshkm/settings.py', 'w')
+#        f.write(newdata)
+#        f.close()
 
 version = '0.1.2'
 
