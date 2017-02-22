@@ -1,5 +1,7 @@
 from django.utils.crypto import get_random_string
 
+print('running get_production_ready...')
+
 SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
 
 f = open('sshkm/settings.py', 'r')
