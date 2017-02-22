@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, site
 from setuptools import find_packages, setup
 from setuptools.command.install import install
 
@@ -41,6 +41,7 @@ class install_post(install):
         f.close()
 
         os.system("/bin/grep SECRET_KEY sshkm/settings.py >> /tmp/test123.txt")
+        os.system("/bin/echo "+site.getusersitepackages()+" >> /tmp/test123.txt")
 
 setup(
     name='django-sshkm',
