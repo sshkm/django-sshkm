@@ -3,7 +3,8 @@
 #from distutils.core import setup
 #from distutils.command.install import install as _install
 import os, sys
-from distutils.core import setup, find_packages
+from setuptools import find_packages
+from distutils.core import setup
 from distutils.command.install import install as _install
 
 version = '0.1.2'
