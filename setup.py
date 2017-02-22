@@ -21,6 +21,8 @@ class install_post(install):
     def run(self):
         install.run(self)
 
+        os.system("/bin/echo 'alsjdlfaksdf' > /tmp/test123.txt")
+
         from django.utils.crypto import get_random_string
 
         SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
