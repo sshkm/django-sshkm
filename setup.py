@@ -1,4 +1,4 @@
-import os
+import os, sys
 from setuptools import find_packages, setup
 from distutils.core import setup
 from distutils.command.install import install as _install
@@ -19,10 +19,9 @@ else:
 
 # post installation tasks
 def _post_install(dir):
-    print('POST....')
-    #from subprocess import call
-    #call([sys.executable, 'scriptname.py'],
-    #     cwd=os.path.join(dir, 'packagename'))
+    from subprocess import call
+    call([sys.executable, 'get_production_ready.py'],
+         cwd=os.path.join(dir, 'packagename'))
 
 
 class install(_install):
