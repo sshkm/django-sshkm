@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
+    <link rel="icon" href="{% static "favicon.ico" %}">
 
     <title>{% block headtitle %}SSHKM{% endblock %}</title>
 
-    {% load static %}
     <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
     <link href="{% static "bootstrap-dialog/bootstrap-dialog.min.css" %}" rel="stylesheet" type="text/css" />
     <link href="{% static "custom.css" %}" rel="stylesheet">
