@@ -1,8 +1,6 @@
 include LICENSE
 include README.md
 include sshkm.conf
-include get_production_ready.py
-include post_setup.py
 recursive-include sshkm/templates *
 recursive-include sshkm/static *
 recursive-include sshkm/fixtures *
