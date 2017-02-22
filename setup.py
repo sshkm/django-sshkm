@@ -18,9 +18,9 @@ else:
     data_files = [('/etc/sshkm', ['sshkm.conf']),]
 
 # post installation tasks
-#class my_install(install):
-#    def run(self):
-#        install.run(self)
+class my_install(install):
+    def run(self):
+        install.run(self)
 
 #        from django.utils.crypto import get_random_string
 
