@@ -83,3 +83,5 @@ setup(
     #options = {},
     #post_script = 'get_production_ready.py',
 )
+
+print('TEST.....')
