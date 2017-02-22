@@ -2,9 +2,9 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'te3l!cun_+17m*m$_24k@-_foyg2^ww!sv=95bau%(%)vehyj&'
+SECRET_KEY = 'SECRET_KEY_PLACEHOLDER'
 
-DEBUG = False
+DEBUG = True
 
 INSTALLED_APPS = (
     'django.contrib.admin',
