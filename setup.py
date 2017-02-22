@@ -1,6 +1,9 @@
 import os
 from setuptools import find_packages, setup
-from setuptools.command.install import install
+from distutils.core import setup
+from distutils.command.install_data import install_data
+
+version = '0.1.2'
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
@@ -15,73 +18,60 @@ else:
     data_files = [('/etc/sshkm', ['sshkm.conf']),]
 
 # post installation tasks
-def _post_install():
-    print('POST INSTALL')
+try:
+    from post_setup import main as post_install
+except ImportError:
+    post_install = lambda: None
 
-class post_install(install):
-    def __init__(self, *args, **kwargs):
-        super(post_install, self).__init__(*args, **kwargs)
-        atexit.register(_post_install)
-#    def run(self):
-#        from django.utils.crypto import get_random_string
-#
-#        SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
-#
-#        f = open('sshkm/settings.py', 'r')
-#        filedata = f.read()
-#        f.close()
-#
-#        newdata = filedata.replace("'SECRET_KEY_PLACEHOLDER'", "'"+SECRET_KEY+"'")
-#        newdata = newdata.replace("DEBUG = True", "DEBUG = False")
-#
-#        f = open('sshkm/settings.py', 'w')
-#        f.write(newdata)
-#        f.close()
+class my_install(install_data):
+    def run(self):
+        install_data.run(self)
+        post_install()
 
-version = '0.1.2'
-
-setup(
-    name='django-sshkm',
-    keywords=['ssh', 'keymaster', 'sshkm', 'ssh-key'],
-    version=version,
-    packages=find_packages(),
-    include_package_data=True,
-    license='GNU General Public License v3 (GPLv3)',
-    description='A Django based ssh-key management tool.',
-    long_description=README,
-    url='https://github.com/sshkm/django-sshkm',
-    download_url='https://github.com/sshkm/django-sshkm/archive/' + version + '.zip',
-    author='Peter Loeffler',
-    author_email='peter.loeffler@guruz.at',
-    classifiers=[
-        'Environment :: Web Environment',
-        'Framework :: Django',
-        'Framework :: Django :: 1.10',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Operating System :: POSIX :: Linux',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 3',
-        'Topic :: Utilities',
-    ],
-    install_requires=[
-        'setuptools',
-        'django>=1.8',
-        'django-auth-ldap',
-        'mysqlclient',
-        'psycopg2',
-        'celery>=4.0.0',
-        'django-bootstrap3',
-        'paramiko',
-        'simplejson',
-        'enum34',
-        #'enum34;python_version<"3.4"',
-    ],
-    data_files=data_files,
-    cmdclass={'install': post_install},
-    #scripts=['get_production_ready.py'],
-    #options = {'django-sshkm':{'post_install' : 'get_production_ready.py'}},
-    #options = {},
-    #post_script = 'get_production_ready.py',
-)
+if __name__ == '__main__':
+    setup(
+        name='django-sshkm',
+        keywords=['ssh', 'keymaster', 'sshkm', 'ssh-key'],
+        version=version,
+        packages=find_packages(),
+        include_package_data=True,
+        license='GNU General Public License v3 (GPLv3)',
+        description='A Django based ssh-key management tool.',
+        long_description=README,
+        url='https://github.com/sshkm/django-sshkm',
+        download_url='https://github.com/sshkm/django-sshkm/archive/' + version + '.zip',
+        author='Peter Loeffler',
+        author_email='peter.loeffler@guruz.at',
+        classifiers=[
+            'Environment :: Web Environment',
+            'Framework :: Django',
+            'Framework :: Django :: 1.10',
+            'Intended Audience :: Developers',
+            'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+            'Operating System :: POSIX :: Linux',
+            'Programming Language :: Python',
+            'Programming Language :: Python :: 2',
+            'Programming Language :: Python :: 3',
+            'Topic :: Utilities',
+        ],
+        install_requires=[
+            'setuptools',
+            'django>=1.8',
+            'django-auth-ldap',
+            'mysqlclient',
+            'psycopg2',
+            'celery>=4.0.0',
+            'django-bootstrap3',
+            'paramiko',
+            'simplejson',
+            'enum34',
+            #'enum34;python_version<"3.4"',
+        ],
+        data_files=data_files,
+        cmdclass={'install': my_install},
+        #cmdclass={'install': post_install},
+        #scripts=['get_production_ready.py'],
+        #options = {'django-sshkm':{'post_install' : 'get_production_ready.py'}},
+        #options = {},
+        #post_script = 'get_production_ready.py',
+    )
