@@ -22,20 +22,20 @@ class my_install(install):
     def run(self):
         install.run(self)
 
-        from django.utils.crypto import get_random_string
+#        from django.utils.crypto import get_random_string
 
-        SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
+#        SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
 
-        f = open('sshkm/settings.py', 'r')
-        filedata = f.read()
-        f.close()
+#        f = open('sshkm/settings.py', 'r')
+#        filedata = f.read()
+#        f.close()
 
-        newdata = filedata.replace("'SECRET_KEY_PLACEHOLDER'", "'"+SECRET_KEY+"'")
-        newdata = newdata.replace("DEBUG = True", "DEBUG = False")
+#        newdata = filedata.replace("'SECRET_KEY_PLACEHOLDER'", "'"+SECRET_KEY+"'")
+#        newdata = newdata.replace("DEBUG = True", "DEBUG = False")
 
-        f = open('sshkm/settings.py', 'w')
-        f.write(newdata)
-        f.close()
+#        f = open('sshkm/settings.py', 'w')
+#        f.write(newdata)
+#        f.close()
 
 setup(
     name='django-sshkm',
