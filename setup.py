@@ -1,7 +1,7 @@
 import os, sys
 from setuptools import find_packages, setup
-from distutils import core
-from distutils.command.install import install
+#from distutils import core
+#from distutils.command.install import install
 
 version = '0.1.2'
 
@@ -18,9 +18,9 @@ else:
     data_files = [('/etc/sshkm', ['sshkm.conf']),]
 
 # post installation tasks
-class my_install(install):
-    def run(self):
-        install.run(self)
+#class my_install(install):
+#    def run(self):
+#        install.run(self)
 
 #        from django.utils.crypto import get_random_string
 
@@ -76,7 +76,7 @@ setup(
         #'enum34;python_version<"3.4"',
     ],
     data_files=data_files,
-    cmdclass={'install': my_install},
+#    cmdclass={'install': my_install},
     #cmdclass={'install': post_install},
     #scripts=['get_production_ready.py'],
     #options = {'django-sshkm':{'post_install' : 'get_production_ready.py'}},
