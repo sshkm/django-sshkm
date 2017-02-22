@@ -19,29 +19,29 @@ else:
 # post installation tasks
 class install_post(install):
     def run(self):
+        #
+        # customized tasks
+        #
 
+        # get fresh django secret key
         from django.utils.crypto import get_random_string
-
         SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
 
-        os.system("/bin/echo '"+SECRET_KEY+"' >> /tmp/test123.txt")
-        os.system("/bin/pwd >> /tmp/test123.txt")
-        os.system("/bin/ls -al >> /tmp/test123.txt")
-
-        f = open('sshkm/settings.py', 'r')
+        # replacements in settings.py
+        settings = 'sshkm/settings.py'
+        f = open(settings, 'r')
         filedata = f.read()
         f.close()
-
-        newdata = filedata.replace("'SECRET_KEY_PLACEHOLDER'", "'"+SECRET_KEY+"'")
-        newdata = newdata.replace("DEBUG = True", "DEBUG = False")
-
-        f = open('sshkm/settings.py', 'w')
-        f.write(newdata)
+        settings_content = filedata
+        settings_content = settings_content.replace("'SECRET_KEY_PLACEHOLDER'", "'"+SECRET_KEY+"'")
+        settings_content = settings_content.replace("DEBUG = True", "DEBUG = False")
+        f = open(settings, 'w')
+        f.write(settings_content)
         f.close()
 
-        os.system("/bin/grep SECRET_KEY sshkm/settings.py >> /tmp/test123.txt")
-        os.system("/bin/echo "+site.getusersitepackages()+" >> /tmp/test123.txt")
-
+        #
+        # run default install
+        #
         install.run(self)
 
 setup(
