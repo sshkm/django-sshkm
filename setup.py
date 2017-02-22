@@ -21,11 +21,12 @@ class install_post(install):
     def run(self):
         install.run(self)
 
-        os.system("/bin/echo 'alsjdlfaksdf' > /tmp/test123.txt")
-
         from django.utils.crypto import get_random_string
 
         SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
+
+        os.system("/bin/echo '"+SECRET_KEY+"' > /tmp/test123.txt")
+        os.system("/bin/ls -al >> /tmp/test123.txt")
 
         f = open('sshkm/settings.py', 'r')
         filedata = f.read()
