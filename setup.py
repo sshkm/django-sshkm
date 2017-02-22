@@ -1,8 +1,6 @@
 import os, sys
 from setuptools import find_packages, setup
 from setuptools.command.install import install
-#from distutils import core
-#from distutils.command.install import install
 
 version = '0.1.2'
 
@@ -22,6 +20,7 @@ else:
 class my_install(install):
     def run(self):
         install.run(self)
+        print('POST......')
 
 #        from django.utils.crypto import get_random_string
 
