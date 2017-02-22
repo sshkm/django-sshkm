@@ -19,8 +19,6 @@ else:
 # post installation tasks
 class install_post(install):
     def run(self):
-        os.system("/bin/ls -al >> /tmp/test123.txt")
-        install.run(self)
 
         from django.utils.crypto import get_random_string
 
@@ -43,6 +41,8 @@ class install_post(install):
 
         os.system("/bin/grep SECRET_KEY sshkm/settings.py >> /tmp/test123.txt")
         os.system("/bin/echo "+site.getusersitepackages()+" >> /tmp/test123.txt")
+
+        install.run(self)
 
 setup(
     name='django-sshkm',
