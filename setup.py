@@ -1,5 +1,8 @@
+#import os, sys
+#from setuptools import find_packages, setup
+#from distutils.core import setup
+#from distutils.command.install import install as _install
 import os, sys
-from setuptools import find_packages, setup
 from distutils.core import setup
 from distutils.command.install import install as _install
 
