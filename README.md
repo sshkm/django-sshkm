@@ -2,11 +2,13 @@
 
 # django-sshkm
 django-sshkm is a Django based ssh-key management tool.
-It stores ssh-public-keys in a database and combine them in goups (Development, Operations, Externals, ...). You can assign this groups to Operating System users on target hosts and are able to deploy your configurations.
+It stores ssh-public-keys in a database and combine them in goups (Development, Operations, Externals, ...). You can assign these groups to Operating System users on target hosts and are able to deploy your configurations.
 
 ## Requirements
 - Linux
 - RabbitMQ
+- Python >= 2.7
+- Django >= 1.8
 - Celery >= 4.0.0
 - Django compatible database like (SQLite, MySQL/MariaDB, PostgreSQL, ...)
 
