@@ -12,7 +12,7 @@ from sshkm.forms import PermissionForm
 
 @login_required
 def PermissionList(request):
-    permissions = Permission.objects.order_by('host_id')
+    permissions = Permission.objects.all().order_by('host__name', 'osuser__name', 'group__name')
     context = {'permissions': permissions}
     return render(request, 'sshkm/permission/list.html', context)
 

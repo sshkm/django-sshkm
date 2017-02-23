@@ -6,12 +6,13 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
+import celery
 from celery import uuid
 
 from sshkm.tasks import ScheduleDeployKeys
 from sshkm.views.deploy import DeployKeys, GetHostKeys
 
-from sshkm.models import Host, Setting
+from sshkm.models import Host, Setting, Permission
 from sshkm.forms import HostForm
 
 
