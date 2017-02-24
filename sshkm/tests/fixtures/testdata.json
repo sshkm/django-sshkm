@@ -12,7 +12,7 @@
     "id": 1, 
     "model": "sshkm.host", 
     "fields": {
-        "name": "kvm01.guruz.home"
+        "name": "localhost"
     }
 },
 {
