@@ -1,5 +1,8 @@
 before_install:
-- sudo echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7jZsMCxBoFtoU3Nslgh1vvOho1gqIKTpZK10Ebz/txFwnkTjmylO3eIX+m/FDdTSi5gCoopeX7pr0otZAYtNIFDEsKKfI6h9oCGL2+YKhy8ufDcpejX5YHFSPqpJkd5M8R1nLo4tNADSIapKLOK1Q3nL5huicCD6/1/9BZXZNl4j15r0gaN5+pthUeW8gDLn1IZ1cQedAeP3E5YyZAHhGiJzIrhsR+OSHEgrrnBVrWcQYzLbZxArUYAOUxQbmSuZL+MHdwPGQdmWckD6qAABHINDVppCZtA2BT/rqGODLJVkmDt6Xe8U766GpDtXtSNU7T06m/eVS20Ixc42RnZ/d" >> /root/.ssh/authorized_keys
+- sudo apt-get update -qq
+- sudo apt-get install -qq tree
+- sudo tree /root/
+# - sudo echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7jZsMCxBoFtoU3Nslgh1vvOho1gqIKTpZK10Ebz/txFwnkTjmylO3eIX+m/FDdTSi5gCoopeX7pr0otZAYtNIFDEsKKfI6h9oCGL2+YKhy8ufDcpejX5YHFSPqpJkd5M8R1nLo4tNADSIapKLOK1Q3nL5huicCD6/1/9BZXZNl4j15r0gaN5+pthUeW8gDLn1IZ1cQedAeP3E5YyZAHhGiJzIrhsR+OSHEgrrnBVrWcQYzLbZxArUYAOUxQbmSuZL+MHdwPGQdmWckD6qAABHINDVppCZtA2BT/rqGODLJVkmDt6Xe8U766GpDtXtSNU7T06m/eVS20Ixc42RnZ/d" >> /root/.ssh/authorized_keys
 language: python
 python:
   - "2.7"
