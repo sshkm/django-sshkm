@@ -1,12 +1,11 @@
-# !!! still under heavy construction
-
 # django-sshkm
+## !!! still under heavy construction
 django-sshkm is a Django based ssh-key management tool.  
 It stores ssh-public-keys in a database and combine them in goups (Development, Operations, Externals, ...). You can assign these groups to Operating System users on target hosts and are able to deploy your configurations.  
   
 Do you have hundreds of hosts/servers and dozens of users or other systems which want to connect to these using SSH?  
-Do you know the problem when some employee leaves the company but knows many passwords of OS-users and now you should better change all your passwords?
-Do you want to have better control over who can connect to your hosts using SSH?
+Do you know the problem when some employee leaves the company but knows many passwords of OS-users and now you should better change all your passwords?  
+Do you want to have better control over who can connect to your hosts using SSH?  
 Then django-sshkm is perfect for you.
 
 ## Requirements

@@ -47,7 +47,7 @@ class install_post(install):
 
 setup(
     name='django-sshkm',
-    keywords=['ssh', 'keymaster', 'sshkm', 'ssh-key'],
+    keywords=['ssh', 'keymaster', 'sshkm', 'ssh-key', 'public key', 'key management'],
     version=version,
     packages=find_packages(),
     include_package_data=True,
