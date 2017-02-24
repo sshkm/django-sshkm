@@ -1,0 +1,82 @@
+[
+{
+    "id": 1,
+    "model": "auth.user",
+    "fields": {
+        "username": "admin",
+        "password": "pbkdf2_sha256$20000$zW4MOyWunGjy$DA/zyG9MCL8pavysNo3aCmHPeNaO7lbOIrr1G2EEGGE=",
+        "is_staff": 1
+    }
+},
+{
+    "id": 1, 
+    "model": "sshkm.host", 
+    "fields": {
+        "name": "kvm01.guruz.home"
+    }
+},
+{
+    "id": 1,
+    "model": "sshkm.group",
+    "fields": {
+        "name": "Admins"
+    }
+},
+{
+    "id": 1,
+    "model": "sshkm.osuser",
+    "fields": {
+        "name": "root",
+        "home": "/tmp/roothome"
+    }
+},
+{
+    "id": 1,
+    "model": "sshkm.key",
+    "fields": {
+        "name": "testkey1",
+        "publickey": "ssh-rsa publickey testkey1"
+    }
+},
+{
+    "id": 1,
+    "model": "sshkm.keygroup",
+    "fields": {
+        "key_id": 1,
+        "group_id": 1
+    }
+},
+{
+    "id": 1,
+    "model": "sshkm.permission",
+    "fields": {
+        "group_id": 1,
+        "host_id": 1,
+        "osuser_id": 1
+    }
+},
+{
+    "id": 1,
+    "model": "sshkm.setting",
+    "fields": {
+        "name": "MasterKeyPublic",
+        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7jZsMCxBoFtoU3Nslgh1vvOho1gqIKTpZK10Ebz/txFwnkTjmylO3eIX+m/FDdTSi5gCoopeX7pr0otZAYtNIFDEsKKfI6h9oCGL2+YKhy8ufDcpejX5YHFSPqpJkd5M8R1nLo4tNADSIapKLOK1Q3nL5huicCD6/1/9BZXZNl4j15r0gaN5+pthUeW8gDLn1IZ1cQedAeP3E5YyZAHhGiJzIrhsR+OSHEgrrnBVrWcQYzLbZxArUYAOUxQbmSuZL+MHdwPGQdmWckD6qAABHINDVppCZtA2BT/rqGODLJVkmDt6Xe8U766GpDtXtSNU7T06m/eVS20Ixc42RnZ/d testmaster1"
+    }
+},
+{
+    "id": 2,
+    "model": "sshkm.setting",
+    "fields": {
+        "name": "MasterKeyPrivate",
+        "value": "-----BEGIN RSA PRIVATE KEY-----\nProc-Type: 4,ENCRYPTED\nDEK-Info: AES-128-CBC,21DE4E1EF8259EBC9A238FF5B5449B70\n\nGE43q2v61CIb/lxZ5eZ8tPDcXgTOERXWF1qsns2deAJvLFxs0s3996Z50pKbBLoA\nrvQfuRkQmM9V9A3e1Cc+vIDplMQpjmmVKv/K7/QiTLh4lx/Fii8RMlXnG5OGuX8W\n4K06IE5rC4euIV712qTvTTuFRnEmn3Va8kacoVAQyP+4zz4sECML7S4LM1vf5w0e\nU9TMNua+2IRh1zO/Bs3DBYQ5pV7yVtX3TKt91vuD4l9eXGqy943TqqDT973HKh+v\n9PpZEBtHP0WCvuka238N7efvosj/rI/BshfsxGh4UEDfa8G7hWs6QfqMRVAWfFy0\nHE/npPkC99oT4g9Tkf5bgi022KLr1BEdnkLDZEKclEe6wvh7b0T7Nm4bsvzWuW+W\nBDV6Wl1uQGvYgT9EEtURekfod6ehNcPphRIpSQ27DWpW85462XuYrVEXHotrdYqy\nvHj1CpmJLtlHqvm79Mw3PdYh2yTMcYOJeXvxK8n5wusOe5D1mG8XZArzRbPEFzy/\n/BwApHcm3/Hfk4p4Ng78JzdJdnSlXCf1V0j52Iv3zU5w4d/b0bCF9P2SVsHnA4pp\n5YqBh8CqvvhoZyIV+wyFbo/Csrw8qvf7UrXGC3+U3/GHxmgVAH+IDaBfov38gWV5\nTGiJSPe+wzmCB0OFmvfkfWvsHHGNN1fNNsuzdKXNdJmXFMh/P8/QsSn2C/31nSKB\nm9e6+0vzCpWUo2FnRq1Zu0LqxiVVrxZeRjTGXHrsH7nhx61EB7wENJvJwipO8ree\nsoR92kwtz1jgl4nQeVtTf/a6QAnawAJwBt2AM22g5QDX/lub0ibMzlSU9EMUz/k1\njLVDjTqM2wepUGPd8VKEOwJSY01xe/lt2h2BxXtRWqp+uWzQRmuC2p4QbE2S6QyW\nODymHSn4oz5RcVbb1Hf4DfCCQNt0p7lVBZIcZcM6tIuliF4oQk5dz/8E+20cblV5\nvsgx3psh0GFo39QJ/WUjGQrUttBDyDdFRmVZEAebkLRmAlgC3qCFG7Ze21tNlp59\nb8GC4KbqLbqVVX8D3riedFfJJ+6YNwX7ZgFuaSldPwAWGE1fb0wPeuTfbLin52pO\n0+oo+lM9zAVp7SKkvEySvykW9ZrqcDguvfpxBkovKoWdd+Mh9J8u9WDzoIeRWWpJ\n7ABwZqgPeNZachJFncSCz0KfqvuTX441kPXoF+P1PB968e0eNa50pFkuZAhFls02\nmxubJemmVIDWabiSdmXEPK0mhZ867Zvts3EHO9fNFryptPHHOry01GYXKYsPbPmc\nCSEZp+qy6dqJs43nXqUIQXLXDob5KESDZsaDPm4UWJXHiZfKnODud4eqciJ30G2u\nG1bZ6RIWtPub0Xfln8sbcd7//d9Tbgt6uajQ0ThhZvU1RHwpNp/+nzLI/wbUlB1w\n+vssX3Gu2jbYxpMxGw3uktbO/weELvTJLm4bAD/v9K/Grywnek23YyFIR6NZO3Eh\nyH0wUqAfIJleQC3g2jr/NONzW3W6AjmXeDNslFHxlaWyl6HBqGkr7qC2kxc2m1vF\nD7qsQDl4AdrimYLPA0WTda5kiufMEUYi3y7ERSNhMOYvSp/qC89d8rGw2q4DlhfD\n-----END RSA PRIVATE KEY-----"
+    }
+},
+{
+    "id": 3,
+    "model": "sshkm.setting",
+    "fields": {
+        "name": "MasterKeyPrivatePassphrase",
+        "value": "yyyyy"
+    }
+}
+]
