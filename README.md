@@ -20,14 +20,14 @@ Then django-sshkm is perfect for you.
 - Install a RabbitMQ server.
 - Install a Django compatible database.
 - Install SSHKM:  
-  you will need some development tools and libraries: gcc python python-devel python-pip mariadb-devel postgresql-devel openldap-devel httpd-devel
+  you will need some development tools and libraries: gcc python python-devel python-pip mariadb-devel postgresql-devel openldap-devel httpd-devel  
 ```bash
 pip install django-sshkm
 ```
 - Configure /etc/sshkm/sshkm.conf  
   If you use sqlite make shure that the user running celery has read and write permissions to the db-file.
 - Install a webserver which runs wsgi  
-  Example Apache httpd:
+  Example Apache httpd:  
 ```
 Alias /static/ /usr/lib/python2.7/site-packages/sshkm/static/
 
@@ -45,7 +45,7 @@ WSGIProcessGroup sshkm
   </Files>
 </Directory>
 ```
-- Run celery
+- Run celery  
 ```
 celery worker -A sshkm -l info
 ```
