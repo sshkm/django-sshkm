@@ -71,4 +71,16 @@ BOOTSTRAP3 = {
 CELERY_BROKER_URL = 'amqp://'
 CELERY_RESULT_BACKEND = 'rpc'
 
-exec(compile(open('/etc/sshkm/sshkm.conf', "rb").read(), '/etc/sshkm/sshkm.conf', 'exec'))
+ALLOWED_HOSTS = ['*']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+try:
+    exec(compile(open('/etc/sshkm/sshkm.conf', "rb").read(), '/etc/sshkm/sshkm.conf', 'exec'))
+except:
+    pass
