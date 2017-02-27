@@ -11,6 +11,7 @@ class Group(models.Model):
 
 class Host(models.Model):
     name = models.CharField(max_length=200, unique=True)
+    superuser = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=500, null=True, blank=True)
     task_id = models.CharField(max_length=36, null=True, blank=True)
     status = models.CharField(max_length=10, null=True, blank=True)

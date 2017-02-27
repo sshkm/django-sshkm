@@ -52,15 +52,17 @@ class GroupForm(forms.ModelForm):
 class HostForm(forms.ModelForm):
     class Meta:
         model = Host
-        fields = ('name', 'description',)
+        fields = ('name', 'superuser', 'description',)
         labels = {
             'name': _('Host or IP'),
+            'superuser': _('Superuser'),
             'description': _('Description (optional)'),
         }
 
     def __init__(self, *args, **kwargs):
         super(HostForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['placeholder'] = 'host1.example.com or 192.168.1.33'
+        self.fields['superuser'].widget.attrs['placeholder'] = 'default: root'
         self.fields['description'].widget.attrs['placeholder'] = ''
 
 class OsuserForm(forms.ModelForm):

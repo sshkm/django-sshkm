@@ -61,6 +61,15 @@
         </div>
 
         <hr>
+        <form action="{% url 'Superuser' %}" method="post" class="form">
+          {% csrf_token %}
+          <div class="form-group"><label class="control-label" for="id_superuser">Global Superuser</label><input class="form-control" id="id_superuser" maxlength="200" name="superuser" placeholder="default: root" title="" type="text" value="{{ superuser }}" /></div>
+          <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+
+        <hr>
         <div class="btn btn-primary" onclick="
           BootstrapDialog.confirm(
             {

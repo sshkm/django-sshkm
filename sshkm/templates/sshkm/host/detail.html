@@ -7,6 +7,7 @@
         <form action="{% url 'HostSave' %}" method="post" class="form">
           {% csrf_token %}
           {% bootstrap_field hostform.name %}
+          {% bootstrap_field hostform.superuser set_required=False %}
           {% bootstrap_field hostform.description set_required=False %}
           {% if request.GET.id %}
           <input type="hidden" name="id" value="{{ request.GET.id }}">

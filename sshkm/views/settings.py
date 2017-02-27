@@ -25,7 +25,13 @@ def SettingsList(request):
     except:
         publickey = ""
 
-    context = {'users': users, 'privatekey': privatekey, 'publickey': publickey}
+    try:
+        superuser = Setting.objects.get(name='SuperUser')
+        superuser = superuser.value
+    except:
+        superuser = ""
+
+    context = {'users': users, 'privatekey': privatekey, 'publickey': publickey, 'superuser': superuser}
     return render(request, 'sshkm/settings/list.html', context)
 
 @staff_member_required(login_url=None)
@@ -106,3 +112,19 @@ def MasterKeyPrivate(request):
             Setting(name='MasterKeyPrivatePassphrase', value=passphrase).save()
 
     return HttpResponseRedirect(reverse('SettingsList'))
+
+@staff_member_required(login_url=None)
+def Superuser(request):
+    try:
+        superuser = Setting.objects.get(name='SuperUser')
+        superuser.value = request.POST.get('superuser')
+        superuser.save()
+        messages.add_message(request, messages.SUCCESS, "Global Superuser set to " + superuser.value)
+    except ObjectDoesNotExist as e:
+        Setting(name='SuperUser', value=request.POST.get('superuser')).save()
+        messages.add_message(request, messages.SUCCESS, "Global Superuser set to " + request.POST.get('superuser'))
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, "Global Superuser can not be saved.")
+
+    return HttpResponseRedirect(reverse('SettingsList'))
+

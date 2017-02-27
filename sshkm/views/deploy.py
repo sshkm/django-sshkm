@@ -8,7 +8,7 @@ except ImportError:
 from sshkm.models import Host, Osuser, Key, KeyGroup, Permission, Setting
 
 
-def CopyKeyfile(host, keyfile, osuser, home):
+def CopyKeyfile(host, keyfile, osuser, home, superuser):
     key = Setting.objects.get(name='MasterKeyPrivate')
 
     try:
@@ -28,7 +28,7 @@ def CopyKeyfile(host, keyfile, osuser, home):
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     try:
-        client.connect(host, username='root', pkey=private_key, timeout=5)
+        client.connect(host, username=superuser, pkey=private_key, timeout=5)
 
         client.exec_command('mkdir -p ' + home + '/.ssh')
         client.exec_command('chown ' + osuser + ' ' + home + '/.ssh')
@@ -65,6 +65,19 @@ def DeployKeys(keys, host_id):
 
     host = Host.objects.get(id=host_id)
 
+    try:
+        globalsuperuser = Setting.objects.get(name='SuperUser').value
+    except:
+        globalsuperuser = False
+
+    if host.superuser and host.superuser != "":
+        superuser = host.superuser
+    else:
+        if globalsuperuser and globalsuperuser != "":
+            superuser = globalsuperuser
+        else:
+            superuser = 'root'
+
     config_masterkey = key.value
 
     last_home = keys[0][0]
@@ -80,13 +93,13 @@ def DeployKeys(keys, host_id):
 
         counter = counter + 1
 
-        if counter == 1 and osuser == 'root':
+        if counter == 1 and osuser == superuser:
             masterkey = config_masterkey + '\n'
 
         if home != last_home:
-            if osuser == 'root':
+            if osuser == superuser:
                 masterkey = config_masterkey + '\n'
-            CopyKeyfile(host.name, keyfile, last_osuser, last_home)
+            CopyKeyfile(host.name, keyfile, last_osuser, last_home, superuser)
             keyfile = masterkey + publickey + '\n'
         else:
             keyfile += masterkey + publickey + '\n'
@@ -94,7 +107,7 @@ def DeployKeys(keys, host_id):
         last_osuser = osuser
         masterkey = ''
 
-    CopyKeyfile(host.name, keyfile, last_osuser, last_home)
+    CopyKeyfile(host.name, keyfile, last_osuser, last_home, superuser)
 
 def GetHome(osuser_id):
     osuser = Osuser.objects.get(id=osuser_id)

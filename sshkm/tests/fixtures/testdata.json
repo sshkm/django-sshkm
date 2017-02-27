@@ -12,7 +12,8 @@
     "id": 1, 
     "model": "sshkm.host", 
     "fields": {
-        "name": "localhost"
+        "name": "localhost",
+        "superuser": "travis"
     }
 },
 {
