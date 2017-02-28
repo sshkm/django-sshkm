@@ -10,9 +10,8 @@ python:
   - "3.6"
 install: "pip install -r requirements.txt"
 before_script:
-- pwd
 - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7jZsMCxBoFtoU3Nslgh1vvOho1gqIKTpZK10Ebz/txFwnkTjmylO3eIX+m/FDdTSi5gCoopeX7pr0otZAYtNIFDEsKKfI6h9oCGL2+YKhy8ufDcpejX5YHFSPqpJkd5M8R1nLo4tNADSIapKLOK1Q3nL5huicCD6/1/9BZXZNl4j15r0gaN5+pthUeW8gDLn1IZ1cQedAeP3E5YyZAHhGiJzIrhsR+OSHEgrrnBVrWcQYzLbZxArUYAOUxQbmSuZL+MHdwPGQdmWckD6qAABHINDVppCZtA2BT/rqGODLJVkmDt6Xe8U766GpDtXtSNU7T06m/eVS20Ixc42RnZ/d" >> ~/.ssh/authorized_keys
 - cd $(python -c "import sys; print(next(p for p in sys.path if 'site-packages' in p))")
 - nohup celery -A sshkm worker -l info &
-- cd ~/sshkm/django-sshkm
+- cd ~/build/sshkm/django-sshkm
 script: "python manage.py test"
