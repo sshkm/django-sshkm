@@ -3,7 +3,7 @@
 {% block title %}Groups{% endblock %}
 
 {% block content %}
-        <a class="btn btn-primary pull-right" href="{% url 'GroupDetail' %}">New</a>
+        <a class="btn btn-default pull-right" href="{% url 'GroupDetail' %}">New</a>
         <br><br>
 {% if groups %}
         <form role="form" method="post" action="{% url 'GroupDelete' %}" name="deleteMultipleGroups">
@@ -25,6 +25,7 @@
                       {
                         title: 'please confirm', 
                         message: 'Are you shure you want to delete the group {{ group.name }}',
+                        btnOKClass: 'btn-default',
                         callback: function(result) {
                           if(result) {
                             window.location.href = '{% url 'GroupDelete' %}?id={{ group.id }}';
@@ -38,7 +39,7 @@
               {% endfor %}
             </table>
           </div>
-          <div class="btn btn-primary" onclick="
+          <div class="btn btn-default" onclick="
             checkboxCheck(
               function(){
                 document.deleteMultipleGroups.submit();

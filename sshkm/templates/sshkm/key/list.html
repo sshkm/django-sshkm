@@ -3,7 +3,7 @@
 {% block title %}Keys{% endblock %}
 
 {% block content %}
-        <a class="btn btn-primary pull-right" href="{% url 'KeyDetail' %}">New</a>
+        <a class="btn btn-default pull-right" href="{% url 'KeyDetail' %}">New</a>
         <br><br>
 {% if keys %}
         <form role="form" method="post" action="{% url 'KeyDelete' %}" name="deleteMultipleKeys">
@@ -31,6 +31,7 @@
                       {
                         title: 'please confirm',
                         message: 'Are you shure you want to delete key {{ key.name }}',
+                        btnOKClass: 'btn-default',
                         callback: function(result) {
                           if(result) {
                             window.location.href = '{% url 'KeyDelete' %}?id={{ key.id }}';
@@ -44,7 +45,7 @@
               {% endfor %}
             </table>
           </div>
-          <div class="btn btn-primary" onclick="
+          <div class="btn btn-default" onclick="
             checkboxCheck(
               function(){
                 document.deleteMultipleKeys.submit();

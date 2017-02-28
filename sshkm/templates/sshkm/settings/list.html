@@ -4,11 +4,12 @@
 
 {% block content %}
         <hr>
-        <div class="btn btn-primary" onclick="
+        <div class="btn btn-default" onclick="
           BootstrapDialog.confirm(
             {
               title: 'Change Password',
               message: $('<form action={% url 'PasswordSave' %} method=post name=changePassword class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm></form>'),
+              btnOKClass: 'btn-default',
               callback: function(result) {
                 if(result) {
                   document.changePassword.submit();
@@ -20,11 +21,12 @@
 
         <hr>
 
-        <div class="btn btn-primary" onclick="
+        <div class="btn btn-default" onclick="
           BootstrapDialog.confirm(
             {
               title: 'Upload Master SSH-public-key',
               message: $('<form action={% url 'MasterKeyPublic' %} method=post name=masterKeyPublic class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=publickey></form>'),
+              btnOKClass: 'btn-default',
               callback: function(result) {
                 if(result) {
                   document.masterKeyPublic.submit();
@@ -41,11 +43,12 @@
         <div>
 
         <hr>
-        <div class="btn btn-primary" onclick="
+        <div class="btn btn-default" onclick="
           BootstrapDialog.confirm(
             {
               title: 'Upload Master SSH-private-key',
               message: $('<form action={% url 'MasterKeyPrivate' %} method=post name=masterKeyPrivate class=form enctype=multipart/form-data><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}><input type=file name=privatekey><br><input type=password name=passphrase placeholder=\'Passphrase if it is set\' class=form-control></form>'),
+              btnOKClass: 'btn-default',
               callback: function(result) {
                 if(result) {
                   document.masterKeyPrivate.submit();
@@ -65,16 +68,17 @@
           {% csrf_token %}
           <div class="form-group"><label class="control-label" for="id_superuser">Global Superuser</label><input class="form-control" id="id_superuser" maxlength="200" name="superuser" placeholder="default: root" title="" type="text" value="{{ superuser }}" /></div>
           <div class="form-group">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-default">Submit</button>
           </div>
         </form>
 
         <hr>
-        <div class="btn btn-primary" onclick="
+        <div class="btn btn-default" onclick="
           BootstrapDialog.confirm(
             {
               title: 'Create User',
               message: $('<form action={% url 'CreateUser' %} method=post name=createUser class=form><input type=hidden name=csrfmiddlewaretoken value={{ csrf_token }}>Username: <input class=form-control type=text name=username>Password: <input class=form-control type=password name=password>Confirm: <input class=form-control type=password name=confirm>Admin: <input type=checkbox name=is_staff></form>'),
+              btnOKClass: 'btn-default',
               callback: function(result) {
                 if(result) {
                   document.createUser.submit();
@@ -102,7 +106,7 @@
               {% endfor %}
             </table>
           </div>
-          <div class="btn btn-primary" onclick="
+          <div class="btn btn-default" onclick="
             checkboxCheck(
               function(){
                 document.deleteMultipleUsers.submit();

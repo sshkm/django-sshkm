@@ -19,6 +19,7 @@ function checkboxCheck(action, element, title_confirm, message_confirm, title_no
       {
         title: title_confirm,
         message: message_confirm,
+        btnOKClass: 'btn-default',
         callback: function(result) {
           if(result) {
             action();
@@ -30,7 +31,8 @@ function checkboxCheck(action, element, title_confirm, message_confirm, title_no
     BootstrapDialog.alert(
       {
         title: title_noselect,
-        message: message_noselect
+        message: message_noselect,
+        btnOKClass: 'btn-default'
       }
     );
   }

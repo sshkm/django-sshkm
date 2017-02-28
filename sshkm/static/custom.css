@@ -3,6 +3,11 @@ body {
   padding-bottom: 15px;
 }
 
+a, a.hover, a.focus, a:hover, a:focus {
+  color: black;
+}
+
+/* login form */
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -38,3 +43,17 @@ body {
   border-top-right-radius: 0;
 }
 
+/* changes for modal dialogs */
+.modal-dialog .modal-content .modal-header {
+  background-color: #333333;
+}
+/*
+.modal-dialog .modal-content .modal-header .bootstrap-dialog-header .bootstrap-dialog-title {
+  color: #ffffff;
+}
+*/
+
+/* adapt svg images */
+svg {
+  fill: currentColor;
+}

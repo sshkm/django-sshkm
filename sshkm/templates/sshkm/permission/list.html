@@ -3,7 +3,7 @@
 {% block title %}Permissions{% endblock %}
 
 {% block content %}
-        <a class="btn btn-primary pull-right" href="{% url 'PermissionCreate' %}">New</a>
+        <a class="btn btn-default pull-right" href="{% url 'PermissionCreate' %}">New</a>
         <br><br>
 {% if permissions %}
         <form role="form" method="post" action="{% url 'PermissionDelete' %}" name="deleteMultiplePermissions">
@@ -29,6 +29,7 @@
                       {
                         title: 'please confirm',
                         message: 'Are you shure you want to delete the permission {{ permission.host.name }} -> {{ permission.group.name }} -> {{ permission.osuser.name }}',
+                        btnOKClass: 'btn-default',
                         callback: function(result) {
                           if(result) {
                             window.location.href = '{% url 'PermissionDelete' %}?id={{ permission.id }}';
@@ -42,7 +43,7 @@
               {% endfor %}
             </table>
           </div>
-          <div class="btn btn-primary" onclick="
+          <div class="btn btn-default" onclick="
             checkboxCheck(
               function(){
                 document.deleteMultiplePermissions.submit();
