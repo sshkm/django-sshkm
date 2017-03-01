@@ -53,6 +53,12 @@ a, a.hover, a.focus, a:hover, a:focus {
 }
 */
 
+.btn-default {
+  background-color: #222222;
+  color: #9d9d9d;
+  border-color: #222222;
+}
+
 /* adapt svg images */
 svg {
   fill: currentColor;
