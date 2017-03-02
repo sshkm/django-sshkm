@@ -53,10 +53,33 @@ a, a.hover, a.focus, a:hover, a:focus {
 }
 */
 
-.btn-default {
+.btn-default,
+.pagination > li > a,
+.pagination > li > span,
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
   background-color: #222222;
   color: #9d9d9d;
   border-color: #222222;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #9d9d9d;
+  background-color: #fff;
+  border-color: #ddd;
 }
 
 /* adapt svg images */

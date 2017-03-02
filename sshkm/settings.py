@@ -83,6 +83,8 @@ DATABASES = {
     }
 }
 
+PAGINATION_PER_PAGE = 50
+
 try:
     exec(compile(open('/etc/sshkm/sshkm.conf', "rb").read(), '/etc/sshkm/sshkm.conf', 'exec'))
 except:

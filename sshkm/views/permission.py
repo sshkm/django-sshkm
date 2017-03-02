@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
@@ -13,6 +15,19 @@ from sshkm.forms import PermissionForm
 @login_required
 def PermissionList(request):
     permissions = Permission.objects.all().order_by('host__name', 'osuser__name', 'group__name')
+
+    per_page = getattr(settings, "PAGINATION_PER_PAGE", 10)
+    paginator = Paginator(permissions, per_page)
+    page = request.GET.get('page')
+    try:
+        permissions = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        permissions = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        permissions = paginator.page(paginator.num_pages)
+
     context = {'permissions': permissions}
     return render(request, 'sshkm/permission/list.html', context)
 
