@@ -1,6 +1,14 @@
+html {
+  height: 100%;
+}
+
 body {
   padding-top: 70px;
-  padding-bottom: 15px;
+  padding-bottom: 70px;
+}
+
+footer {
+
 }
 
 a, a.hover, a.focus, a:hover, a:focus {
@@ -82,8 +90,8 @@ a, a.hover, a.focus, a:hover, a:focus {
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
   color: #9d9d9d;
-  background-color: #fff;
-  border-color: #ddd;
+  background-color: #e6e6e6;
+  border-color: #adadad;
 }
 
 .form-control:focus {

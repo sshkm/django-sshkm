@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
-from sshkm.models import Key, KeyGroup
+from sshkm.models import Key, KeyGroup, Group
 from sshkm.forms import KeyForm
 
 
@@ -37,12 +37,25 @@ def KeyDetail(request):
     if request.method == 'GET' and 'id' in request.GET:
         key = get_object_or_404(Key, pk=request.GET['id'])
         keyform = KeyForm(instance=key)
+        groups = Group.objects.all()
+        groups_selected = KeyGroup.objects.all().filter(key_id=request.GET['id'])
+        ids_selected = []
+        for group_selected in groups_selected:
+            ids_selected.append(group_selected.group_id)
+        groups_not_selected = Group.objects.all().exclude(id__in=ids_selected)
+        return render(request, 'sshkm/key/detail.html', {
+            'keyform': keyform,
+            'groups': groups,
+            'groups_selected': groups_selected,
+            'groups_not_selected': groups_not_selected,
+        })
     else:
         keyform = KeyForm()
-
-    return render(request, 'sshkm/key/detail.html', {
-        'keyform': keyform,
-    })
+        groups_not_selected = Group.objects.all()
+        return render(request, 'sshkm/key/detail.html', {
+            'keyform': keyform,
+            'groups_not_selected': groups_not_selected,
+        })
 
 @login_required
 def KeyDelete(request):

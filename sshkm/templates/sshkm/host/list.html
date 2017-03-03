@@ -88,3 +88,32 @@
         <p>No Hosts are available.</p>
 {% endif %}
 {% endblock %}
+
+{% block footer %}
+              <li><a href="{% url 'HostDetail' %}">New</a></li>
+              <li><a href="#" onclick="
+                checkboxCheck(
+                  function(){
+                    document.MultipleHosts.submit();
+                  },
+                  'id_multiple',
+                  'please confirm',
+                  'Are you shure you want to delete selected host(s)',
+                  'no host(s) selected',
+                  'Please select at least one host'
+                )
+              ">Delete</a></li>
+              <li><a href="#" onclick="
+            checkboxCheck(
+              function(){
+                document.MultipleHosts.action = '{% url 'HostDeploy' %}';
+                document.MultipleHosts.submit();
+              },
+              'id_multiple',
+              'please confirm',
+              'Are you shure you want to deploy selected host(s)',
+              'no host(s) selected',
+              'Please select at least one host'
+            )
+          ">Deploy</a></li>
+{% endblock %}
