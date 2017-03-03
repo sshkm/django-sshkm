@@ -4,7 +4,7 @@
 
 {% block content %}
 {% load bootstrap3 %}
-        <form action="{% url 'GroupSave' %}" method="post" class="form">
+        <form action="{% url 'GroupSave' %}" method="post" class="form" name="save">
           {% csrf_token %}
           {% bootstrap_field groupform.name %}
           {% bootstrap_field groupform.description set_required=False %}
@@ -65,4 +65,8 @@
         </div>
 
 {% endif %}
+{% endblock %}
+
+{% block footer %}
+              <li><a href="#" onclick="selectAll('leftValues'); document.save.submit();">Submit</a></li>
 {% endblock %}

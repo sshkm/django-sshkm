@@ -56,3 +56,19 @@
         <p>No Groups are available.</p>
 {% endif %}
 {% endblock %}
+
+{% block footer %}
+              <li><a href="{% url 'GroupDetail' %}">New</a></li>
+              <li><a href="#" onclick="
+                checkboxCheck(
+                  function(){
+                    document.MultipleGroups.submit();
+                  },
+                  'id_multiple',
+                  'please confirm',
+                  'Are you shure you want to delete selected group(s)',
+                  'no group(s) selected',
+                  'Please select at least one group'
+                )
+              ">Delete</a></li>
+{% endblock %}

@@ -4,7 +4,7 @@
 
 {% block content %}
 {% load bootstrap3 %}
-        <form action="{% url 'KeySave' %}" method="post" class="form">
+        <form action="{% url 'KeySave' %}" method="post" class="form" name="save">
           {% csrf_token %}
           {% bootstrap_field keyform.name %}
           {% bootstrap_field keyform.email %}
@@ -50,4 +50,8 @@
           <button type="submit" class="btn btn-default" onclick="selectAll('leftValues');">Submit</button>
           {% endbuttons %}
         </form>
+{% endblock %}
+
+{% block footer %}
+              <li><a href="#" onclick="selectAll('leftValues'); document.save.submit();">Submit</a></li>
 {% endblock %}

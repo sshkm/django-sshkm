@@ -4,7 +4,7 @@
 
 {% block content %}
 {% load bootstrap3 %}
-        <form action="{% url 'OsuserSave' %}" method="post" class="form">
+        <form action="{% url 'OsuserSave' %}" method="post" class="form" name="save">
           {% csrf_token %}
           {% bootstrap_field osuserform.name %}
           {% bootstrap_field osuserform.home set_required=False %}
@@ -34,4 +34,8 @@
           </table>
         </div>
 {% endif %}
+{% endblock %}
+
+{% block footer %}
+              <li><a href="#" onclick="document.save.submit();">Submit</a></li>
 {% endblock %}

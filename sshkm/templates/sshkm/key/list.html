@@ -62,3 +62,19 @@
         <p>No Keys are available.</p>
 {% endif %}
 {% endblock %}
+
+{% block footer %}
+              <li><a href="{% url 'KeyDetail' %}">New</a></li>
+              <li><a href="#" onclick="
+                checkboxCheck(
+                  function(){
+                    document.MultipleKeys.submit();
+                  },
+                  'id_multiple',
+                  'please confirm',
+                  'Are you shure you want to delete selected key(s)',
+                  'no key(s) selected',
+                  'Please select at least one key'
+                )
+              ">Delete</a></li>
+{% endblock %}

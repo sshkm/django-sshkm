@@ -56,3 +56,19 @@
        <p>No Osusers are available.</p>
 {% endif %}
 {% endblock %}
+
+{% block footer %}
+              <li><a href="{% url 'OsuserDetail' %}">New</a></li>
+              <li><a href="#" onclick="
+                checkboxCheck(
+                  function(){
+                    document.MultipleOsusers.submit();
+                  },
+                  'id_multiple',
+                  'please confirm',
+                  'Are you shure you want to delete selected OS-User(s)',
+                  'no OS-User(s) selected',
+                  'Please select at least one OS-User'
+                )
+              ">Delete</a></li>
+{% endblock %}

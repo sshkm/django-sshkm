@@ -78,3 +78,36 @@
         <p>No Permissions are available.</p>
 {% endif %}
 {% endblock %}
+
+{% block footer %}
+              <li><a href="{% url 'PermissionCreate' %}">New</a></li>
+              <li><a href="#" onclick="
+                checkboxCheck(
+                  function(){
+                    document.MultiplePermissions.submit();
+                  },
+                  'id_multiple',
+                  'please confirm',
+                  'Are you shure you want to delete selected permission(s)',
+                  'no permission(s) selected',
+                  'Please select at least one permission'
+                )
+              ">Delete</a></li>
+
+          {% if permissions.has_other_pages %}
+            </ul>
+            <ul class="pull-right pagination pagination-nav">
+              {% if permissions.has_previous %}
+              <li><a href="?page={{ permissions.previous_page_number }}">&laquo;</a></li>
+              {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+              {% endif %}
+              <li class="active"><span>Page {{ permissions.number }} of {{ permissions.paginator.num_pages }}</span></li>
+              {% if permissions.has_next %}
+              <li><a href="?page={{ permissions.next_page_number }}">&raquo;</a></li>
+              {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+              {% endif %}
+          {% endif %}
+
+{% endblock %}

@@ -94,6 +94,34 @@ a, a.hover, a.focus, a:hover, a:focus {
   border-color: #adadad;
 }
 
+.pagination-nav > li > a,
+.pagination-nav > li > span,
+.pagination-nav > .active > a,
+.pagination-nav > .active > span,
+.pagination-nav > .active > a:hover,
+.pagination-nav > .active > span:hover,
+.pagination-nav > .active > a:focus,
+.pagination-nav > .active > span:focus {
+  background-color: #222222;
+  color: #9d9d9d;
+  border-color: #adadad;
+}
+
+.pagination-nav > li > a:hover,
+.pagination-nav > li > span:hover,
+.pagination-nav > li > a:focus,
+.pagination-nav > li > span:focus
+.pagination-nav > .disabled > span,
+.pagination-nav > .disabled > span:hover,
+.pagination-nav > .disabled > span:focus,
+.pagination-nav > .disabled > a,
+.pagination-nav > .disabled > a:hover,
+.pagination-nav > .disabled > a:focus {
+  color: #9d9d9d;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
 .form-control:focus {
   border-color: #000000;
   outline: 0;
