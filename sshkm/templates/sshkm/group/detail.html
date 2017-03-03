@@ -8,12 +8,43 @@
           {% csrf_token %}
           {% bootstrap_field groupform.name %}
           {% bootstrap_field groupform.description set_required=False %}
-          {% bootstrap_field groupform.members set_required=False %}
+          <div class="form-group">
+            <label class="control-label" for="id_members">Members (Key(s))</label>
+            <div class="input-group">
+              <div class="two-select two-select-left">
+                <label class="control-label" for="rightValues">Selected</label>
+                <select id="leftValues" multiple class="form-control" name="members">
+                  {% if members_selected %}
+                  {% for member in members_selected %}
+                  <option value="{{ member.key.id }}">{{ member.key.name }}</option>
+                  {% endfor %}
+                  {% endif %}
+                </select>
+              </div>
+              <div class="two-select two-select-buttons">
+                <ul class="pagination">
+                  <li><a href="#" id="btnLeft">&laquo;</a></li>
+                  <li><a href="#" id="btnRight">&raquo;</a></li>
+                </ul>
+              </div>
+              <div class="two-select two-select-right">
+                <label class="control-label" for="rightValues">Available</label>
+                <select id="rightValues" multiple class="form-control">
+                  {% if members_not_selected %}
+                  {% for member in members_not_selected %}
+                  <option value="{{ member.id }}">{{ member.name }}</option>
+                  {% endfor %}
+                  {% endif %}
+                </select>
+              </div>
+            </div>
+          </div>
+
           {% if request.GET.id %}
           <input type="hidden" name="id" value="{{ request.GET.id }}">
           {% endif %}
           {% buttons %}
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default" onclick="selectAll('leftValues');">Submit</button>
           {% endbuttons %}
         </form>
 {% if permissions %}
@@ -33,5 +64,6 @@
             {% endfor %}
           </table>
         </div>
+
 {% endif %}
 {% endblock %}

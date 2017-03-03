@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.forms import ModelMultipleChoiceField
 
+
 # return names of object in MultipleChoiceField
 class ModelMultipleChoiceFieldNames(ModelMultipleChoiceField):
     def label_from_instance(self, obj):

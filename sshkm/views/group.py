@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
-from sshkm.models import Group, KeyGroup, Permission
+from sshkm.models import Group, Key, KeyGroup, Permission
 from sshkm.forms import GroupForm
 
 
@@ -22,14 +22,25 @@ def GroupDetail(request):
         group = get_object_or_404(Group, pk=request.GET['id'])
         groupform = GroupForm(instance=group)
         permissions = Permission.objects.filter(group_id=request.GET['id'])
+        members = Key.objects.all()
+        members_selected = KeyGroup.objects.all().filter(group_id=request.GET['id'])
+        ids_selected = []
+        for member_selected in members_selected:
+            ids_selected.append(member_selected.key_id)
+        members_not_selected = Key.objects.all().exclude(id__in=ids_selected)
         return render(request, 'sshkm/group/detail.html', {
             'groupform': groupform,
             'permissions': permissions,
+            'members': members,
+            'members_selected': members_selected,
+            'members_not_selected': members_not_selected,
         })
     else:
         groupform = GroupForm()
+        members_not_selected = Key.objects.all()
         return render(request, 'sshkm/group/detail.html', {
             'groupform': groupform,
+            'members_not_selected': members_not_selected,
         })
 
 @login_required

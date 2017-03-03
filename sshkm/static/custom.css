@@ -7,6 +7,7 @@ a, a.hover, a.focus, a:hover, a:focus {
   color: black;
 }
 
+
 /* login form */
 .form-signin {
   max-width: 330px;
@@ -43,6 +44,7 @@ a, a.hover, a.focus, a:hover, a:focus {
   border-top-right-radius: 0;
 }
 
+
 /* changes for modal dialogs */
 .modal-dialog .modal-content .modal-header {
   background-color: #333333;
@@ -53,6 +55,8 @@ a, a.hover, a.focus, a:hover, a:focus {
 }
 */
 
+
+/* from modifications */
 .btn-default,
 .pagination > li > a,
 .pagination > li > span,
@@ -92,6 +96,28 @@ a, a.hover, a.focus, a:hover, a:focus {
 select[multiple] option:checked {
   background: #222222 linear-gradient(0deg, #222222 0%, #222222 100%);
 }
+
+
+/* two-select box */
+.two-select {
+  display:inline;
+  margin-left: 5px;
+}
+
+.two-select-left {
+  float: left;
+}
+
+.two-select-right {
+  float: right;
+}
+
+.two-select-buttons {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: table-cell;
+}
+
 
 /* adapt svg images */
 svg {
