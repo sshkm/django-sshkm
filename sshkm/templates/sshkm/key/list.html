@@ -6,8 +6,8 @@
 {% if keys %}
         <form role="form" method="post" action="{% url 'KeyDelete' %}" name="deleteMultipleKeys">
           {% csrf_token %}
-          <div class="panel panel-default">
-            <table class="table table-striped table-hover">
+          <table class="DataTable display">
+            <thead>
               <tr>
                 <th><input type="checkbox" class="checkAll"></th>
                 <th>Name</th>
@@ -16,6 +16,8 @@
                 <th>Email</th>
                 <th>&nbsp;</th>
               </tr>
+            </thead>
+            <tbody>
               {% for key in keys %}
               <tr>
                 <td><input type="checkbox" name="id_multiple" id="{{ key.id }}" value="{{ key.id }}"></td>
@@ -41,8 +43,8 @@
                 </td>
               </tr>
               {% endfor %}
-            </table>
-          </div>
+            </tbody>
+          </table>
         </form>
 {% else %}
         <p>No Keys are available.</p>

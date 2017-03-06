@@ -6,8 +6,8 @@
 {% if hostsstati %}
         <form role="form" method="post" action="{% url 'HostDelete' %}" name="MultipleHosts">
           {% csrf_token %}
-          <div class="panel panel-default">
-            <table class="table table-striped table-hover">
+          <table class="DataTable display">
+            <thead>
               <tr>
                 <th><input type="checkbox" class="checkAll"></th>
                 <th>Name</th>
@@ -15,6 +15,8 @@
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
               </tr>
+            </thead>
+            <tbody>
               {% for hoststatus in hostsstati %}
               <tr>
                 <td><input type="checkbox" name="id_multiple" id="{{ hoststatus.id }}" value="{{ hoststatus.id }}"></td>
@@ -54,8 +56,8 @@
                 </td>
               </tr>
               {% endfor %}
-            </table>
-          </div>
+            </tbody>
+          </table>
         </form>
 {% else %}
         <p>No Hosts are available.</p>

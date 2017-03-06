@@ -59,3 +59,12 @@ function selectAll(box) {
         selectBox.options[i].selected = true; 
     } 
 }
+
+
+// DataTable
+$(document).ready(function(){
+  $('.DataTable').DataTable({
+    paging: false,
+    info: false
+  });
+});

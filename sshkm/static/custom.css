@@ -160,6 +160,16 @@ select[multiple] option:checked {
 }
 
 
+/* test dataTables */
+/*
+.dataTables_wrapper select {
+  background-color: red;
+  height: 30px;
+  line-height: 30px;
+}
+*/
+
+
 /* adapt svg images */
 svg {
   fill: currentColor;
