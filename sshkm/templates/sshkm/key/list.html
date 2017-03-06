@@ -50,7 +50,8 @@
 {% endblock %}
 
 {% block footer %}
-              <li><a href="{% url 'KeyDetail' %}">New</a></li>
+              <li><a href="{% url 'KeyDetail' %}">New Key</a></li>
+{% if keys %}
               <li><a href="#" onclick="
                 checkboxCheck(
                   function(){
@@ -63,4 +64,5 @@
                   'Please select at least one key'
                 )
               ">Delete</a></li>
+{% endif %}
 {% endblock %}

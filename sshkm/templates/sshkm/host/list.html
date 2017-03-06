@@ -63,7 +63,8 @@
 {% endblock %}
 
 {% block footer %}
-              <li><a href="{% url 'HostDetail' %}">New</a></li>
+              <li><a href="{% url 'HostDetail' %}">New Host</a></li>
+{% if hostsstati %}
               <li><a href="#" onclick="
                 checkboxCheck(
                   function(){
@@ -89,4 +90,5 @@
               'Please select at least one host'
             )
           ">Deploy</a></li>
+{% endif %}
 {% endblock %}

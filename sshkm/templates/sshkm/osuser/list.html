@@ -44,7 +44,8 @@
 {% endblock %}
 
 {% block footer %}
-              <li><a href="{% url 'OsuserDetail' %}">New</a></li>
+              <li><a href="{% url 'OsuserDetail' %}">New OS-User</a></li>
+{% if osusers %}
               <li><a href="#" onclick="
                 checkboxCheck(
                   function(){
@@ -57,4 +58,5 @@
                   'Please select at least one OS-User'
                 )
               ">Delete</a></li>
+{% endif %}
 {% endblock %}

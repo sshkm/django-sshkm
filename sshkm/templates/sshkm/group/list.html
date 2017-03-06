@@ -44,7 +44,8 @@
 {% endblock %}
 
 {% block footer %}
-              <li><a href="{% url 'GroupDetail' %}">New</a></li>
+              <li><a href="{% url 'GroupDetail' %}">New Group</a></li>
+{% if groups %}
               <li><a href="#" onclick="
                 checkboxCheck(
                   function(){
@@ -57,4 +58,5 @@
                   'Please select at least one group'
                 )
               ">Delete</a></li>
+{% endif %}
 {% endblock %}
