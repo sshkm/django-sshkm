@@ -3,8 +3,6 @@
 {% block title %}Permissions{% endblock %}
 
 {% block content %}
-        <a class="btn btn-default pull-right" href="{% url 'PermissionCreate' %}">New</a>
-        <br><br>
 {% if permissions %}
         <form role="form" method="post" action="{% url 'PermissionDelete' %}" name="deleteMultiplePermissions">
           {% csrf_token %}
@@ -43,35 +41,6 @@
               {% endfor %}
             </table>
           </div>
-          <div class="btn btn-default" onclick="
-            checkboxCheck(
-              function(){
-                document.deleteMultiplePermissions.submit();
-              },
-              'id_multiple',
-              'please confirm',
-              'Are you shure you want to delete selected permission(s)',
-              'no permission(s) selected',
-              'Please select at least one permission'
-            )
-          ">Delete</div>
-          {% if permissions.has_other_pages %}
-          <div align="center">
-            <ul class="pagination">
-              {% if permissions.has_previous %}
-              <li><a href="?page={{ permissions.previous_page_number }}">&laquo;</a></li>
-              {% else %}
-              <li class="disabled"><span>&laquo;</span></li>
-              {% endif %}
-              <li class="active"><span>Page {{ permissions.number }} of {{ permissions.paginator.num_pages }}</span></li>
-              {% if permissions.has_next %}
-              <li><a href="?page={{ permissions.next_page_number }}">&raquo;</a></li>
-              {% else %}
-              <li class="disabled"><span>&raquo;</span></li>
-              {% endif %}
-            </ul>
-          </div>
-          {% endif %}
         </form>
 
 {% else %}
@@ -84,7 +53,7 @@
               <li><a href="#" onclick="
                 checkboxCheck(
                   function(){
-                    document.MultiplePermissions.submit();
+                    document.deleteMultiplePermissions.submit();
                   },
                   'id_multiple',
                   'please confirm',
@@ -96,7 +65,7 @@
 
           {% if permissions.has_other_pages %}
             </ul>
-            <ul class="pull-right pagination pagination-nav">
+            <ul class="pagination pagination-nav pull-right">
               {% if permissions.has_previous %}
               <li><a href="?page={{ permissions.previous_page_number }}">&laquo;</a></li>
               {% else %}

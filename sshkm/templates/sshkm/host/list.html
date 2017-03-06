@@ -3,8 +3,6 @@
 {% block title %}Hosts{% endblock %}
 
 {% block content %}
-        <a class="btn btn-default pull-right" href="{% url 'HostDetail' %}">New</a>
-        <br><br>
 {% if hostsstati %}
         <form role="form" method="post" action="{% url 'HostDelete' %}" name="MultipleHosts">
           {% csrf_token %}
@@ -58,31 +56,6 @@
               {% endfor %}
             </table>
           </div>
-          <div class="btn btn-default" onclick="
-            checkboxCheck(
-              function(){
-                document.MultipleHosts.submit();
-              },
-              'id_multiple',
-              'please confirm',
-              'Are you shure you want to delete selected host(s)',
-              'no host(s) selected',
-              'Please select at least one host'
-            )
-          ">Delete</div>
-          <div class="btn btn-default" onclick="
-            checkboxCheck(
-              function(){
-                document.MultipleHosts.action = '{% url 'HostDeploy' %}';
-                document.MultipleHosts.submit();
-              },
-              'id_multiple',
-              'please confirm',
-              'Are you shure you want to deploy selected host(s)',
-              'no host(s) selected',
-              'Please select at least one host'
-            )
-          ">Deploy</div>
         </form>
 {% else %}
         <p>No Hosts are available.</p>

@@ -12,9 +12,6 @@
           {% if request.GET.id %}
           <input type="hidden" name="id" value="{{ request.GET.id }}">
           {% endif %}
-          {% buttons %}
-          <button type="submit" class="btn btn-default">Submit</button>
-          {% endbuttons %}
         </form>
 {% if permissions %}
        <br>

@@ -3,8 +3,6 @@
 {% block title %}Osusers{% endblock %}
 
 {% block content %}
-        <a class="btn btn-default pull-right" href="{% url 'OsuserDetail' %}">New</a>
-        <br><br>
 {% if osusers %}
         <form role="form" method="post" action="{% url 'OsuserDelete' %}" name="deleteMultipleOsusers">
           {% csrf_token %}
@@ -39,18 +37,6 @@
               {% endfor %}
             </table>
           </div>
-          <div class="btn btn-default" onclick="
-            checkboxCheck(
-              function(){
-                document.deleteMultipleOsusers.submit();
-              },
-              'id_multiple',
-              'please confirm',
-              'Are you shure you want to delete selected OS-User(s)',
-              'no OS-User(s) selected',
-              'Please select at least one OS-User'
-            )
-          ">Delete</div>
        </form>
 {% else %}
        <p>No Osusers are available.</p>
@@ -62,7 +48,7 @@
               <li><a href="#" onclick="
                 checkboxCheck(
                   function(){
-                    document.MultipleOsusers.submit();
+                    document.deleteMultipleOsusers.submit();
                   },
                   'id_multiple',
                   'please confirm',

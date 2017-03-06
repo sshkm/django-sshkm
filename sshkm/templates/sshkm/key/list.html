@@ -3,8 +3,6 @@
 {% block title %}Keys{% endblock %}
 
 {% block content %}
-        <a class="btn btn-default pull-right" href="{% url 'KeyDetail' %}">New</a>
-        <br><br>
 {% if keys %}
         <form role="form" method="post" action="{% url 'KeyDelete' %}" name="deleteMultipleKeys">
           {% csrf_token %}
@@ -45,18 +43,6 @@
               {% endfor %}
             </table>
           </div>
-          <div class="btn btn-default" onclick="
-            checkboxCheck(
-              function(){
-                document.deleteMultipleKeys.submit();
-              },
-              'id_multiple',
-              'please confirm',
-              'Are you shure you want to delete selected key(s)',
-              'no key(s) selected',
-              'Please select at least one key'
-            )
-          ">Delete</div>
         </form>
 {% else %}
         <p>No Keys are available.</p>
@@ -68,7 +54,7 @@
               <li><a href="#" onclick="
                 checkboxCheck(
                   function(){
-                    document.MultipleKeys.submit();
+                    document.deleteMultipleKeys.submit();
                   },
                   'id_multiple',
                   'please confirm',
