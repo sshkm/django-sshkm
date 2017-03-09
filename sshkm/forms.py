@@ -89,9 +89,9 @@ class PermissionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PermissionForm, self).__init__(*args, **kwargs)
-        self.fields['host'] = ModelMultipleChoiceFieldNames(queryset=Host.objects.all(), label='Select host(s) on which you want to set perssion(s):')
-        self.fields['group'] = ModelMultipleChoiceFieldNames(queryset=Group.objects.all(), label='Select the group(s) which has/have permission on the selected host(s):')
-        self.fields['osuser'] = ModelMultipleChoiceFieldNames(queryset=Osuser.objects.all(), label='Select OS-User(s) on which the key(s) in the selected group(s) should be allowed to connect on the selected hosts(s):')
+        self.fields['host'] = ModelMultipleChoiceFieldNames(queryset=Host.objects.all().order_by('name'), label='Select host(s) on which you want to set perssion(s):')
+        self.fields['group'] = ModelMultipleChoiceFieldNames(queryset=Group.objects.all().order_by('name'), label='Select the group(s) which has/have permission on the selected host(s):')
+        self.fields['osuser'] = ModelMultipleChoiceFieldNames(queryset=Osuser.objects.all().order_by('name'), label='Select OS-User(s) on which the key(s) in the selected group(s) should be allowed to connect on the selected hosts(s):')
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

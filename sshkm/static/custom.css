@@ -169,6 +169,10 @@ select[multiple] option:checked {
 }
 */
 
+.dataTables_paginate, .dataTables_length {
+    display: none;
+}
+
 
 /* adapt svg images */
 svg {

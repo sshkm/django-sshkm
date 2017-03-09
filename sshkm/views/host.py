@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 import celery
 from celery import uuid
+from celery.result import AsyncResult
 
 from sshkm.tasks import ScheduleDeployKeys
 from sshkm.views.deploy import DeployKeys, GetHostKeys

@@ -6,7 +6,7 @@
 {% if permissions %}
         <form role="form" method="post" action="{% url 'PermissionDelete' %}" name="deleteMultiplePermissions">
           {% csrf_token %}
-          <table class="DataTable display">
+          <table class="DataTablePermissions display">
             <thead>
               <tr>
                 <th><input type="checkbox" class="checkAll"></th>
@@ -44,7 +44,6 @@
             </tbody>
           </table>
         </form>
-
 {% else %}
         <p>No Permissions are available.</p>
 {% endif %}
@@ -66,17 +65,22 @@
                 )
               ">Delete</a></li>
 
+            </ul>
+            <ul class="pagination pagination-nav pull-right">
+              <li><a href="#" class="paginate_left">&laquo;</a></li>
+              <li><span class="tableInfo" id="tableInfo"></span></li>
+              <li><a href="#" class="paginate_right">&raquo;</a></li>
           {% if permissions.has_other_pages %}
             </ul>
             <ul class="pagination pagination-nav pull-right">
               {% if permissions.has_previous %}
-              <li><a href="?page={{ permissions.previous_page_number }}">&laquo;</a></li>
+              <li><a href="?page={{ permissions.previous_page_number }}" class="paginate_left">&laquo;</a></li>
               {% else %}
               <li class="disabled"><span>&laquo;</span></li>
               {% endif %}
               <li class="active"><span>Page {{ permissions.number }} of {{ permissions.paginator.num_pages }}</span></li>
               {% if permissions.has_next %}
-              <li><a href="?page={{ permissions.next_page_number }}">&raquo;</a></li>
+              <li><a href="?page={{ permissions.next_page_number }}" class="paginate_right">&raquo;</a></li>
               {% else %}
               <li class="disabled"><span>&raquo;</span></li>
               {% endif %}

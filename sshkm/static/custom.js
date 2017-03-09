@@ -43,21 +43,21 @@ function checkboxCheck(action, element, title_confirm, message_confirm, title_no
 
 // two-side multiselect
 $("#btnLeft").click(function () {
-    var selectedItem = $("#rightValues option:selected");
-    $("#leftValues").append(selectedItem);
+  var selectedItem = $("#rightValues option:selected");
+  $("#leftValues").append(selectedItem);
 });
 
 $("#btnRight").click(function () {
-    var selectedItem = $("#leftValues option:selected");
-    $("#rightValues").append(selectedItem);
+  var selectedItem = $("#leftValues option:selected");
+  $("#rightValues").append(selectedItem);
 });
 
 function selectAll(box) { 
-    selectBox = document.getElementById(box);
+  selectBox = document.getElementById(box);
 
-    for (var i = 0; i < selectBox.options.length; i++) { 
-        selectBox.options[i].selected = true; 
-    } 
+  for (var i = 0; i < selectBox.options.length; i++) { 
+    selectBox.options[i].selected = true; 
+  } 
 }
 
 
@@ -67,4 +67,30 @@ $(document).ready(function(){
     paging: false,
     info: false
   });
+});
+
+var oTable;
+$(document).ready(function(){
+  oTable = $(".DataTablePermissions").dataTable({
+    info: false,
+    "pageLength": 50
+  });
+
+  function refreshPageNumber() {
+    var table = $('.DataTablePermissions').DataTable();
+    var info = table.page.info();
+    $(".tableInfo").text((info.page+1)+' of '+info.pages);
+  }
+
+  $(".paginate_left").click(function(){
+    oTable.fnPageChange( 'previous' );
+    refreshPageNumber();
+  });
+
+  $(".paginate_right").click(function(){
+    oTable.fnPageChange( 'next' );
+    refreshPageNumber();
+  });
+
+  refreshPageNumber();
 });
