@@ -57,7 +57,7 @@ def PermissionDelete(request):
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The permission could not be deleted")
 
-    cache.delete('cache_permissions')
+    cache.clear()
 
     return HttpResponseRedirect(reverse('PermissionList'))
 
@@ -75,6 +75,6 @@ def PermissionSave(request):
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The permission could not be saved")
 
-    cache.delete('cache_permissions')
+    cache.clear()
 
     return HttpResponseRedirect(reverse('PermissionList'))

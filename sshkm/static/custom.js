@@ -96,5 +96,9 @@ $(document).ready(function(){
     refreshCurrentPage();
   }));
 
+  $(oTable.off('search.dt', function(){
+    refreshCurrentPage();
+  }));
+
   refreshCurrentPage();
 });
