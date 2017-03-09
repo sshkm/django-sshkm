@@ -80,7 +80,7 @@
               {% else %}
               <li class="disabled"><span>&laquo;</span></li>
               {% endif %}
-              <li class="active"><span>Page {{ permissions.number }} of {{ permissions.paginator.num_pages }}</span></li>
+              <li class="active"><span>{{ permissions.number }} of {{ permissions.paginator.num_pages }}</span></li>
               {% if permissions.has_next %}
               <li><a href="?page={{ permissions.next_page_number }}" class="paginate_right">&raquo;</a></li>
               {% else %}

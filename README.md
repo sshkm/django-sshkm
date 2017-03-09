@@ -16,6 +16,16 @@ Then django-sshkm is perfect for you.
 - Celery >= 4.0.0
 - Django compatible database like (SQLite, MySQL/MariaDB, PostgreSQL, ...)
 
+## Used Technologies
+- [Linux](https://www.kernel.org)
+- [Python](https://www.python.org)
+- [Django](https://www.djangoproject.com)
+- [RabbitMQ](https://www.rabbitmq.com)
+- [Celery](http://www.celeryproject.org)
+- [Bootstrap](http://getbootstrap.com)
+- [jQuery](https://jquery.com)
+- [DataTables](https://datatables.net)
+
 ## Setup
 - Install a RabbitMQ server.
 - Install a Django compatible database.

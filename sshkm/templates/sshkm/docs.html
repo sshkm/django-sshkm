@@ -32,7 +32,8 @@
           To be able to deploy public keys to your environment SSHKM uses SSH-keys itself.<br>
           First login to SSHKM as user with admin priviledges. The default user is admin with password admin (you can and should change this password in the <a href="{% url 'SettingsList' %}">settings page</a>).<br>
           Navigate to the <a href="{% url 'SettingsList' %}">settings page</a>. This is the little gear-wheel icon in the top right corner.<br>
-          Here you can upload the public and private SSH-key wich SSHKM will use to deploy all your further configurations.
+          Here you can upload the public and private SSH-key wich SSHKM will use to deploy all your further configurations.<br>
+          To distribute your Master public key to your Hosts in the first place it is recommended to use Ansible, Puppet, Chef, ...
         </p>
         <h3>Create Hosts</h3>
         <p>
