@@ -73,10 +73,10 @@ var oTable;
 $(document).ready(function(){
   oTable = $(".DataTablePermissions").dataTable({
     info: false,
-    "pageLength": 50
+    "pageLength": 3
   });
 
-  function refreshPageNumber() {
+  function refreshCurrentPage() {
     var table = $('.DataTablePermissions').DataTable();
     var info = table.page.info();
     $(".tableInfo").text((info.page+1)+' of '+info.pages);
@@ -84,13 +84,17 @@ $(document).ready(function(){
 
   $(".paginate_left").click(function(){
     oTable.fnPageChange( 'previous' );
-    refreshPageNumber();
+    refreshCurrentPage();
   });
 
   $(".paginate_right").click(function(){
     oTable.fnPageChange( 'next' );
-    refreshPageNumber();
+    refreshCurrentPage();
   });
 
-  refreshPageNumber();
+  $(oTable.on('search.dt', function(){
+    refreshCurrentPage();
+  }));
+
+  refreshCurrentPage();
 });
