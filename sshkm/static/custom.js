@@ -73,7 +73,7 @@ var oTable;
 $(document).ready(function(){
   oTable = $(".DataTablePermissions").dataTable({
     info: false,
-    "pageLength": 3
+    "pageLength": 50
   });
 
   function refreshCurrentPage() {
