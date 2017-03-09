@@ -17,7 +17,6 @@ from sshkm.forms import PermissionForm
 def PermissionList(request):
     permissions = Permission.objects.all().order_by('host__name', 'osuser__name', 'group__name')
 
-    """
     per_page = getattr(settings, "PAGINATION_PER_PAGE", 10)
     paginator = Paginator(permissions, per_page)
     page = request.GET.get('page')
@@ -29,7 +28,6 @@ def PermissionList(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         permissions = paginator.page(paginator.num_pages)
-    """
 
     context = {'permissions': permissions}
     return render(request, 'sshkm/permission/list.html', context)
@@ -57,8 +55,6 @@ def PermissionDelete(request):
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The permission could not be deleted")
 
-    cache.clear()
-
     return HttpResponseRedirect(reverse('PermissionList'))
 
 @login_required
@@ -74,7 +70,5 @@ def PermissionSave(request):
         messages.add_message(request, messages.ERROR, "One or more Permisson(s) already exists.")
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The permission could not be saved")
-
-    cache.clear()
 
     return HttpResponseRedirect(reverse('PermissionList'))

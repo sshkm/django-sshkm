@@ -69,6 +69,15 @@ $(document).ready(function(){
   });
 });
 
+$(document).ready(function(){
+  $('.DataTablePermissions').DataTable({
+    paging: false,
+    info: false,
+    searching: false
+  });
+});
+
+/*
 var oTable;
 $(document).ready(function(){
   oTable = $(".DataTablePermissions").dataTable({
@@ -102,3 +111,4 @@ $(document).ready(function(){
 
   refreshCurrentPage();
 });
+*/

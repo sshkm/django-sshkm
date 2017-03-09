@@ -1,5 +1,4 @@
 {% extends "sshkm/base.html" %}
-{% load cache %}
 
 {% block title %}Permissions{% endblock %}
 
@@ -18,7 +17,6 @@
               </tr>
             </thead>
             <tbody>
-              {% cache 18000 cache_permissions %}
               {% for permission in permissions %}
               <tr>
                 <td><input type="checkbox" name="id_multiple" id="{{ permission.id }}" value="{{ permission.id }}"></td>
@@ -43,7 +41,6 @@
                 </td>
               </tr>
               {% endfor %}
-              {% endcache %}
             </tbody>
           </table>
         </form>
@@ -68,11 +65,13 @@
                 )
               ">Delete</a></li>
 
+{% comment %}
             </ul>
             <ul class="pagination pagination-nav pull-right">
               <li><a href="#" class="paginate_left">&laquo;</a></li>
               <li><span class="tableInfo" id="tableInfo"></span></li>
               <li><a href="#" class="paginate_right">&raquo;</a></li>
+{% endcomment %}
           {% if permissions.has_other_pages %}
             </ul>
             <ul class="pagination pagination-nav pull-right">
