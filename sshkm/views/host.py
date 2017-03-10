@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -21,26 +22,27 @@ from sshkm.forms import HostForm
 def HostList(request):
     hosts = Host.objects.order_by('name')
 
-    class HostStatus():
-        def __init__(self, id, name, status):
-            self.id = id
-            self.name = name
-            self.status = status
+    #class HostStatus():
+    #    def __init__(self, id, name, status):
+    #        self.id = id
+    #        self.name = name
+    #        self.status = status
 
-    hostsstati = []
-    for host in hosts:
-        try:
-            status = celery.result.AsyncResult(host.task_id).status
-        except:
-            status = host.status
-        hostsstati.append(HostStatus(host.id, host.name, status))
+    #hostsstati = []
+    #for host in hosts:
+    #    try:
+    #        status = celery.result.AsyncResult(host.task_id).status
+    #    except:
+    #        status = host.status
+    #    hostsstati.append(HostStatus(host.id, host.name, status))
 
     # if hosts are created check if public/private keys are uploaded to make deployment possible
     keys = Setting.objects.filter(name__in=['MasterKeyPrivate', 'MasterKeyPublic']).count()
     if hosts and keys != 2:
         messages.add_message(request, messages.WARNING, "To be able to deploy keys to your hosts please navigate to the settings page and upload your master private and public key (as user with Admin priviledges).")
 
-    context = {'hosts': hosts, 'hostsstati': hostsstati}
+    #context = {'hosts': hosts, 'hostsstati': hostsstati}
+    context = {'hosts': hosts}
     return render(request, 'sshkm/host/list.html', context)
 
 @login_required
@@ -110,11 +112,13 @@ def HostDeploy(request):
             try:
                 DeployKeys(GetHostKeys(request.GET['id']), request.GET['id'])
                 host.status = 'SUCCESS'
+                host.last_status = timezone.now()
                 messages.add_message(request, messages.SUCCESS, "Host " + host.name + " deployed")
             except:
                 host = Host.objects.get(id=request.GET['id'])
                 host.task_id = None
                 host.status = 'FAILURE'
+                host.last_status = timezone.now()
                 messages.add_message(request, messages.ERROR, "Host " + host.name + " could not be deployed")
             host.save()
     except Exception as e:

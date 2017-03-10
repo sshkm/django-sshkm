@@ -175,6 +175,19 @@ select[multiple] option:checked {
 */
 
 
+.glyphicon-ok {
+  color: green;
+}
+
+.glyphicon-remove {
+  color: red;
+}
+
+.glyphicon-refresh {
+  color: turquoise;
+}
+
+
 /* adapt svg images */
 svg {
   fill: currentColor;

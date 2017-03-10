@@ -3,7 +3,7 @@
 {% block title %}Hosts{% endblock %}
 
 {% block content %}
-{% if hostsstati %}
+{% if hosts %}
         <form role="form" method="post" action="{% url 'HostDelete' %}" name="MultipleHosts">
           {% csrf_token %}
           <table class="DataTable display">
@@ -17,21 +17,31 @@
               </tr>
             </thead>
             <tbody>
-              {% for hoststatus in hostsstati %}
+              {% for host in hosts %}
               <tr>
-                <td><input type="checkbox" name="id_multiple" id="{{ hoststatus.id }}" value="{{ hoststatus.id }}"></td>
-                <td><a href="{% url 'HostDetail' %}?id={{ hoststatus.id }}">{{ hoststatus.name }}</a></td>
-                <td>{{ hoststatus.status }}</td>
+                <td><input type="checkbox" name="id_multiple" id="{{ host.id }}" value="{{ host.id }}"></td>
+                <td><a href="{% url 'HostDetail' %}?id={{ host.id }}">{{ host.name }}</a></td>
+                <td>
+                  {% if host.status == "SUCCESS" %}
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true" title="{{host.status}} {{host.last_status}}"></span>
+                  {% elif host.status == "FAILURE" %}
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true" title="{{host.status}} {{host.last_status}}"></span>
+                  {% elif host.status == "PENDING" %}
+                  <span class="glyphicon glyphicon-refresh" aria-hidden="true" title="{{host.status}} {{host.last_status}}"></span>
+                  {% else %}
+                  &nbsp;
+                  {% endif %}
+                </td>
                 <td align="right">
                   <a href="#" onclick="
                     BootstrapDialog.confirm(
                       {
                         title: 'please confirm',
-                        message: 'Are you shure you want to delete the host {{ hoststatus.name }}',
+                        message: 'Are you shure you want to delete the host {{ host.name }}',
                         btnOKClass: 'btn-default',
                         callback: function(result) {
                           if(result) {
-                            window.location.href = '{% url 'HostDelete' %}?id={{ hoststatus.id }}';
+                            window.location.href = '{% url 'HostDelete' %}?id={{ host.id }}';
                           }
                         }
                       }
@@ -43,11 +53,11 @@
                     BootstrapDialog.confirm(
                       {
                         title: 'please confirm',
-                        message: 'Are you shure you want to deploy the host {{ hoststatus.name }}',
+                        message: 'Are you shure you want to deploy the host {{ host.name }}',
                         btnOKClass: 'btn-default',
                         callback: function(result) {
                           if(result) {
-                            window.location.href = '{% url 'HostDeploy' %}?id={{ hoststatus.id }}';
+                            window.location.href = '{% url 'HostDeploy' %}?id={{ host.id }}';
                           }
                         }
                       }
@@ -66,7 +76,7 @@
 
 {% block footer %}
               <li><a href="{% url 'HostDetail' %}">New Host</a></li>
-{% if hostsstati %}
+{% if hosts %}
               <li><a href="#" onclick="
                 checkboxCheck(
                   function(){
