@@ -8,6 +8,12 @@ Do you know the problem when an employee leaves the company but knows many passw
 Do you want to have better control over who can connect to your hosts using SSH?  
 Then django-sshkm is perfect for you.
 
+## Demo
+There is a demo available:  
+URL: [http://sshkm.guruz.at](http://sshkm.guruz.at)  
+USER: admin  
+PASSWORD: admin  
+
 ## Requirements
 - Linux
 - RabbitMQ
