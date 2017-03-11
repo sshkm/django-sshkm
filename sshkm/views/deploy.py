@@ -82,6 +82,7 @@ def DeployKeys(keys, host_id):
         host.status = 'SUCCESS'
         host.last_status = timezone.now()
         host.save()
+        # ToDo: return nothing to deploy
     else:
         key = Setting.objects.get(name='MasterKeyPublic')
 

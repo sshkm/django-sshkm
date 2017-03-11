@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=200, unique=True)),
                 ('description', models.CharField(blank=True, max_length=500, null=True)),
-                ('task_id', models.CharField(blank=True, max_length=36, null=True)),
+                #('task_id', models.CharField(blank=True, max_length=36, null=True)),
                 ('status', models.CharField(blank=True, max_length=10, null=True)),
             ],
         ),

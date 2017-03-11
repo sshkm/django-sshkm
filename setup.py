@@ -3,7 +3,7 @@ import os, sys, site
 from setuptools import find_packages, setup
 from setuptools.command.install import install
 
-version = '0.1.3'
+version = '0.1.4'
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
@@ -36,6 +36,7 @@ class install_post(install):
         settings_content = filedata
         settings_content = settings_content.replace("'SECRET_KEY_PLACEHOLDER'", "'"+SECRET_KEY+"'")
         settings_content = settings_content.replace("DEBUG = True", "DEBUG = False")
+        settings_content = settings_content.replace("SSHKM_VERSION = 'master'", "SSHKM_VERSION = '"+version+"'")
         f = open(settings, 'w')
         f.write(settings_content)
         f.close()

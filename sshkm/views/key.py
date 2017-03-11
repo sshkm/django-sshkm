@@ -16,21 +16,21 @@ def KeyList(request):
     context = {'keys': keys}
     return render(request, 'sshkm/key/list.html', context)
 
-import simplejson as json
-def task_state(request):
-    data = 'Fail'
-    if request.is_ajax():
-        if request.GET['task_id']:
-            task_id = request.GET['task_id']
-            task = AsyncResult(task_id)
-            data = task.result or task.state
-        else:
-            data = 'No task_id in the request'
-    else:
-        data = 'This is not an ajax request'
-
-    json_data = json.dumps(data)
-    return HttpResponse(json_data, content_type='application/json')
+#import simplejson as json
+#def task_state(request):
+#    data = 'Fail'
+#    if request.is_ajax():
+#        if request.GET['task_id']:
+#            task_id = request.GET['task_id']
+#            task = AsyncResult(task_id)
+#            data = task.result or task.state
+#        else:
+#            data = 'No task_id in the request'
+#    else:
+#        data = 'This is not an ajax request'
+#
+#    json_data = json.dumps(data)
+#    return HttpResponse(json_data, content_type='application/json')
 
 @login_required
 def KeyDetail(request):

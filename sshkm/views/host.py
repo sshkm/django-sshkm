@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
@@ -97,31 +98,41 @@ def HostSave(request):
 
 @login_required
 def HostDeploy(request):
-    try:
-        if request.POST.get('id_multiple') is not None:
-            for host in request.POST.getlist('id_multiple'):
-                task_id = uuid()
-                deploy = ScheduleDeployKeys.apply_async([host], task_id=task_id)
-                host = Host.objects.get(id=host)
-                host.task_id = task_id
-                host.save()
-            messages.add_message(request, messages.INFO, "Multiple host deployment initiated")
-        else:
-            host = Host.objects.get(id=request.GET['id'])
-            host.task_id = None
-            try:
-                DeployKeys(GetHostKeys(request.GET['id']), request.GET['id'])
-                host.status = 'SUCCESS'
-                host.last_status = timezone.now()
-                messages.add_message(request, messages.SUCCESS, "Host " + host.name + " deployed")
-            except:
+    if settings.SSHKM_DEMO is False:
+        try:
+            if request.POST.get('id_multiple') is not None:
+                for host in request.POST.getlist('id_multiple'):
+                    #task_id = uuid()
+                    #deploy = ScheduleDeployKeys.apply_async([host], task_id=task_id)
+                    deploy = ScheduleDeployKeys.apply_async([host])
+                    hoststatus = Host.objects.get(id=host)
+                    hoststatus.status = 'PENDING'
+                    hoststatus.save()
+                    #host = Host.objects.get(id=host)
+                    #host.task_id = task_id
+                    #host.save()
+                messages.add_message(request, messages.INFO, "Multiple host deployment initiated")
+            else:
                 host = Host.objects.get(id=request.GET['id'])
-                host.task_id = None
-                host.status = 'FAILURE'
-                host.last_status = timezone.now()
-                messages.add_message(request, messages.ERROR, "Host " + host.name + " could not be deployed")
-            host.save()
-    except Exception as e:
-        messages.add_message(request, messages.ERROR, "The host could not be deployed")
+                #host.task_id = None
+                try:
+                    DeployKeys(GetHostKeys(request.GET['id']), request.GET['id'])
+                    #host.status = 'SUCCESS'
+                    #host.last_status = timezone.now()
+                    messages.add_message(request, messages.SUCCESS, "Host " + host.name + " deployed")
+                except:
+                    #host = Host.objects.get(id=request.GET['id'])
+                    #host.task_id = None
+                    #host.status = 'FAILURE'
+                    #host.last_status = timezone.now()
+                    messages.add_message(request, messages.ERROR, "Host " + host.name + " could not be deployed")
+                #host.save()
+        except Exception as e:
+            if str(e) == "[Errno 111] Connection refused":
+                messages.add_message(request, messages.ERROR, "The host(s) could not be deployed. Celery is not running.")
+            else:
+                messages.add_message(request, messages.ERROR, "The host(s) could not be deployed")
+    else:
+        messages.add_message(request, messages.INFO, "Deployment is disabled in demo mode.")
 
     return HttpResponseRedirect(reverse('HostList'))

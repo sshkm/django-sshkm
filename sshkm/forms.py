@@ -64,6 +64,7 @@ class HostForm(forms.ModelForm):
         super(HostForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['placeholder'] = 'host1.example.com or 192.168.1.33'
         self.fields['superuser'].widget.attrs['placeholder'] = 'default: root'
+        self.fields['superuser'].label = 'Superuser (OS-User used to connect to your host to deploy all other keys)'
         self.fields['description'].widget.attrs['placeholder'] = ''
 
 class OsuserForm(forms.ModelForm):

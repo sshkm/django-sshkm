@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^key/detail/$', views.KeyDetail, name='KeyDetail'),
     url(r'^key/delete/$', views.KeyDelete, name='KeyDelete'),
     url(r'^key/save/$', views.KeySave, name='KeySave'),
-    url(r'^key/task_state/$', views.task_state, name='task_state'),
+    #url(r'^key/task_state/$', views.task_state, name='task_state'),
 
     url(r'^group/$', views.GroupList, name='GroupList'),
     url(r'^group/detail/$', views.GroupDetail, name='GroupDetail'),

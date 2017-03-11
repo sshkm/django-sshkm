@@ -83,6 +83,8 @@ DATABASES = {
     }
 }
 
+SSHKM_VERSION = 'master'
+SSHKM_DEMO = False
 PAGINATION_PER_PAGE = 50
 
 try:

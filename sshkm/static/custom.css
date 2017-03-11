@@ -15,6 +15,11 @@ a, a.hover, a.focus, a:hover, a:focus {
   color: black;
 }
 
+.version {
+  color: grey;
+  margin-top: 3px;
+}
+
 
 /* login form */
 .form-signin {
@@ -176,15 +181,15 @@ select[multiple] option:checked {
 
 
 .glyphicon-ok {
-  color: green;
+  color: #0df822;
 }
 
 .glyphicon-remove {
-  color: red;
+  color: #ff0000;
 }
 
 .glyphicon-refresh {
-  color: turquoise;
+  color: #00ebff;
 }
 
 

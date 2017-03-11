@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -36,14 +37,18 @@ def SettingsList(request):
 
 @staff_member_required(login_url=None)
 def PasswordSave(request):
-    if request.POST.get('password') != request.POST.get('confirm'):
-        messages.add_message(request, messages.ERROR, "Password and Password Confirm are not equal.")
-        return HttpResponseRedirect(reverse('SettingsList'))
+    if settings.SSHKM_DEMO is False:
+        if request.POST.get('password') != request.POST.get('confirm'):
+            messages.add_message(request, messages.ERROR, "Password and Password Confirm are not equal.")
+            return HttpResponseRedirect(reverse('SettingsList'))
+        else:
+            u = User.objects.get(id=request.user.id)
+            u.set_password(request.POST.get('password'))
+            u.save()
+            return HttpResponseRedirect(reverse('logout'))
     else:
-        u = User.objects.get(id=request.user.id)
-        u.set_password(request.POST.get('password'))
-        u.save()
-        return HttpResponseRedirect(reverse('logout'))
+        messages.add_message(request, messages.INFO, "Changing password is disabled in demo mode.")
+        return HttpResponseRedirect(reverse('SettingsList'))
 
 @staff_member_required(login_url=None)
 def CreateUser(request):
