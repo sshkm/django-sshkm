@@ -45,5 +45,5 @@ def auth_login(request):
 @login_required
 def auth_logout(request):
     logout(request)
-    return redirect('/')
+    return redirect('login')
 
