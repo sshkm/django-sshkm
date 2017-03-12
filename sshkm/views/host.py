@@ -116,10 +116,13 @@ def HostDeploy(request):
                 host = Host.objects.get(id=request.GET['id'])
                 #host.task_id = None
                 try:
-                    DeployKeys(GetHostKeys(request.GET['id']), request.GET['id'])
-                    #host.status = 'SUCCESS'
-                    #host.last_status = timezone.now()
-                    messages.add_message(request, messages.SUCCESS, "Host " + host.name + " deployed")
+                    deploy = DeployKeys(GetHostKeys(request.GET['id']), request.GET['id'])
+                    if deploy == "NTD":
+                        messages.add_message(request, messages.INFO, "Nothing to deploy for Host " + host.name)
+                    else:
+                        #host.status = 'SUCCESS'
+                        #host.last_status = timezone.now()
+                        messages.add_message(request, messages.SUCCESS, "Host " + host.name + " deployed")
                 except:
                     #host = Host.objects.get(id=request.GET['id'])
                     #host.task_id = None
