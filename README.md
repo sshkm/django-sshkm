@@ -40,8 +40,9 @@ PASSWORD: admin
 ```bash
 pip install django-sshkm
 ```
-- Configure /etc/sshkm/sshkm.conf  
-  If you use sqlite make sure that the user running celery has read and write permissions to the db-file.
+- Configure /etc/sshkm/sshkm.conf (create it if it does not exist)  
+  You can find an example in your install directory (example: /usr/lib/python2.7/site-packages/sshkm/sshkm.conf).  
+  If you use sqlite make sure that the user running celery (see next step) has read and write permissions to the db-file.
 - Install a webserver which runs wsgi  
   Example Apache httpd:  
 ```
@@ -51,7 +52,7 @@ Alias /static/ /usr/lib/python2.7/site-packages/sshkm/static/
   Require all granted
 </Directory>
 
-WSGIScriptAlias / /usr/lib/python2.7/site-packages/sshkm/wsgi.py
+WSGIScriptAlias /sshkm /usr/lib/python2.7/site-packages/sshkm/wsgi.py/
 WSGIDaemonProcess sshkm user=apache group=apache
 WSGIProcessGroup sshkm
 
@@ -63,6 +64,7 @@ WSGIProcessGroup sshkm
 ```
 - Run celery  
 ```
+cd /usr/lib/python2.7/site-packages
 celery worker -A sshkm -l info
 ```
 
