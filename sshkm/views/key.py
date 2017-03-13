@@ -101,7 +101,7 @@ def KeySave(request):
                 firstname=request.POST.get('firstname', False),
                 lastname=request.POST.get('lastname', False),
                 email=request.POST.get('email'),
-                publickey=request.POST.get('publickey', False).replace("\n", "").replace("\r", ""),
+                publickey=request.POST.get('publickey', '').replace("\n", "").replace("\r", ""),
             )
             key.save()
             for group_id in request.POST.getlist('member_of'):

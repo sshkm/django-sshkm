@@ -12,10 +12,10 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 # check if sshkm.conf exists in /etc/sshkm directory and prevent from overwriting
-if os.path.isfile("/etc/sshkm/sshkm.conf"):
-    data_files = []
-else:
-    data_files = [('/etc/sshkm', ['sshkm.conf']),]
+#if os.path.isfile("/etc/sshkm/sshkm.conf"):
+#    data_files = []
+#else:
+#    data_files = [('/etc/sshkm', ['sshkm.conf']),]
 
 # post installation tasks
 class install_post(install):
