@@ -37,7 +37,7 @@ def auth_login(request):
     user = authenticate(username=username, password=password)
     if user is not None and user.is_active:
         login(request, user)
-        return redirect('/')
+        return redirect('index')
     else:
         sshkm_version = dsettings.SSHKM_VERSION
         return render(request, 'sshkm/login.html', {'sshkm_version': sshkm_version})
