@@ -16,6 +16,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 #    data_files = []
 #else:
 #    data_files = [('/etc/sshkm', ['sshkm.conf']),]
+data_files = []
 
 # post installation tasks
 class install_post(install):
