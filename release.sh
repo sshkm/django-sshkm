@@ -26,7 +26,6 @@ fi
 # predefine variables
 TAG=$1
 MESSAGE="$2"
-GITDIR=$(pwd)
 GITREPO=https://github.com/sshkm/django-sshkm.git
 TEMPDIR=/tmp/sshkm-build
 SPEC=rpmbuild/SPECS/sshkm.spec
@@ -74,9 +73,6 @@ tar czf ~/rpmbuild/SOURCES/sshkm-${TAG}.tar.gz sshkm-$TAG/
 cd $TEMPDIR/django-sshkm
 tar tf ~/rpmbuild/SOURCES/sshkm-${TAG}.tar.gz
 
-# cleanup temp dir
-rm -rf $TEMPDIR
-
 # commit and push last modifications to git repo
 #git commit -a -m "$MESSAGE"
 #git push
@@ -85,4 +81,6 @@ rm -rf $TEMPDIR
 #git tag -a $TAG -m "$MESSAGE"
 #git push origin $TAG
 
+# cleanup temp dir
+#rm -rf $TEMPDIR
 
