@@ -3,7 +3,7 @@ import os, sys, site
 from setuptools import find_packages, setup
 from setuptools.command.install import install
 
-version = '0.1.7'
+version = '0.1.8'
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
