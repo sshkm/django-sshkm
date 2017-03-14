@@ -61,7 +61,7 @@ setup(
     author='Peter Loeffler',
     author_email='sshkm@guruz.at',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Framework :: Django :: 1.8',

@@ -1,5 +1,4 @@
 # django-sshkm [![Build Status](https://travis-ci.org/sshkm/django-sshkm.svg?branch=master)](https://travis-ci.org/sshkm/django-sshkm)
-### still under heavy construction!!!
 django-sshkm is a Django based ssh-key management tool.  
 It stores ssh-public-keys in a database and combines them in groups (Development, Operations, Externals, ...). You can assign these groups to operating system users on target hosts and are able to deploy your configurations.  
   
@@ -68,4 +67,4 @@ cd /usr/lib/python2.7/site-packages
 celery worker -A sshkm -l info
 ```
 
-You can find a full example for a runnable versions in the wiki: https://github.com/sshkm/django-sshkm/wiki
+You can find more informations in the wiki: https://github.com/sshkm/django-sshkm/wiki
