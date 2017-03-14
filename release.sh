@@ -1,5 +1,8 @@
 #!/bin/bash
 
+############################################################################
+### preconditions
+############################################################################
 # check parameter count
 if [ "$2" == "" ]; then
     echo "usage: $0 <tag> <message>"
@@ -7,10 +10,10 @@ if [ "$2" == "" ]; then
 fi
 
 # check correct working dir
-if [ ! -d .git -a ! -f setup.py ]; then
-    echo "please run this script from project base directory"
-    exit 2
-fi
+#if [ ! -d .git -a ! -f setup.py ]; then
+#    echo "please run this script from project base directory"
+#    exit 2
+#fi
 
 # check if rpmbuild is installed
 which rpmbuild >/dev/null 2>&1
@@ -22,7 +25,12 @@ fi
 if [ ! -d ~/rpmbuild ]; then
     rpmdev-setuptree
 fi
+############################################################################
 
+
+############################################################################
+### prepare
+############################################################################
 # predefine variables
 TAG=$1
 MESSAGE="$2"
@@ -37,11 +45,17 @@ mkdir -p $TEMPDIR
 # clone git repo
 cd $TEMPDIR
 git clone $GITREPO
-cd $TEMPDIR/django-sshkm
 
 # get RPM release
-RELEASE=$((($(grep "Release:" $SPEC | awk '{print $2}' | awk -F '%' '{print $1}')+1)))
+#cd $TEMPDIR/django-sshkm
+#RELEASE=$((($(grep "Release:" $SPEC | awk '{print $2}' | awk -F '%' '{print $1}')+1)))
+RELEASE=1
+############################################################################
 
+
+############################################################################
+### verify
+############################################################################
 # verify settings
 echo "--------------------------------------------------------------"
 echo "TAG: $TAG"
@@ -52,16 +66,61 @@ echo "---- please press enter to continue"
 echo "--------------------------------------------------------------"
 read
 echo ""
+############################################################################
+
+
+############################################################################
+### make changes for new version
+############################################################################
+# change to temporary directory
+cd $TEMPDIR/django-sshkm
 
 # set version in setup.py
-sed "s/version = .*/version = $TAG/g" setup.py | grep version
-#sed -i "s/version = .*/version = $TAG/g" setup.py
+sed -i "s/version = .*/version = '$TAG'/g" setup.py
 
 # set version and releas in SPEC file
-sed "s/Version:\t.*/Version:\t$TAG/g" $SPEC | grep Version
-#sed -i "s/Version:\t.*/Version:\t$TAG/g" $SPEC
-sed "s/Release:\t.*/Release:\t$RELEASE%{?dist}/g" $SPEC | grep Release
-#sed -i "s/Release:\t.*/Release:\t$RELEASE%{?dist}/g" $SPEC
+sed -i "s/Version:\t.*/Version:\t$TAG/g" $SPEC
+sed -i "s/Release:\t.*/Release:\t$RELEASE%{?dist}/g" $SPEC
+############################################################################
+
+
+############################################################################
+### commit changes and create tag
+############################################################################
+# change to temporary directory
+cd $TEMPDIR/django-sshkm
+
+# commit and push last modifications to git repo
+git commit -a -m "$MESSAGE"
+git push
+
+# create tag and push it to git repo
+git tag -a $TAG -m "$MESSAGE"
+git push origin $TAG
+############################################################################
+
+
+############################################################################
+### prepare files for pypi and upload them
+############################################################################
+# change to temporary directory
+cd $TEMPDIR/django-sshkm
+
+# prepare
+python setup.py sdist
+PYPIDIR=~/rpmbuild/pypi
+rm -rf $PYPIDIR
+mkdir -p $PYPIDIR
+cp dist/* $PYPIDIR/
+cp django_sshkm.egg-info/PKG-INFO $PYPIDIR/
+############################################################################
+
+
+############################################################################
+### create SRPM
+############################################################################
+# change to temporary directory
+cd $TEMPDIR/django-sshkm
 
 # create tarball for rpmbuild
 RPMSRC=$TEMPDIR/rpmbuild/SOURCES
@@ -70,17 +129,28 @@ cp -a rpmbuild/SOURCES/sshkm-master $RPMSRC/
 mv $RPMSRC/sshkm-master $RPMSRC/sshkm-$TAG
 cd $RPMSRC
 tar czf ~/rpmbuild/SOURCES/sshkm-${TAG}.tar.gz sshkm-$TAG/
+
+# build SRPM
 cd $TEMPDIR/django-sshkm
-tar tf ~/rpmbuild/SOURCES/sshkm-${TAG}.tar.gz
+rpmbuild -bs $TEMPDIR/django-sshkm/$SPEC
+############################################################################
 
-# commit and push last modifications to git repo
-#git commit -a -m "$MESSAGE"
-#git push
 
-# create tag and push it to git repo
-#git tag -a $TAG -m "$MESSAGE"
-#git push origin $TAG
-
+############################################################################
+### cleanups
+############################################################################
 # cleanup temp dir
-#rm -rf $TEMPDIR
+rm -rf $TEMPDIR
+############################################################################
+
+
+############################################################################
+### final info
+############################################################################
+echo "--------------------------------------------------------------"
+echo "manual steps:"
+echo "- register pypi (files in $PYPIDIR)"
+echo "- upload SRPM file to copr (file in ~/rpmbuild/SRPMS)"
+echo "--------------------------------------------------------------"
+############################################################################
 
