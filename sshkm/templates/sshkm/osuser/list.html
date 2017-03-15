@@ -4,6 +4,9 @@
 
 {% block content %}
 {% if osusers %}
+        <br>
+        <input type="text" id="searchbox" class="form-control searchbox" placeholder="filter ...">
+        <br>
         <form role="form" method="post" action="{% url 'OsuserDelete' %}" name="deleteMultipleOsusers">
           {% csrf_token %}
           <table class="DataTable display">

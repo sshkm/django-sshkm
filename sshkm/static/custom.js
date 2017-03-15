@@ -63,17 +63,13 @@ function selectAll(box) {
 
 // DataTable
 $(document).ready(function(){
-  $('.DataTable').DataTable({
+  var dataTable = $('.DataTable').DataTable({
     paging: false,
     info: false
   });
-});
 
-$(document).ready(function(){
-  $('.DataTablePermissions').DataTable({
-    paging: false,
-    info: false,
-    searching: false
+  $("#searchbox").on("keyup search input paste cut", function() {
+    dataTable.search(this.value).draw();
   });
 });
 

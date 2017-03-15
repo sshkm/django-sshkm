@@ -6,7 +6,7 @@
 {% if permissions %}
         <form role="form" method="post" action="{% url 'PermissionDelete' %}" name="deleteMultiplePermissions">
           {% csrf_token %}
-          <table class="DataTablePermissions display">
+          <table class="DataTable display">
             <thead>
               <tr>
                 <th><input type="checkbox" class="checkAll"></th>

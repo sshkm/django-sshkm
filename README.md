@@ -67,4 +67,7 @@ cd /usr/lib/python2.7/site-packages
 celery worker -A sshkm -l info
 ```
 
+## Firewall & SELinux
+Be aware of firewall and SELinux issues  
+  
 You can find more informations in the wiki: https://github.com/sshkm/django-sshkm/wiki

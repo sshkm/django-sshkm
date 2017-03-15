@@ -1,17 +1,18 @@
 Name:		sshkm
 Version:	0.1.8
 Release:	1%{?dist}
-Summary:	SSHKM
+Summary:	A Python/Django based ssh-key management tool
 Group:		Applications/System
 License:	GNU General Public License v3 (GPLv3)
 URL:		https://github.com/sshkm/django-sshkm
 Source0:	%{name}-%{version}.tar.gz
 BuildRequires:	gcc, python, python-virtualenv, python-devel, python-pip, mariadb-devel, postgresql-devel, openldap-devel, httpd-devel, sqlite, rabbitmq-server, httpd, mod_wsgi
-Requires:	python, python-virtualenv, sqlite, rabbitmq-server, httpd, mod_wsgi
+Requires:	python, python-virtualenv, sqlite, rabbitmq-server, httpd, mod_wsgi, policycoreutils-python
 AutoReqProv:    no
 
 %description
-A Django based ssh-key management tool
+A Python/Django based ssh-key management tool
+For more information visit https://github.com/sshkm/django-sshkm
 
 
 %define sourcedir %{_builddir}/%{name}-%{version}
@@ -73,22 +74,38 @@ cp -a %{sourcedir}/%{swdir}/%{name} %{buildroot}/%{swdir}/
 
 
 %post
+PYTHONLIB=%{swdir}/%{name}/lib
+PYTHONDIR=$PYTHONLIB/$(ls $PYTHONLIB)
+
+# create user and group
 id -g %{name} &>/dev/null || groupadd %{name}
 id -u %{name} &>/dev/null || useradd -g %{name} -M -s /sbin/nologin %{name}
+
+# create directories for pid file and logs
 mkdir -p /var/run/%{name}/celery
 mkdir -p /var/log/%{name}/celery
 chown %{name}:%{name} /var/log/%{name}/celery /var/run/%{name}/celery
 
-chown -R %{name} /%{swdir}/%{name}/lib/python*/site-packages/%{name}
+# grant permission for httpd
+chown -R %{name} $PYTHONDIR/site-packages/%{name}
 
+# SELinux
+semanage fcontext -a -t httpd_sys_rw_content_t "$PYTHONDIR/site-packages/%{name}/db.sqlite3" 2> /dev/null
+restorecon -v "$PYTHONDIR/site-packages/%{name}/db.sqlite3" 2> /dev/null
+semanage fcontext -a -t httpd_sys_rw_content_t "$PYTHONDIR/site-packages/%{name}" 2> /dev/null
+restorecon -v "$PYTHONDIR/site-packages/%{name}" 2> /dev/null
+setsebool -P httpd_can_network_connect 1 2> /dev/null
+
+# generate random SECRET_KEY
+SECRET_KEY=$(python -c "from django.utils.crypto import get_random_string; print(get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789\!@#$%^&*(-_=+)'));")
+sed -i "s/SECRET_KEY = .*/SECRET_KEY = '$SECRET_KEY'/g" $PYTHONDIR/site-packages/sshkm/settings.py
+
+# enable and start all deamons
 systemctl daemon-reload
-
 systemctl enable rabbitmq-server.service
 systemctl restart rabbitmq-server.service
-
 systemctl enable %{name}-celery.service
 systemctl restart %{name}-celery.service
-
 systemctl enable httpd.service
 systemctl restart httpd.service
 
@@ -100,6 +117,9 @@ systemctl stop %{name}-celery.service
 %postun
 # on removal
 if [ "$1" == "0" ]; then
+    # SELinux
+    setsebool -P httpd_can_network_connect 0 2> /dev/null
+
     systemctl daemon-reload
     systemctl restart rabbitmq-server.service
     systemctl restart httpd.service

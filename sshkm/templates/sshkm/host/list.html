@@ -4,6 +4,9 @@
 
 {% block content %}
 {% if hosts %}
+        <br>
+        <input type="text" id="searchbox" class="form-control searchbox" placeholder="filter ...">
+        <br>
         <form role="form" method="post" action="{% url 'HostDelete' %}" name="MultipleHosts">
           {% csrf_token %}
           <table class="DataTable display">

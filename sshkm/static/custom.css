@@ -1,3 +1,4 @@
+/* global */
 html {
   height: 100%;
 }
@@ -7,14 +8,12 @@ body {
   padding-bottom: 70px;
 }
 
-footer {
-
-}
-
 a, a.hover, a.focus, a:hover, a:focus {
   color: black;
 }
 
+
+/* version info */
 .version {
   color: grey;
   margin-top: 3px;
@@ -62,14 +61,9 @@ a, a.hover, a.focus, a:hover, a:focus {
 .modal-dialog .modal-content .modal-header {
   background-color: #333333;
 }
-/*
-.modal-dialog .modal-content .modal-header .bootstrap-dialog-header .bootstrap-dialog-title {
-  color: #ffffff;
-}
-*/
 
 
-/* from modifications */
+/* form modifications */
 .btn-default,
 .pagination > li > a,
 .pagination > li > span,
@@ -131,7 +125,6 @@ a, a.hover, a.focus, a:hover, a:focus {
   margin-bottom: -17px;
 }
 
-
 .form-control:focus {
   border-color: #000000;
   outline: 0;
@@ -165,21 +158,19 @@ select[multiple] option:checked {
 }
 
 
-/* test dataTables */
-/*
-.dataTables_wrapper select {
-  background-color: red;
-  height: 30px;
-  line-height: 30px;
+/* dataTables */
+.dataTables_filter {
+  display: none;
+  /*float: left !important;
+  color: green;*/
 }
-*/
-/*
-.dataTables_paginate, .dataTables_length {
-    display: none;
+
+.searchbox {
+  max-width: 330px;
 }
-*/
 
 
+/* deploy stati */
 .glyphicon-ok {
   color: #0df822;
 }

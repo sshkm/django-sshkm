@@ -1,7 +1,6 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(BASE_DIR)
 
 SECRET_KEY = 'SECRET_KEY_PLACEHOLDER'
 
@@ -55,7 +54,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-STATIC_URL = '/static/'
+STATIC_URL = '/sshkm/static/'
 LOGIN_URL = '/login/'
 
 #SESSION_EXPIRE_AT_BROWSER_CLOSE = True

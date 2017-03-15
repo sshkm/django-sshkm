@@ -4,6 +4,9 @@
 
 {% block content %}
 {% if keys %}
+        <br>
+        <input type="text" id="searchbox" class="form-control searchbox" placeholder="filter ...">
+        <br>
         <form role="form" method="post" action="{% url 'KeyDelete' %}" name="deleteMultipleKeys">
           {% csrf_token %}
           <table class="DataTable display">
