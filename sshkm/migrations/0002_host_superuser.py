@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='host',
             name='superuser',
-            field=models.CharField(blank=True, max_length=200, null=True),
+            field=models.CharField(blank=True, max_length=191, null=True),
         ),
     ]
