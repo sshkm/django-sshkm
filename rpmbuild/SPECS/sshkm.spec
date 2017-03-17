@@ -97,8 +97,10 @@ restorecon -v "$PYTHONDIR/site-packages/%{name}" 2> /dev/null
 setsebool -P httpd_can_network_connect 1 2> /dev/null
 
 # generate random SECRET_KEY
+source %{sourcedir}/%{swdir}/%{name}/bin/activate
 SECRET_KEY=$(python -c "from django.utils.crypto import get_random_string; print(get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789\!@#$%^&*(-_=+)'));")
 sed -i "s/SECRET_KEY = .*/SECRET_KEY = '$SECRET_KEY'/g" $PYTHONDIR/site-packages/sshkm/settings.py
+deactivate
 
 # enable and start all deamons
 systemctl daemon-reload
