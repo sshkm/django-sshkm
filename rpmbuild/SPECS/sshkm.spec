@@ -1,5 +1,5 @@
 Name:		sshkm
-Version:	0.1.8
+Version:	0.1.9
 Release:	1%{?dist}
 Summary:	A Python/Django based ssh-key management tool
 Group:		Applications/System
