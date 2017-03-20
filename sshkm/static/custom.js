@@ -108,3 +108,51 @@ $(document).ready(function(){
   refreshCurrentPage();
 });
 */
+
+
+// monitor deployment
+$('.monitor_state').each(
+  function() {
+    var this_id = this.id;
+    var host_id = this_id.replace(/host/, '');
+    setInterval(
+      function() {
+        if ( $('#'+this_id).hasClass( "monitor_state" ) ) {
+          $.ajax({
+            url: '/host/state/?id='+host_id,
+            dataType : 'json',
+            cache: false,
+            success: function(data) {
+              var iconclass;
+              var icontitle;
+              switch(data.status) {
+                case 'SUCCESS':
+                  iconclass = 'glyphicon glyphicon-ok';
+                  icontitle = data.status+' '+data.last_status;
+                  break;
+                case 'FAILURE':
+                  iconclass = 'glyphicon glyphicon-remove';
+                  icontitle = data.status+' '+data.last_status;
+                  break;
+                case 'PENDING':
+                  iconclass = 'glyphicon glyphicon-refresh monitor_state';
+                  icontitle = data.status+' '+data.last_status;
+                  break;
+                case 'NTD':
+                  iconclass = 'glyphicon glyphicon-option-horizontal';
+                  icontitle = 'nothing to deploy '+data.last_status;
+                  break;
+                default:
+                  iconclass = '';
+              }
+              $('#'+this_id).removeClass();
+              $('#'+this_id).addClass(iconclass);
+              $('span#'+this_id).attr('title',icontitle);
+            }
+          });
+        }
+      }, 2000
+    );
+  }
+);
+

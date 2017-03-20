@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^host/delete/$', views.HostDelete, name='HostDelete'),
     url(r'^host/save/$', views.HostSave, name='HostSave'),
     url(r'^host/deploy/$', views.HostDeploy, name='HostDeploy'),
+    url(r'^host/state/$', views.HostState, name='HostState'),
 
     url(r'^osuser/$', views.OsuserList, name='OsuserList'),
     url(r'^osuser/detail/$', views.OsuserDetail, name='OsuserDetail'),

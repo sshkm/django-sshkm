@@ -8,7 +8,7 @@ from sshkm.models import Setting
 from sshkm.views.docs import docs
 from sshkm.views.key import KeyList, KeyDetail, KeyDelete, KeySave
 from sshkm.views.group import GroupList, GroupDetail, GroupDelete, GroupSave
-from sshkm.views.host import HostList, HostDetail, HostDelete, HostSave, HostDeploy
+from sshkm.views.host import HostList, HostDetail, HostDelete, HostSave, HostDeploy, HostState
 from sshkm.views.osuser import OsuserList, OsuserDetail, OsuserDelete, OsuserSave
 from sshkm.views.permission import PermissionList, PermissionCreate, PermissionDelete, PermissionSave
 from sshkm.views.deploy import CopyKeyfile, GetHostKeys, DeployKeys, GetHome

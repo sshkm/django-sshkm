@@ -26,15 +26,15 @@
                 <td><a href="{% url 'HostDetail' %}?id={{ host.id }}">{{ host.name }}</a></td>
                 <td>
                   {% if host.status == "SUCCESS" %}
-                  <span class="glyphicon glyphicon-ok" aria-hidden="true" title="{{host.status}} {{host.last_status}}"></span>
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true" title="{{host.status}} {{host.last_status}}" id="host{{ host.id }}"></span>
                   {% elif host.status == "FAILURE" %}
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true" title="{{host.status}} {{host.last_status}}"></span>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true" title="{{host.status}} {{host.last_status}}" id="host{{ host.id }}"></span>
                   {% elif host.status == "PENDING" %}
-                  <span class="glyphicon glyphicon-refresh" aria-hidden="true" title="{{host.status}} {{host.last_status}}"></span>
+                  <span class="glyphicon glyphicon-refresh monitor_state" aria-hidden="true" title="{{host.status}} {{host.last_status}}" id="host{{ host.id }}"></span>
                   {% elif host.status == "NTD" %}
-                  <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true" title="nothing to deploy {{host.last_status}}"></span>
+                  <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true" title="nothing to deploy {{host.last_status}}" id="host{{ host.id }}"></span>
                   {% else %}
-                  &nbsp;
+                  <span class="monitor_state" id="host{{ host.id }}">&nbsp;</span>
                   {% endif %}
                 </td>
                 <td align="right">

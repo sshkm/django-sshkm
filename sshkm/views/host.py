@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.utils import timezone
+from django.utils.formats import localize
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -45,6 +46,17 @@ def HostList(request):
     #context = {'hosts': hosts, 'hostsstati': hostsstati}
     context = {'hosts': hosts}
     return render(request, 'sshkm/host/list.html', context)
+
+@login_required
+def HostState(request):
+    if request.is_ajax():
+        if request.GET['id']:
+            host = Host.objects.get(id=request.GET['id'])
+            data = {"status": host.status, "last_status": localize(host.last_status)}
+    else:
+        data = {"status": None, "last_status": None}
+
+    return JsonResponse(data)
 
 @login_required
 def HostDetail(request):
