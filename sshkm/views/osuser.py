@@ -46,8 +46,6 @@ def OsuserDelete(request):
         messages.add_message(request, messages.ERROR, "The osuser could not be deleted")
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The osuser could not be deleted")
-        print(type(e))
-        print(e)
 
     return HttpResponseRedirect(reverse('OsuserList'))
 
@@ -65,7 +63,5 @@ def OsuserSave(request):
         messages.add_message(request, messages.ERROR, "The osuser could not be saved.")
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The osuser could not be saved")
-        print(type(e))
-        print(e)
 
     return HttpResponseRedirect(reverse('OsuserList'))

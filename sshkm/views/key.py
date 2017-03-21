@@ -16,22 +16,6 @@ def KeyList(request):
     context = {'keys': keys}
     return render(request, 'sshkm/key/list.html', context)
 
-#import simplejson as json
-#def task_state(request):
-#    data = 'Fail'
-#    if request.is_ajax():
-#        if request.GET['task_id']:
-#            task_id = request.GET['task_id']
-#            task = AsyncResult(task_id)
-#            data = task.result or task.state
-#        else:
-#            data = 'No task_id in the request'
-#    else:
-#        data = 'This is not an ajax request'
-#
-#    json_data = json.dumps(data)
-#    return HttpResponse(json_data, content_type='application/json')
-
 @login_required
 def KeyDetail(request):
     if request.method == 'GET' and 'id' in request.GET:
@@ -71,8 +55,6 @@ def KeyDelete(request):
         messages.add_message(request, messages.ERROR, "The key could not be deleted. Key does not exist")
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The key could not be deleted")
-        print(type(e))
-        print(e)
 
     return HttpResponseRedirect(reverse('KeyList'))
 
@@ -109,15 +91,12 @@ def KeySave(request):
                 keygroup.save()
         messages.add_message(request, messages.SUCCESS, "Key " + request.POST.get('name') + " sucessfully saved")
     except AttributeError as e:
-        print(e)
         messages.add_message(request, messages.WARNING, "Key " + request.POST.get('name') + " sucessfully saved with warnings")
     except ValueError as e:
-        print(e)
+        messages.add_message(request, messages.ERROR, "The key could not be saved (ValueError)")
     except IntegrityError as e:
         messages.add_message(request, messages.ERROR, "The key could not be saved. Key already exists.")
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The key could not be saved")
-        print(type(e))
-        print(e)
 
     return HttpResponseRedirect(reverse('KeyList'))

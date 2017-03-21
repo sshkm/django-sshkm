@@ -124,30 +124,25 @@ $('.monitor_state').each(
             cache: false,
             success: function(data) {
               var iconclass;
-              var icontitle;
               switch(data.status) {
                 case 'SUCCESS':
                   iconclass = 'glyphicon glyphicon-ok';
-                  icontitle = data.status+' '+data.last_status;
                   break;
                 case 'FAILURE':
                   iconclass = 'glyphicon glyphicon-remove';
-                  icontitle = data.status+' '+data.last_status;
                   break;
                 case 'PENDING':
                   iconclass = 'glyphicon glyphicon-refresh monitor_state';
-                  icontitle = data.status+' '+data.last_status;
                   break;
-                case 'NTD':
+                case 'NOTHING TO DEPLOY':
                   iconclass = 'glyphicon glyphicon-option-horizontal';
-                  icontitle = 'nothing to deploy '+data.last_status;
                   break;
                 default:
                   iconclass = '';
               }
               $('#'+this_id).removeClass();
               $('#'+this_id).addClass(iconclass);
-              $('span#'+this_id).attr('title',icontitle);
+              $('span#'+this_id).attr('title', data.status+' '+data.last_status);
             }
           });
         }

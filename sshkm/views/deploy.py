@@ -79,8 +79,8 @@ def DeployKeys(keys, host_id):
     host = Host.objects.get(id=host_id)
 
     if len(keys) == 0:
-        # nothing to deploy (NTD)
-        host.status = 'NTD'
+        # nothing to deploy
+        host.status = 'NOTHING TO DEPLOY'
         host.last_status = timezone.now()
         host.save()
         return "NTD"

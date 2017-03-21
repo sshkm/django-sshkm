@@ -31,8 +31,8 @@
                   <span class="glyphicon glyphicon-remove" aria-hidden="true" title="{{host.status}} {{host.last_status}}" id="host{{ host.id }}"></span>
                   {% elif host.status == "PENDING" %}
                   <span class="glyphicon glyphicon-refresh monitor_state" aria-hidden="true" title="{{host.status}} {{host.last_status}}" id="host{{ host.id }}"></span>
-                  {% elif host.status == "NTD" %}
-                  <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true" title="nothing to deploy {{host.last_status}}" id="host{{ host.id }}"></span>
+                  {% elif host.status == "NOTHING TO DEPLOY" %}
+                  <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true" title="{{host.status}} {{host.last_status}}" id="host{{ host.id }}"></span>
                   {% else %}
                   <span class="monitor_state" id="host{{ host.id }}">&nbsp;</span>
                   {% endif %}

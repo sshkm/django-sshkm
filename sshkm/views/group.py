@@ -57,8 +57,6 @@ def GroupDelete(request):
         messages.add_message(request, messages.ERROR, "The group could not be deleted")
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The group could not be deleted")
-        print(type(e))
-        print(e)
 
     return HttpResponseRedirect(reverse('GroupList'))
 
@@ -87,15 +85,12 @@ def GroupSave(request):
                 keygroup.save()
         messages.add_message(request, messages.SUCCESS, "Group " + request.POST.get('name') + " sucessfully saved")
     except AttributeError as e:
-        print(e)
         messages.add_message(request, messages.WARNING, "Group " + request.POST.get('name') + " sucessfully saved with warnings")
     except ValueError as e:
-        print(e)
+        messages.add_message(request, messages.ERROR, "The group could not be saved (ValueError)")
     except IntegrityError as e:
         messages.add_message(request, messages.ERROR, "The group could not be saved. Group already exists.")
     except Exception as e:
         messages.add_message(request, messages.ERROR, "The group could not be saved")
-        print(type(e))
-        print(e)
 
     return HttpResponseRedirect(reverse('GroupList'))
