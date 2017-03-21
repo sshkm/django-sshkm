@@ -1,4 +1,4 @@
-#import time
+import time
 from django.test import TestCase, Client, override_settings
 from sshkm.models import Host, Group, Key, Osuser, Permission
 
@@ -42,8 +42,7 @@ class Test01(TestCase):
     def test_host_deploy_multiple(self):
         response = self.client.post('/host/deploy/', {'id_multiple': [1]}, follow=True)
         self.assertContains(response, 'Multiple host deployment initiated', status_code=200)
+        time.sleep(10)
         response = self.client.get('/host/', follow=True)
-        self.assertEqual(Host.objects.get(id=1).status, "PENDING")
-        #time.sleep(10)
-        #response = self.client.get('/host/', follow=True)
-        #self.assertEqual(Host.objects.get(id=1).status, "SUCCESS")
+        self.assertEqual(Host.objects.get(id=1).status, "SUCCESS")
+
