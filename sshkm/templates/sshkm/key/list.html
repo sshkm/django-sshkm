@@ -23,7 +23,7 @@
             <tbody>
               {% for key in keys %}
               <tr>
-                <td><input type="checkbox" name="id_multiple" id="{{ key.id }}" value="{{ key.id }}"></td>
+                <td><input type="checkbox" name="id" id="{{ key.id }}" value="{{ key.id }}"></td>
                 <td><a href="{% url 'KeyDetail' %}?id={{ key.id }}">{{ key.name }}</a></td>
                 <td><a href="{% url 'KeyDetail' %}?id={{ key.id }}">{{ key.firstname }}</a></td>
                 <td><a href="{% url 'KeyDetail' %}?id={{ key.id }}">{{ key.lastname }}</a></td>
@@ -62,7 +62,7 @@
                   function(){
                     document.deleteMultipleKeys.submit();
                   },
-                  'id_multiple',
+                  'id',
                   'please confirm',
                   'Are you shure you want to delete selected key(s)',
                   'no key(s) selected',
