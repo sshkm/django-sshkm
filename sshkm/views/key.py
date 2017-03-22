@@ -20,75 +20,65 @@ def KeyList(request):
 def KeyDetail(request):
     if request.method == 'GET' and 'id' in request.GET:
         key = get_object_or_404(Key, pk=request.GET['id'])
-        keyform = KeyForm(instance=key)
         groups = Group.objects.all()
         groups_selected = KeyGroup.objects.all().filter(key_id=request.GET['id'])
         ids_selected = []
+        
         for group_selected in groups_selected:
             ids_selected.append(group_selected.group_id)
-        groups_not_selected = Group.objects.all().exclude(id__in=ids_selected)
+
+        groups_not_selected = groups.exclude(id__in=ids_selected)
+        
         return render(request, 'sshkm/key/detail.html', {
-            'keyform': keyform,
+            'keyform': KeyForm(instance=key),
             'groups': groups,
             'groups_selected': groups_selected,
             'groups_not_selected': groups_not_selected,
         })
     else:
-        keyform = KeyForm()
-        groups_not_selected = Group.objects.all()
         return render(request, 'sshkm/key/detail.html', {
-            'keyform': keyform,
-            'groups_not_selected': groups_not_selected,
+            'keyform': KeyForm(),
+            'groups_not_selected': Group.objects.all(),
         })
 
 @login_required
 def KeyDelete(request):
     try:
-        if request.POST.get('id_multiple') is not None:
-            Key.objects.filter(id__in=request.POST.getlist('id_multiple')).delete()
-            messages.add_message(request, messages.SUCCESS, "Keys deleted")
+        keys = Key.objects.filter(id__in=request.GET.getlist('id', request.POST.getlist('id'))) # calls getlist on POST only if getlist of GET is None
+        size = len(keys)
+
+        if size > 0:
+            messages.add_message(request, messages.SUCCESS, "Keys deleted") if size > 1 else messages.add_message(request, messages.SUCCESS, "Key " + keys.first().name+ " deleted")
+            keys.delete()
         else:
-            key = Key.objects.get(id=request.GET['id'])
-            delete = Key(id=request.GET['id']).delete()
-            messages.add_message(request, messages.SUCCESS, "Key " + key.name + " deleted")
-    except ObjectDoesNotExist as e:
-        messages.add_message(request, messages.ERROR, "The key could not be deleted. Key does not exist")
+            messages.add_message(request, messages.ERROR, "The key could not be deleted. Key does not exist")
     except Exception as e:
-        messages.add_message(request, messages.ERROR, "The key could not be deleted")
+        messages.add_message(request, messages.ERROR, "The key could not be deleted: "+str(e))
 
     return HttpResponseRedirect(reverse('KeyList'))
 
 @login_required
 def KeySave(request):
     try:
-        if request.POST.get('id') is not None:
-            key = Key(
-                id=request.POST.get('id'),
-                name=request.POST.get('name'),
-                description=request.POST.get('description', ''),
-                firstname=request.POST.get('firstname', False),
-                lastname=request.POST.get('lastname', False),
-                email=request.POST.get('email'),
-                publickey=request.POST.get('publickey', False).replace("\n", "").replace("\r", ""),
-            )
+        key = Key(
+            id=request.POST.get('id'),
+            name=request.POST.get('name'),
+            description=request.POST.get('description', ''),
+            firstname=request.POST.get('firstname', False),
+            lastname=request.POST.get('lastname', False),
+            email=request.POST.get('email'),
+            publickey=request.POST.get('publickey', False).replace("\n", "").replace("\r", "")
+        )
+
+        if key.id is not None:
             KeyGroup.objects.filter(key_id=request.POST.get('id')).delete()
-            key.save()
-            for group_id in request.POST.getlist('member_of'):
-                keygroup = KeyGroup(key_id=key.id, group_id=group_id)
-                keygroup.save()
-        else:
-            key = Key(
-                name=request.POST.get('name'),
-                description=request.POST.get('description'),
-                firstname=request.POST.get('firstname', False),
-                lastname=request.POST.get('lastname', False),
-                email=request.POST.get('email'),
-                publickey=request.POST.get('publickey', '').replace("\n", "").replace("\r", ""),
-            )
-            key.save()
-            for group_id in request.POST.getlist('member_of'):
-                keygroup = KeyGroup(key_id=key.id, group_id=group_id)
-                keygroup.save()
+            
+        key.save()
+
+        for group_id in request.POST.getlist('member_of'):
+            keygroup = KeyGroup(key_id=key.id, group_id=group_id)
+            keygroup.save()
+
         messages.add_message(request, messages.SUCCESS, "Key " + request.POST.get('name') + " sucessfully saved")
     except AttributeError as e:
         messages.add_message(request, messages.WARNING, "Key " + request.POST.get('name') + " sucessfully saved with warnings")
