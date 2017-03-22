@@ -6,12 +6,12 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
+from django.utils.decorators import method_decorator
 
 from sshkm.models import Setting
 from sshkm.forms import UserForm
 
-
-@staff_member_required(login_url=None)
+@method_decorator(staff_member_required)
 def SettingsList(request):
     users = User.objects.exclude(username='admin')
     try:
@@ -35,7 +35,7 @@ def SettingsList(request):
     context = {'users': users, 'privatekey': privatekey, 'publickey': publickey, 'superuser': superuser}
     return render(request, 'sshkm/settings/list.html', context)
 
-@staff_member_required(login_url=None)
+@method_decorator(staff_member_required)
 def PasswordSave(request):
     if settings.SSHKM_DEMO is False:
         if request.POST.get('password') != request.POST.get('confirm'):
@@ -50,7 +50,7 @@ def PasswordSave(request):
         messages.add_message(request, messages.INFO, "Changing password is disabled in demo mode.")
         return HttpResponseRedirect(reverse('SettingsList'))
 
-@staff_member_required(login_url=None)
+@method_decorator(staff_member_required)
 def CreateUser(request):
     if request.POST.get('password') != request.POST.get('confirm'):
         messages.add_message(request, messages.ERROR, "Password and Password Confirm are not equal.")
@@ -62,7 +62,7 @@ def CreateUser(request):
         user.save()
         return HttpResponseRedirect(reverse('SettingsList'))
 
-@staff_member_required(login_url=None)
+@method_decorator(staff_member_required)
 def DeleteUser(request):
     try:
         if request.POST.get('id_multiple') is not None:
@@ -79,7 +79,7 @@ def DeleteUser(request):
 
     return HttpResponseRedirect(reverse('SettingsList'))
 
-@staff_member_required(login_url=None)
+@method_decorator(staff_member_required)
 def MasterKeyPublic(request):
     try:
         key = Setting.objects.get(name='MasterKeyPublic')
@@ -94,7 +94,7 @@ def MasterKeyPublic(request):
 
     return HttpResponseRedirect(reverse('SettingsList'))
 
-@staff_member_required(login_url=None)
+@method_decorator(staff_member_required)
 def MasterKeyPrivate(request):
     try:
         key = Setting.objects.get(name='MasterKeyPrivate')
@@ -118,7 +118,7 @@ def MasterKeyPrivate(request):
 
     return HttpResponseRedirect(reverse('SettingsList'))
 
-@staff_member_required(login_url=None)
+@method_decorator(staff_member_required)
 def Superuser(request):
     try:
         superuser = Setting.objects.get(name='SuperUser')
