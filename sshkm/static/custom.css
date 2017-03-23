@@ -251,3 +251,16 @@ svg {
   fill: currentColor;
 }
 
+
+/* nav-none-collapse */
+.nav-none-collapse {
+  margin-right: 15px;
+  padding-top: 7px;
+}
+
+.nav-none-collapse > li > a {
+  padding: 16px 5px;
+  font-size: 15px;
+  line-height: 20px;
+}
+

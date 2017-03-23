@@ -37,6 +37,18 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static "favicon.png" %}" width="20" height="20"></a>
+          <div class="visible-xs hidden-sm hidden-md hidden-lg" style="padding-right: 10px; padding-left: 10px; display: inline;">
+            <ul class="navbar-nav pull-right list-inline nav-none-collapse">
+              {% url 'docs' as current_url %}<li{% if current_url in request.path %} class="active"{% endif %}><a href="{{ current_url }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="docs"></span></a></li>
+              <li><a href="#top" title="Top"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true" title="top"></span></a></li>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'logout' %}" title="Logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true" title="logout"></span></a></li>
+              {% if user.is_staff %}
+              {% url 'SettingsList' as current_url %}<li{% if current_url in request.path %} class="active"{% endif %}><a href="{{ current_url }}"><span class="glyphicon glyphicon-cog" aria-hidden="true" title="settings"></span></a></li>
+              {% endif %}
+              {% endif %}
+            </ul>
+          </div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -48,7 +60,7 @@
             {% url 'PermissionList' as current_url %}<li{% if current_url in request.path %} class="active"{% endif %}><a href="{{ current_url }}">Permissions</a></li>
             {% endif %}
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="hidden-xs nav navbar-nav navbar-right">
             {% url 'docs' as current_url %}<li{% if current_url in request.path %} class="active"{% endif %}><a href="{{ current_url }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="docs"></span></a></li>
             <li><a href="#top" title="Top"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true" title="top"></span></a></li>
             {% if user.is_authenticated %}
