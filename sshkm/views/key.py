@@ -63,15 +63,15 @@ def KeySave(request):
         key = Key(
             id=request.POST.get('id'),
             name=request.POST.get('name'),
-            description=request.POST.get('description', ''),
+            description=request.POST.get('description'),
             firstname=request.POST.get('firstname', False),
             lastname=request.POST.get('lastname', False),
             email=request.POST.get('email'),
-            publickey=request.POST.get('publickey', False).replace("\n", "").replace("\r", "")
+            publickey=request.POST.get('publickey', '').replace("\n", "").replace("\r", ""),
         )
-
+        
         if key.id is not None:
-            KeyGroup.objects.filter(key_id=request.POST.get('id')).delete()
+            KeyGroup.objects.filter(key_id=key.id).delete()
             
         key.save()
 
