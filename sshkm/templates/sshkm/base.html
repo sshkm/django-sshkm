@@ -30,14 +30,16 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
+          {% if user.is_authenticated %}
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          {% endif %}
           <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static "favicon.png" %}" width="20" height="20"></a>
-          <div class="visible-xs hidden-sm hidden-md hidden-lg" style="padding-right: 10px; padding-left: 10px; display: inline;">
+          <div class="visible-xs hidden-sm hidden-md hidden-lg">
             <ul class="navbar-nav pull-right list-inline nav-none-collapse">
               {% url 'docs' as current_url %}<li{% if current_url in request.path %} class="active"{% endif %}><a href="{{ current_url }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="docs"></span></a></li>
               <li><a href="#top" title="Top"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true" title="top"></span></a></li>

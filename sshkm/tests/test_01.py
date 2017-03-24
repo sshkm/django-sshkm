@@ -46,3 +46,5 @@ class Test01(TestCase):
         response = self.client.get('/host/', follow=True)
         self.assertEqual(Host.objects.get(id=1).status, "SUCCESS")
 
+    # ToDo:
+    # Test for Settings visible only for admins
